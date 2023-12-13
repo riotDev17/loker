@@ -132,8 +132,7 @@
 										<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
 										</div>
 										<p>
-											Paket asuransi kesehatan yang komprehensif, yang mencakup kesehatan fisik dan mental, seringkali
-											menjadi tunjangan yang sangat dihargai oleh para pekerja.
+											<?= $r['tunjang_untung'];?>
 										</p>
 									</div>
 								</div>
