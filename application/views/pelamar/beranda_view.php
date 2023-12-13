@@ -41,7 +41,7 @@
 
 					<div class="flex md:flex-row flex-col items-start justify-start gap-5">
 						<a href="#" class="btn btn-primary py-3 w-full">Apply Now</a>
-						<a href="<?= base_url('detail') ?>" class="btn btn-dark py-3 w-full">See Job</a>
+						<a href="<?= base_url('detailjob') ?>" class="btn btn-dark py-3 w-full">See Job</a>
 					</div>
 				</div>
 
