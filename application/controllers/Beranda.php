@@ -11,6 +11,11 @@ class Beranda extends CI_Controller
 	}
 	public function index()
 	{
-		$this->load->view('pelamar/beranda_view');
+		$data = array(
+			'record' => $this->Loker_model->read('loker'),
+			'title' => 'Bahyu Sanciko'
+		);
+		// die(print_r($data));
+		$this->load->view('pelamar/beranda_view', $data);
 	}
 }
