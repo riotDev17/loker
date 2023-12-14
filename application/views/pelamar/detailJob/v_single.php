@@ -34,7 +34,7 @@
 
 									<div class="flex items-center font-semibold gap-3 mt-2 text-primary">
 										<iconify-icon icon="vaadin:office" width="20"></iconify-icon>
-										<p class="text-base">PT. Orang Ganteng</p>
+										<p class="text-base"><?= $r['nama_perusahaan']; ?></p>
 									</div>
 								</div>
 
