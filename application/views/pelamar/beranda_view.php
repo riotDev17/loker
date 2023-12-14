@@ -14,7 +14,7 @@
 		<div class="container px-3" :class="[$store.app.animation]">
 			<!-- start main content section -->
 			<div class="mt-10">
-				<h1 class="text-2xl dark:text-white">50 Jobs Found</h1>
+				<h1 class="text-2xl dark:text-white"><?= count($record) ?> Jobs Found</h1>
 			</div>
 
 			<!-- List Jobs -->

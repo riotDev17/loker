@@ -24,7 +24,6 @@
 						<div class="bg-primary text-white-light w-16 h-16 rounded-md flex items-center justify-center">
 							<iconify-icon icon="material-symbols:work" class="text-white" width="25"></iconify-icon>
 						</div>
-
 						<!-- Main Frame-->
 						<?php foreach ($record as $r) : ?>
 							<!-- Header -->
@@ -37,15 +36,14 @@
 										<p class="text-base"><?= $r['nama_perusahaan']; ?></p>
 									</div>
 								</div>
-
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="material-symbols:attach-money" width="22"></iconify-icon>
-									<p class="text-base">IDR3.000.000 - 8.000.000 / Bulan</p>
+									<p class="text-base">IDR <?= $r['benefit'] ?>/ Bulan</p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="game-icons:sands-of-time" width="22"></iconify-icon>
-									<p class="text-base">Penuh Waktu</p>
+									<p class="text-base"><?= $r['jam_kerja'] ?></p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
@@ -55,7 +53,7 @@
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="mdi:worker" width="22"></iconify-icon>
-									<p class="text-base">Pengalaman kurang dari 1 tahun</p>
+									<p class="text-base">Pengalaman kurang dari <?= $r['pengalaman'] ?></p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
@@ -75,8 +73,7 @@
 							<h1 class="text-xl font-bold">Persyaratan</h1>
 						</div>
 						<div class="flex items-center mt-3 gap-3">
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari 1
-								Tahun</span>
+							<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari <?= $r['pengalaman'] ?></span>
 							<span class="badge badge-outline-primary rounded-md text-center py-3">Minimal SMA / SMK</span>
 							<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Figma</span>
 							<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Adobe XD</span>
@@ -140,7 +137,7 @@
 
 					<!-- Deskripsi -->
 					<div class="block mt-10">
-						<h1 class="font-bold text-lg">Deskripsi Pekerjaan UI / UX Designer PT.Orang Ganteng</h1>
+						<h1 class="font-bold text-lg">Deskripsi Pekerjaan <?= $r['nama_pekerjaan']; ?> <?= $r['nama_perusahaan']; ?></h1>
 						<div class="mt-5">
 							<ul class=" space-y-1 list-disc list-inside text-base flex flex-col gap-5">
 								<li>Melakukan wawancara, survei, dan observasi untuk memahami kebutuhan pengguna.</li>
@@ -164,11 +161,11 @@
 							<iconify-icon icon="material-symbols:work" class="text-white" width="25"></iconify-icon>
 						</div>
 						<div class="block items-center justify-between">
-							<h1 class="text-2xl font-bold mb-auto">UI / UX Designer</h1>
+							<h1 class="text-2xl font-bold mb-auto"><?= $r['nama_pekerjaan']; ?></h1>
 
 							<div class="flex items-center font-semibold gap-3 mt-2 text-primary">
 								<iconify-icon icon="vaadin:office" width="20"></iconify-icon>
-								<p class="text-base">PT. Orang Ganteng</p>
+								<p class="text-base"><?= $r['nama_perusahaan']; ?></p>
 							</div>
 
 						</div>
@@ -181,12 +178,12 @@
 						<div>
 							<div class="flex items-center font-semibold gap-3 mt-2">
 								<iconify-icon icon="material-symbols:attach-money" width="22"></iconify-icon>
-								<p class="text-base">IDR3.000.000 - 8.000.000 / Bulan</p>
+								<p class="text-base">IDR <?= $r['benefit'] ?> / Bulan</p>
 							</div>
 
 							<div class="flex items-center font-semibold gap-3 mt-2">
 								<iconify-icon icon="game-icons:sands-of-time" width="22"></iconify-icon>
-								<p class="text-base">Penuh Waktu</p>
+								<p class="text-base"><?= $r['jam_kerja'] ?></p>
 							</div>
 
 							<div class="flex items-center font-semibold gap-3 mt-2">
@@ -196,7 +193,7 @@
 
 							<div class="flex items-center font-semibold gap-3 mt-2">
 								<iconify-icon icon="mdi:worker" width="22"></iconify-icon>
-								<p class="text-base">Pengalaman kurang dari 1 tahun</p>
+								<p class="text-base">Pengalaman kurang dari <?= $r['pengalaman'] ?></p>
 							</div>
 
 							<div class="flex items-center font-semibold gap-3 mt-2">
@@ -210,8 +207,7 @@
 						<div class="block mt-10">
 							<h1 class="text-xl font-bold">Persyaratan</h1>
 							<div class="grid grid-cols-2 mt-3 gap-3">
-								<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari 1
-									Tahun</span>
+								<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari <?= $r['pengalaman'] ?></span>
 								<span class="badge badge-outline-primary rounded-md text-center py-3">Minimal SMA / SMK</span>
 								<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Figma</span>
 								<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Adobe XD</span>
@@ -278,7 +274,7 @@
 
 						<!-- Deskripsi -->
 						<div class="block mt-10 mx-auto">
-							<h1 class="font-bold text-lg">Deskripsi Pekerjaan UI / UX Designer PT.Orang Ganteng</h1>
+							<h1 class="font-bold text-lg">Deskripsi Pekerjaan <?= $r['nama_pekerjaan']; ?> <?= $r['nama_perusahaan']; ?></h1>
 							<div class="mt-5">
 								<ul class="max-w-md space-y-1 list-disc list-inside text-base flex flex-col gap-5">
 									<li>Melakukan wawancara, survei, dan observasi untuk memahami kebutuhan pengguna.</li>
