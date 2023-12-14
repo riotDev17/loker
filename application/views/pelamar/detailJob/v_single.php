@@ -26,7 +26,6 @@
 						</div>
 
 						<!-- Main Frame-->
-
 						<?php foreach ($record as $r) : ?>
 							<!-- Header -->
 							<div class="w-full">
@@ -67,7 +66,7 @@
 								<button class="btn btn-primary mt-10 px-16">
 									Apply Now
 								</button>
-							</div>	
+							</div>
 					</div>
 
 					<!-- Persyaratan -->
