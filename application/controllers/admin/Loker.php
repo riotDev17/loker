@@ -5,6 +5,11 @@ class Loker extends CI_Controller
 {
     public function index()
     {
-        $this->load->view('pelamar/detailJob/index');
+        $this->load->view('admin/loker/index');
+    }
+
+    public function addloker()
+    {
+        $this->load->view('admin/loker/tambah_loker');
     }
 }
