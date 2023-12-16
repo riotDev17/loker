@@ -38,27 +38,31 @@
 								</div>
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="material-symbols:attach-money" width="22"></iconify-icon>
-									<p class="text-base">IDR <?= $r['benefit'] ?>/ Bulan</p>
+									<p class="text-base">IDR <?= $r['gaji'] ?>/ Bulan</p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="game-icons:sands-of-time" width="22"></iconify-icon>
-									<p class="text-base"><?= $r['jam_kerja'] ?></p>
+									<p class="text-base"><?= $r['tipe_kerja'] ?> &nbsp;
+									<ul style="list-style-type:disc;">
+										<li><?= $r['kebijakan'] ?></li>
+									</ul>
+									</p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="mdi:education-outline" width="22"></iconify-icon>
-									<p class="text-base">Minimal SMA / SMK</p>
+									<p class="text-base"><?= $r['pendidikan'] ?></p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="mdi:worker" width="22"></iconify-icon>
-									<p class="text-base">Pengalaman kurang dari <?= $r['pengalaman'] ?></p>
+									<p class="text-base">Pengalaman kurang dari <?= $r['pengalaman'] ?> Tahun</p>
 								</div>
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="mingcute:time-fill" width="22"></iconify-icon>
-									<p class="text-base">Senin - Jumat / 07:00 - 16:00</p>
+									<p class="text-base"><?= $r['hari_kerja'] ?> / <?= $r['jam_kerja'] ?></p>
 								</div>
 
 								<button class="btn btn-primary mt-10 px-16">
@@ -119,7 +123,7 @@
 									<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
 									</div>
 									<p>
-										<?= $r['tunjang_untung']; ?>
+										<?= $r['deskripsi']; ?>
 									</p>
 								</div>
 							</div>

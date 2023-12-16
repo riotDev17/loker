@@ -94,14 +94,15 @@
 
             <div class="mb-5">
               <label for="inputLarge">Usia</label>
-              <input id="inputLarge" type="text" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
+              <input id="inputLarge" type="number" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
             </div>
 
             <div class="mb-5">
               <label for="jenis_kelaminSelect">Jenis Kelamin</label>
-              <select class="form-multiselect selectjenis_kelamin" name="jenis_kelamin[]">
+              <select class="form-multiselect selectjenis_kelamin" name="jenis_kelamin">
                 <option selected value="Laki-laki">Laki-laki</option>
                 <option value="Perempuan">Perempuan</option>
+                <option value="Semua Jenis Kelamin">Perempuan</option>
               </select>
             </div>
 
@@ -126,7 +127,7 @@
 
             <div class="mb-5">
               <label for="tipekerjaSelect">Tipe kerja</label>
-              <select class="form-multiselect selecttipekerja" name="tipekerja[]">
+              <select class="form-multiselect selecttipekerja" name="tipe_kerja">
                 <option value="Full-time">Full-time</option>
                 <option value="Part-Time">Part-Time</option>
                 <option value="Magang">Magang</option>
@@ -137,7 +138,7 @@
 
             <div class="mb-5">
               <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
-              <select class="form-multiselect selectkebijakan" name="kebijakan[]">
+              <select class="form-multiselect selectkebijakan" name="kebijakan">
                 <option value="Kerja di kantor">Kerja di kantor</option>
                 <option value="Kerja di rumah">Kerja di rumah</option>
                 <option value="Kerja di lapangan">Kerja di lapangan</option>
@@ -148,9 +149,32 @@
 
             <div class="mb-5">
               <label for="inputLarge">Hari Kerja</label>
-              <input id="inputLarge" type="text" name="hari_kerja" placeholder="Masukkan Hari Kerja..." class="form-input form-input-md" />
+              <select id="daySelectawal" name="hari_awal">
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+                <option value="Jumat">Jumat</option>
+                <option value="Sabtu">Sabtu</option>
+                <option value="Minggu">Minggu</option>
+              </select>
+              <select id="daySelectakhir" name="hari_akhir">
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+                <option value="Jumat">Jumat</option>
+                <option value="Sabtu">Sabtu</option>
+                <option value="Minggu">Minggu</option>
+              </select>
             </div>
+            <div class="mb-5">
+              <label for="inputLarge">Jam Kerja Awal</label>
+              <input type="time" name="jam_awal" placeholder="Masukkan Jam Awal Loker... " />
 
+              <label for="inputLarge">Jam Kerja Akhir</label>
+              <input type="time" name="jam_akhir" placeholder="Masukkan Jam Akhir Loker... " />
+            </div>
             <div class="mb-9">
               <label for="">Deskripsi Pekerjaan</label>
               <div id="editortunjangg">
@@ -160,11 +184,11 @@
 
             <div class="mb-5">
               <label for="pendidikanSelect">Pendidikan</label>
-              <select class="form-multiselect selectpendidikan" name="pendidikan[]">
-                <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/SMK/Sederajat</option>
-                <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/MTS/Sederajat</option>
+              <select class="form-multiselect selectpendidikan" name="pendidikan">
+                <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/ SMK/ Sederajat</option>
+                <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/ MTS/ Sederajat</option>
                 <option value="Minimal D3">Minimal D3</option>
-                <option value="Minimal D3/D4">Minimal D3/D4</option>
+                <option value="Minimal D3/D4">Minimal D3/ D4</option>
                 <option value="Minimal S1">Minimal S1</option>
                 <option value="Minimal S1/S2">Minimal S1/S2</option>
                 <option value="Semua Jenjang">Semua Jenjang</option>
@@ -218,12 +242,11 @@
   <script defer src="<?php echo base_url() ?>assets/js/alpine-focus.min.js"></script>
   <script defer src="<?php echo base_url() ?>assets/js/alpine.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
-
   <!-- start hightlight js -->
   <script src="<?php echo base_url() ?>assets/js/highlight.min.js"></script>
   <!-- end hightlight js -->
-
   <script src="<?php echo base_url() ?>assets/js/quill.js"></script>
+
   <script>
     $(document).ready(function() {
       $('.selectbenefit').select2({

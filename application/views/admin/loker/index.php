@@ -89,48 +89,50 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <div>
-                                                <tr>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>UI / UX Designer</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>PT. Orang Ganteng</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>IDR3.000.000 - 8.000.000 / Bulan</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>Penuh Waktu</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>Jl.A.Yani</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex items-center justify-center gap-4">
-                                                            <button type="button" class="btn btn-sm btn-outline-success">
-                                                                Lihat
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-primary">
-                                                                Edit
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger">
-                                                                Hapus
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </div>
+                                            <?php foreach ($loker as $l) : ?>
+                                                <div>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $l['nama_pekerjaan'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $l['nama_perusahaan'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div>IDR<?= $l['gaji'] ?> / Bulan</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $l['tipe_kerja'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $l['lokasi'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex items-center justify-center gap-4">
+                                                                <a href="<?= base_url('admin/loker/detailjob/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-success">
+                                                                    Lihat
+                                                                </a>
+                                                                <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
+                                                                    Edit
+                                                                </a>
+                                                                <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger">
+                                                                    Hapus
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
