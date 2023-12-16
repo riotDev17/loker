@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>VRISTO - Multipurpose Tailwind Dashboard Template</title>
+  <title><?= $title ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,13 +18,12 @@
   <script defer src="<?php echo base_url() ?>assets/js/tippy-bundle.umd.min.js"></script>
   <script defer src="<?php echo base_url() ?>assets/js/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/quill.snow.css" />
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/nice-select2.css" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-  <!-- Sertakan library Select2 dari CDN -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.js"></script>
 </head>
 
 <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
@@ -66,108 +65,139 @@
           </ul>
 
           <!-- MAIN -->
-          <form action="" class="mt-10">
+          <form action="<?= base_url('admin/loker/insertloker') ?>" class="mt-10" method="POST" id="myForm">
+            <!-- Isi formulir -->
             <div class="mb-5">
               <label for="inputLarge">Nama Pekerjaan</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-lg" />
+              <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-md" />
             </div>
 
             <div class="mb-5">
               <label for="inputLarge">Nama Perusahaan</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Nama Perusahaan..." class="form-input form-input-lg" />
-            </div>
-
-            <div class="mb-5">
-              <label for="inputLarge">Gaji</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Gaji..." class="form-input form-input-lg" />
-            </div>
-
-            <div class="mb-5">
-              <label for="inputLarge">Durasi Kerja</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Durasi Kerja..." class="form-input form-input-lg" />
-            </div>
-
-            <div class="mb-5">
-              <label for="inputLarge">Hari Kerja</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Hari Kerja..." class="form-input form-input-lg" />
+              <input id="inputLarge" type="text" name="nama_perusahaan" placeholder="Masukkan Nama Perusahaan..." class="form-input form-input-md" />
             </div>
 
             <div class="mb-5">
               <label for="inputLarge">Lokasi</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Lokasi..." class="form-input form-input-lg" />
+              <input id="inputLarge" type="text" name="lokasi" placeholder="Masukkan Lokasi..." class="form-input form-input-md" />
             </div>
-            <!-- 
+
             <div class="mb-5">
-              <label for="ctnSelect1">Persyaratan Kerja</label>
-              <select class="selectize" multiple='multiple'>
-                <option value="orange">Persyaratan Kerja 1</option>
-                <option value="White">Persyaratan Kerja 2</option>
-                <option value="White">Persyaratan Kerja 3</option>
-              </select>
-            </div> -->
+              <label for="inputLarge">Gaji</label>
+              <input id="inputLarge" type="text" name="gaji" placeholder="Masukkan Gaji..." class="form-input form-input-md" />
+            </div>
+
             <div class="mb-5">
-              <label for="syaratSelect">Persyaratan Kerja</label>
-              <select class="form-multiselect selectsyarat" name="skills[]" multiple="multiple" placeholder="Select skills">
-                <option value="orange">Persyaratan Kerja 1</option>
-                <option value="White">Persyaratan Kerja 2</option>
-                <option value="White">Persyaratan Kerja 3</option>
+              <label for="inputLarge">Pengalaman</label>
+              <input id="inputLarge" type="text" name="pengalaman" placeholder="Masukkan Minimal Pengalaman..." class="form-input form-input-md" />
+            </div>
+
+            <div class="mb-5">
+              <label for="inputLarge">Usia</label>
+              <input id="inputLarge" type="text" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
+            </div>
+
+            <div class="mb-5">
+              <label for="jenis_kelaminSelect">Jenis Kelamin</label>
+              <select class="form-multiselect selectjenis_kelamin" name="jenis_kelamin[]">
+                <option selected value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
               </select>
             </div>
+
+            <div class="mb-5">
+              <label for="syaratSelect">Benefit</label>
+              <select class="form-multiselect selectbenefit" name="benefit[]" multiple="multiple">
+                <option value="BPJS">BPJS</option>
+                <option value="Gaji Pokok">Gaji Pokok</option>
+                <option value="Upah Lembur">Upah Lembur</option>
+                <option value="THR">THR</option>
+                <option value="Uang Makan">Uang Makan</option>
+                <option value="Asuransi Kesehatan">Asuransi Kesehatan</option>
+                <option value="Pelatihan/Kursus">Pelatihan/Kursus</option>
+                <option value="Bonus Kinerja">Bonus Kinerja</option>
+                <option value="Tunjangan Transportasi">Tunjangan Transportasi</option>
+                <option value="Tunjangan Tempat Tinggal">Tunjangan Tempat Tinggal</option>
+                <option value="Tunjangan Komunikasi">Tunjangan Komunikasi</option>
+                <option value="Cuti">Cuti</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="tipekerjaSelect">Tipe kerja</label>
+              <select class="form-multiselect selecttipekerja" name="tipekerja[]">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-Time">Part-Time</option>
+                <option value="Magang">Magang</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Kontrak">Kontrak</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
+              <select class="form-multiselect selectkebijakan" name="kebijakan[]">
+                <option value="Kerja di kantor">Kerja di kantor</option>
+                <option value="Kerja di rumah">Kerja di rumah</option>
+                <option value="Kerja di lapangan">Kerja di lapangan</option>
+                <option value="Kerja di kantor/rumah">Kerja di kantor/rumah</option>
+                <option value="Remote di lokasi tertentu">Remote di lokasi tertentu</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="inputLarge">Hari Kerja</label>
+              <input id="inputLarge" type="text" name="hari_kerja" placeholder="Masukkan Hari Kerja..." class="form-input form-input-md" />
+            </div>
+
+            <div class="mb-9">
+              <label for="">Deskripsi Pekerjaan</label>
+              <div id="editortunjangg">
+              </div>
+              <textarea name="deskripsi" style="display:none" id="tunjang"></textarea>
+            </div>
+
+            <div class="mb-5">
+              <label for="pendidikanSelect">Pendidikan</label>
+              <select class="form-multiselect selectpendidikan" name="pendidikan[]">
+                <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/SMK/Sederajat</option>
+                <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/MTS/Sederajat</option>
+                <option value="Minimal D3">Minimal D3</option>
+                <option value="Minimal D3/D4">Minimal D3/D4</option>
+                <option value="Minimal S1">Minimal S1</option>
+                <option value="Minimal S1/S2">Minimal S1/S2</option>
+                <option value="Semua Jenjang">Semua Jenjang</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="skillsSelect">Kategori Pekerjaan</label>
+              <select class="form-multiselect selectkategori" name="kategori[]" multiple="multiple">
+                <?php foreach ($kategori as $k) : ?>
+                  <option value="<?= $k['nama_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
+                <?php endforeach; ?>
+              </select>
+              <input type="hidden" name="kategori_baru" id="kategoriBaru">
+            </div>
+
             <div class="mb-5">
               <label for="skillsSelect">Skills</label>
               <select class="form-multiselect selectskills" name="skills[]" multiple="multiple" placeholder="Select skills">
-                <option value="UI">UI</option>
-                <option value="UX">UX</option>
-                <option value="Design">Design</option>
+                <?php foreach ($skill as $s) : ?>
+                  <option value="<?= $s['nama_skill'] ?>"><?= $s['nama_skill'] ?></option>
+                <?php endforeach; ?>
               </select>
             </div>
 
-            <div class=" mb-5">
-              <label for="inputLarge">Tunjangan & Keuntungan</label>
-              <input id="inputLarge" type="text" placeholder="Masukkan Tunjangan & Keuntungan..." class="form-input form-input-lg" />
-            </div>
-            <div class="mb-9">
-              <label for="">Tunjangan & Keuntungan</label>
-              <div id="editortunjang">
-                <h1>This is a heading text...</h1>
-                <br />
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dui arcu, pellentesque id mattis sed,
-                  mattis semper erat. Etiam commodo arcu a mollis consequat. Curabitur pretium auctor tortor, bibendum
-                  placerat elit feugiat et. Ut ac turpis nec dui ullamcorper ornare. Vestibulum finibus quis magna at
-                  accumsan. Praesent a purus vitae tortor fringilla tempus vel non purus. Suspendisse eleifend nibh
-                  porta dolor ullamcorper laoreet. Ut sit amet ipsum vitae lectus pharetra tincidunt. In ipsum quam,
-                  iaculis at erat ut, fermentum efficitur ipsum. Nunc odio diam, fringilla in auctor et, scelerisque at
-                  lorem. Sed convallis tempor dolor eu dictum. Cras ornare ornare imperdiet. Pellentesque sagittis lacus
-                  non libero fringilla faucibus. Aenean ullamcorper enim et metus vestibulum, eu aliquam nunc placerat.
-                  Praesent fringilla dolor sit amet leo pulvinar semper. </p>
-                <br />
-              </div>
-            </div>
             <div class="mb-5">
-              <label for="">Deskripsi Pekerjaan</label>
-              <div id="editor">
-                <h1>This is a heading text...</h1>
-                <br />
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dui arcu, pellentesque id mattis sed,
-                  mattis semper erat. Etiam commodo arcu a mollis consequat. Curabitur pretium auctor tortor, bibendum
-                  placerat elit feugiat et. Ut ac turpis nec dui ullamcorper ornare. Vestibulum finibus quis magna at
-                  accumsan. Praesent a purus vitae tortor fringilla tempus vel non purus. Suspendisse eleifend nibh
-                  porta dolor ullamcorper laoreet. Ut sit amet ipsum vitae lectus pharetra tincidunt. In ipsum quam,
-                  iaculis at erat ut, fermentum efficitur ipsum. Nunc odio diam, fringilla in auctor et, scelerisque at
-                  lorem. Sed convallis tempor dolor eu dictum. Cras ornare ornare imperdiet. Pellentesque sagittis lacus
-                  non libero fringilla faucibus. Aenean ullamcorper enim et metus vestibulum, eu aliquam nunc placerat.
-                  Praesent fringilla dolor sit amet leo pulvinar semper. </p>
-                <br />
-              </div>
+              <label for="inputLarge">Batas Akhir Loker</label>
+              <input id="inputLarge" type="date" name="tgl_akhir_loker" placeholder="Masukkan Batas Akhir Loker... " class="form-input form-input-md" />
             </div>
 
             <div class="flex items-center gap-3 justify-end mt-5">
-              <a href="kategori.html">
-                <button type="button" class="btn btn-primary">Simpan</button>
-              </a>
-              <a href="kategori.html">
-                <button type="button" class="btn btn-danger">Batal</button>
-              </a>
+              <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
+              <button type="button" class="btn btn-danger">Batal</button>
             </div>
           </form>
         </div>
@@ -193,8 +223,22 @@
   <script src="<?php echo base_url() ?>assets/js/highlight.min.js"></script>
   <!-- end hightlight js -->
 
-  <script src="<?php echo base_url() ?>assets/js/nice-select2.js"></script>
   <script src="<?php echo base_url() ?>assets/js/quill.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.selectbenefit').select2({
+        tags: true,
+        placeholder: "Pilih Benefit Pekerjaan"
+      });
+
+      $('.selectbenefit').on('select2:select', function(e) {
+        var data = e.params.data;
+        if (data.id === data.text) {
+
+        }
+      });
+    });
+  </script>
   <script>
     document.addEventListener('alpine:init', () => {
       // main section
@@ -247,28 +291,35 @@
     });
 
     $(document).ready(function() {
-      $(".selectskills").select2({
-        placeholder: "Select Skills"
+      $(".selectjenis_kelamin").select2({
+        placeholder: "Pilih Jenis Kelamin "
       });
     });
     $(document).ready(function() {
-      $(".selectsyarat").select2({
-        placeholder: "Select Syarat"
+      $(".selectkategori").select2({
+        placeholder: "Pilih Kategori Pekerjaan"
       });
     });
-
-    new Quill('#editortunjang', {
-      theme: 'snow'
+    $(document).ready(function() {
+      $(".selectpendidikan").select2({
+        placeholder: "Pilih Minimal Pendidikan"
+      });
     });
-    var toolbar = quill.container.previousSibling;
-    toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
-    toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
-    toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
-    toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
-    toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
-    toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
-    toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
-    toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
+    $(document).ready(function() {
+      $(".selectskills").select2({
+        placeholder: "Pilih Skill Pekerjaan"
+      });
+    });
+    $(document).ready(function() {
+      $(".selecttipekerja").select2({
+        placeholder: "Pilih Tipe Pekerjaan"
+      });
+    });
+    $(document).ready(function() {
+      $(".selectkebijakan").select2({
+        placeholder: "Pilih Kebijakan Pekerjaan"
+      });
+    });
   </script>
   <script>
     new Quill('#editor', {
@@ -284,6 +335,28 @@
     toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
     toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
   </script>
+  <script>
+    var quillt = new Quill('#editortunjangg', {
+      theme: 'snow'
+    });
+    var toolbar = quill.container.previousSibling;
+    toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
+    toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
+    toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
+    toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
+    toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
+    toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
+    toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
+    toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
+  </script>
+
+  <script>
+    document.getElementById('submitButton').addEventListener('click', function(e) {
+      var quillData = quillt.root.innerHTML;
+      $('#tunjang').val(quillData);
+    });
+  </script>
+
 
 </body>
 

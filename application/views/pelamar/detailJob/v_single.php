@@ -84,17 +84,21 @@
 					<div class="block mt-5">
 						<h1 class="text-xl font-bold">Skill</h1>
 						<div class="flex items-center mt-3 gap-3">
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Adobe XD</span>
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Figma</span>
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Manajemen Waktu</span>
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Kreatif</span>
+							<?php $dataarray = explode(" ", $r['skills']); ?>
+							<?php $array = $r['skills'];
+							foreach ($dataarray as $data) {
+								$arrayd = explode(" ", $data);
+								$kataAcak = $arrayd[array_rand($arrayd)];
+								echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . $kataAcak . '</span>';
+							}
+							?>
 						</div>
 					</div>
 
 					<!-- Tunjangan & Keuntungan -->
 					<div class="block mt-10">
 						<h1 class="text-xl font-bold ">Tunjangan Dan Keuntungan</h1>
-						<div class="grid lg:grid-cols-3 mt-3 gap-5">
+						<div class="grid lg:grid-cols-32 mt-3 gap-5">
 
 							<!-- Tunjangan 1 -->
 							<div class="w-full p-5 bg-info-light rounded-lg">
@@ -104,20 +108,7 @@
 									<p>
 										Perusahaan dapat menyediakan dana untuk pelatihan tambahan, kursus online, atau konferensi terkait
 										desain UI/UX. Ini membantu para desainer untuk tetap terkini dengan tren terbaru dan teknologi
-										baru dalam industri.
-									</p>
-								</div>
-							</div>
-
-							<!-- Tunjangan 2 -->
-							<div class="w-full p-5 bg-info-light rounded-lg">
-								<div class="flex gap-5">
-									<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
-									</div>
-									<p>
-										Beberapa perusahaan menawarkan fleksibilitas dalam waktu kerja, seperti jam kerja yang fleksibel,
-										bekerja dari rumah, atau jadwal kerja yang bisa disesuaikan, memungkinkan desainer untuk
-										menyesuaikan kehidupan kerja dengan kebutuhan pribadi mereka.
+										baru dalam industri Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, id. Quas voluptate aliquam ipsum. Labore recusandae porro molestiae asperiores neque..
 									</p>
 								</div>
 							</div>
