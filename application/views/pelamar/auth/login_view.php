@@ -12,7 +12,7 @@
         <div class="flex min-h-screen">
             <div class="hidden min-h-screen w-1/2 flex-col items-center justify-center bg-gradient-to-t from-[#ff1361bf] to-[#44107A] p-4 text-white dark:text-black lg:flex">
                 <div class="mx-auto mb-5 w-full">
-                    <img src="assets/images/auth-login.svg" alt="coming_soon" class="mx-auto lg:max-w-[370px] xl:max-w-[500px]" />
+                    <img src="<?= base_url() ?>assets/images/auth-login.svg" alt="coming_soon" class="mx-auto lg:max-w-[370px] xl:max-w-[500px]" />
                 </div>
             </div>
             <div class="relative flex w-full items-center justify-center lg:w-1/2">
@@ -39,7 +39,7 @@
 
 
                     <p class="text-center">
-                        Dont't have an account ? <a href="<?php echo base_url('register_view.php') ?>" class="font-bold text-primary hover:underline">Sign Up</a>
+                        Dont't have an account ? <a href="<?php echo base_url('auth/registrasi') ?>" class="font-bold text-primary hover:underline">Sign Up</a>
                     </p>
                 </div>
             </div>

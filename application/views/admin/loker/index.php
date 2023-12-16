@@ -119,7 +119,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/loker/detailjob/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-success">
+                                                                <a href="<?= base_url('admin/loker/read/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-success">
                                                                     Lihat
                                                                 </a>
                                                                 <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
