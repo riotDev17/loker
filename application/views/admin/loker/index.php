@@ -180,9 +180,15 @@
 //             });
 
 if(confirm.isConfirmed){
-    console.log('OK');
-    window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-    Swal.fire('Terhapus!', 'Berhasil')
+    try{
+        window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+        Swal.fire({
+            title: msg,
+            icon: 'question',
+        });
+    } catch(e){
+        console.log(e);
+    }
 }
         };
     </script>
