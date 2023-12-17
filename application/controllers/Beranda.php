@@ -16,6 +16,6 @@ class Beranda extends CI_Controller
 			'title' => 'Bahyu Sanciko'
 		);
 		// die(print_r($data));
-		$this->load->view('pelamar/beranda_view', $data);
+		$this->load->view('beranda_view', $data);
 	}
 }

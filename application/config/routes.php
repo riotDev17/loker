@@ -51,5 +51,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'beranda';
 $route['admin'] = 'admin/beranda';
+$route['profil'] = 'auth/profil';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

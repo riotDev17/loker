@@ -11,4 +11,8 @@ class Auth extends CI_Controller
     {
         $this->load->view('pelamar/auth/register_view');
     }
+    public function profil()
+    {
+        $this->load->view('pelamar/profil/profil');
+    }
 }
