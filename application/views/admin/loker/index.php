@@ -89,50 +89,57 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($loker as $l) : ?>
-                                                <div>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['nama_pekerjaan'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['nama_perusahaan'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div>IDR<?= $l['gaji'] ?> / Bulan</div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['tipe_kerja'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['lokasi'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/loker/read/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-success">
-                                                                    Lihat
-                                                                </a>
-                                                                <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
-                                                                    Edit
-                                                                </a>
-                                                                <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger">
-                                                                    Hapus
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </div>
-                                            <?php endforeach ?>
+                                            <?php if (empty($loker)) : ?>
+                                                <tr>
+                                                    <td colspan="6" style="text-align: center;" class="text-center">Tidak ada data pekerjaan yang tersedia.</td>
+                                                </tr>
+                                            <?php else : ?>
+                                                <?php foreach ($loker as $l) : ?>
+                                                    <div>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['nama_pekerjaan'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['nama_perusahaan'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div>IDR<?= $l['gaji'] ?> / Bulan</div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['tipe_kerja'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['lokasi'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex items-center justify-center gap-4">
+                                                                    <a href="<?= base_url('admin/loker/read/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-success">
+                                                                        Lihat
+                                                                    </a>
+                                                                    <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
+                                                                        Edit
+                                                                    </a>
+                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger">
+                                                                        Hapus
+                                                                    </a>
+                                                                    <button type="button" class="btn btn-secondary" @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')">Top Center</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </div>
+                                                <?php endforeach ?>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -149,6 +156,31 @@
             <!-- end footer section -->
         </div>
     </div>
+
+    <script>
+        showConfirm = (msg = 'Yakin Untuk Menghapus Data Ini?', position = 'bottom-start', idLoker) => {
+            const confirm = window.Swal.mixin({
+                position: position || 'bottom-start',
+                showCancelButton: true,
+                confirmButtonColor: '#E7515A',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+            });
+            confirm.fire({
+                title: msg,
+                icon: 'question',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log('OK');
+                    window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+                } else {
+                    console.log('klik Batal');
+                }
+            });
+        };
+    </script>
+
     <?php $this->load->view("_partials/script.php") ?>
 
 </body>

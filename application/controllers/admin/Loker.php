@@ -13,7 +13,6 @@ class Loker extends CI_Controller
     public function index()
     {
         $data['loker'] = $this->Loker_model->read('loker');
-
         $this->load->view('admin/loker/index', $data);
     }
 
@@ -34,7 +33,7 @@ class Loker extends CI_Controller
     {
         $kode = $this->get_kod();
         $data = array(
-            'id_loker' => 'LKR002',
+            'id_loker' => $kode,
             'nama_pekerjaan' =>  $this->input->post('nama_pekerjaan'),
             'nama_perusahaan' => $this->input->post('nama_perusahaan'),
             'lokasi' => $this->input->post('lokasi'),
@@ -78,11 +77,23 @@ class Loker extends CI_Controller
 
         return $new_kd;
     }
+
     public function edit()
     {
         $data['skill'] = $this->Skills_model->read('skill');
         $data['kategori'] = $this->Kategori_model->read('kategori');
         $data['title'] = "Sistem Informasi Loker | Tambah Loker";
         $this->load->view('admin/loker/tambah_loker', $data);
+    }
+
+    public function updata()
+    {
+    }
+    public function delete($id)
+    {
+        $this->db->where('id_loker', $id);
+        $this->db->delete('loker');
+        // $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-pesan">Produk favorit anda berhasil dihapus.</div>');
+        redirect('admin/loker');
     }
 }

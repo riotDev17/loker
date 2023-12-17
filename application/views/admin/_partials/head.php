@@ -11,3 +11,4 @@
     <link defer rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url('assets/css/animate.css') ?>" />
     <script src="<?php echo base_url('assets/js/perfect-scrollbar.min.js') ?>"></script>
     <script defer src="<?php echo base_url('assets/js/popper.min.js') ?>"></script>
+    <script defer src="<?php echo base_url('assets/js/sweetalert.min.js') ?>"></script>
