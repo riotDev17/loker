@@ -19,6 +19,15 @@
 
 			<!-- Desktop -->
 			<div class="mt-10">
+				<div>
+					<a href="javascript:void(0);" onclick="window.history.go(-1);" class="flex items-center justify-start mb-10 gap-5">
+
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
+							<path fill="currentColor" d="M228 128a12 12 0 0 1-12 12H69l51.52 51.51a12 12 0 0 1-17 17l-72-72a12 12 0 0 1 0-17l72-72a12 12 0 0 1 17 17L69 116h147a12 12 0 0 1 12 12" />
+						</svg>
+						<h1 class="text-base">Kembali</h1>
+					</a>
+				</div>
 				<div class="lg:block hidden">
 					<div class="lg:flex hidden gap-5 border-b-2 pb-5">
 						<div class="bg-primary text-white-light w-16 h-16 rounded-md flex items-center justify-center">

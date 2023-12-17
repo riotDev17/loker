@@ -17,8 +17,10 @@
     <script defer src="<?= base_url() ?>assets/js/popper.min.js"></script>
     <script defer src="<?= base_url() ?>assets/js/tippy-bundle.umd.min.js"></script>
     <script defer src="<?= base_url() ?>assets/js/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/nice-select2.css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/quill.snow.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
@@ -107,10 +109,10 @@
 
                                             <div>
                                                 <label for="ctnSelect1">Skills</label>
-                                                <select class="selectize" name="states" multiple='multiple'>
-                                                    <option value="orange">UI</option>
-                                                    <option value="White">UX</option>
-                                                    <option value="White">Design</option>
+                                                <select class="form-multiselect selectskills" name="skills[]" multiple="multiple" placeholder="Select skills">
+                                                    <?php foreach ($skill as $s) : ?>
+                                                        <option value="<?= $s['nama_skill'] ?>"><?= $s['nama_skill'] ?></option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
 
@@ -144,7 +146,6 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/highlight.min.css" />
     <script src="<?= base_url() ?>assets/js/highlight.min.js"></script>
     <!-- end hightlight js -->
-    <script src="<?= base_url() ?>assets/js/nice-select2.js"></script>
 
     <script src="<?= base_url() ?>assets/js/quill.js"></script>
 
@@ -198,15 +199,11 @@
                 },
             }));
         });
-
-        document.addEventListener("DOMContentLoaded", function(e) {
-            // default
-            var els = document.querySelectorAll(".selectize");
-            els.forEach(function(select) {
-                NiceSelect.bind(select);
+        $(document).ready(function() {
+            $(".selectskills").select2({
+                placeholder: "Pilih Skill Pekerjaan"
             });
         });
-
         new Quill('#editor', {
             theme: 'snow'
         });

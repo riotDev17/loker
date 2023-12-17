@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Skills_model');
+    }
     public function index()
     {
         $this->load->view('pelamar/auth/login_view');
@@ -13,6 +18,7 @@ class Auth extends CI_Controller
     }
     public function profil()
     {
-        $this->load->view('pelamar/profil/profil');
+        $data['skill'] = $this->Skills_model->read('skill');
+        $this->load->view('pelamar/profil/profil',$data);
     }
 }

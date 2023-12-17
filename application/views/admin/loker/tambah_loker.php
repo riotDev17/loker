@@ -18,8 +18,8 @@
   <script defer src="<?php echo base_url() ?>assets/js/tippy-bundle.umd.min.js"></script>
   <script defer src="<?php echo base_url() ?>assets/js/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/quill.snow.css" />
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
