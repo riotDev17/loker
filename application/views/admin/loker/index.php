@@ -167,17 +167,23 @@
                 confirmButtonText: 'Hapus',
                 cancelButtonText: 'Batal',
             });
-            confirm.fire({
-                title: msg,
-                icon: 'question',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log('OK');
-                    window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-                } else {
-                    console.log('klik Batal');
-                }
-            });
+//             confirm.fire({
+//                 title: msg,
+//                 icon: 'question',
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     console.log('OK');
+//                     window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+//                 } else {
+//                     console.log('klik Batal');
+//                 }
+//             });
+
+if(confirm.isConfirmed){
+    console.log('OK');
+    window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+    Swal.fire('Terhapus!', 'Berhasil')
+}
         };
     </script>
 
