@@ -141,10 +141,9 @@
                                                                     <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
                                                                         Edit
                                                                     </a>
-                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger">
+                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger" onclick="showAlert(event)">
                                                                         Hapus
                                                                     </a>
-                                                                    <button type="button" class="btn btn-secondary" @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')">Top Center</button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -179,30 +178,12 @@
                 showCancelButton: true,
                 confirmButtonText: 'Delete',
             });
-//             confirm.fire({
-//                 title: msg,
-//                 icon: 'question',
-//             }).then((result) => {
-//                 if (result.isConfirmed) {
-//                     console.log('OK');
-//                     window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-//                 } else {
-//                     console.log('klik Batal');
-//                 }
-//             });
 
-if(confirm.isConfirmed){
-    try{
-        window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-        Swal.fire({
-            title: msg,
-            icon: 'question',
-        });
-    } catch(e){
-        console.log(e);
-    }
-}
-        };
+            if (result.value) {
+                // Arahkan pengguna ke URL penghapusan setelah konfirmasi diterima
+                window.location.href = event.target.getAttribute('href');
+            }
+        }
     </script>
 
     <?php $this->load->view("_partials/script.php") ?>
