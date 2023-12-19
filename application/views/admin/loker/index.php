@@ -130,9 +130,12 @@
                                                                     <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
                                                                         Edit
                                                                     </a>
-                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger">
+                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')" class="btn btn-sm btn-outline-danger">
                                                                         Hapus
                                                                     </a>
+                                                                    <button type="button    " @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')" class="btn btn-sm btn-outline-danger">
+                                                                        Hapus1
+                                                                    </button>
                                                                     <button type="button" class="btn btn-secondary" @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')">Top Center</button>
                                                                 </div>
                                                             </td>
@@ -167,29 +170,29 @@
                 confirmButtonText: 'Hapus',
                 cancelButtonText: 'Batal',
             });
-//             confirm.fire({
-//                 title: msg,
-//                 icon: 'question',
-//             }).then((result) => {
-//                 if (result.isConfirmed) {
-//                     console.log('OK');
-//                     window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-//                 } else {
-//                     console.log('klik Batal');
-//                 }
-//             });
+            //             confirm.fire({
+            //                 title: msg,
+            //                 icon: 'question',
+            //             }).then((result) => {
+            //                 if (result.isConfirmed) {
+            //                     console.log('OK');
+            //                     window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+            //                 } else {
+            //                     console.log('klik Batal');
+            //                 }
+            //             });
 
-if(confirm.isConfirmed){
-    try{
-        window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-        Swal.fire({
-            title: msg,
-            icon: 'question',
-        });
-    } catch(e){
-        console.log(e);
-    }
-}
+            if (confirm.isConfirmed) {
+                try {
+                    window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+                    Swal.fire({
+                        title: msg,
+                        icon: 'question',
+                    });
+                } catch (e) {
+                    console.log(e);
+                }
+            }
         };
     </script>
 

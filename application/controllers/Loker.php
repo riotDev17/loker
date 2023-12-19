@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Detailjob extends CI_Controller
+class Loker extends CI_Controller
 {
     public function __construct()
     {
@@ -12,7 +12,7 @@ class Detailjob extends CI_Controller
     {
         $this->load->view('pelamar/detailJob/index');
     }
-    public function read($id)
+    public function read($id, $nama_pekerjaan)
     {
         $data['record'] = $this->Loker_model->baca_detail($id);
         $data['title'] = "Detail Job";

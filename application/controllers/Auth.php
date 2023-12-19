@@ -19,6 +19,7 @@ class Auth extends CI_Controller
     public function profil()
     {
         $data['skill'] = $this->Skills_model->read('skill');
-        $this->load->view('pelamar/profil/profil',$data);
+        $this->load->view('pelamar/profil/profil', $data);
     }
+    
 }

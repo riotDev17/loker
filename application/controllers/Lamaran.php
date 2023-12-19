@@ -5,6 +5,11 @@ class Lamaran extends CI_Controller
 {
     public function index()
     {
-        $this->load->view('pelamar/beranda_view');
+        $this->load->view('pelamar/profil/status_lamaran');
+    }
+
+    public function read()
+    {
+        $this->load->view('pelamar/profil/v_status');
     }
 }

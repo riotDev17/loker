@@ -20,6 +20,6 @@ class Pelamar extends CI_Controller
     {
         $data['pelamar'] = $this->Pelamar_model->baca_detail($id);
 
-        $this->load->view('admin/pelamar/v_single_admin', $data);
+        $this->load->view('admin/pelamar/v_pelamar', $data);
     }
 }

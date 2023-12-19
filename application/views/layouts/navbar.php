@@ -85,12 +85,19 @@
                             </div>
                         </li>
                         <li>
-                            <a href="<?= base_url('auth/profil') ?>" class="dark:hover:text-white" @click="toggle">
+                            <a href="<?= base_url('profil') ?>" class="dark:hover:text-white" @click="toggle">
                                 <svg class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5" />
                                     <path opacity="0.5" d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z" stroke="currentColor" stroke-width="1.5" />
                                 </svg>
                                 Profile</a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('status') ?>" class="dark:hover:text-white" @click="toggle">
+                                <svg class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.5" d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10ZM7 12l4 3l5-7" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                Status Pelamaran</a>
                         </li>
                         <li class="border-t border-white-light dark:border-white-light/10">
                             <a href="<?php echo site_url('pelamar/auth/login_view.php') ?>" class="!py-3 text-danger" @click="toggle">

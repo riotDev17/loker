@@ -65,169 +65,174 @@
           </ul>
 
           <!-- MAIN -->
-          <form action="<?= base_url('admin/loker/insertloker') ?>" class="mt-10" method="POST" id="myForm">
-            <!-- Isi formulir -->
-            <div class="mb-5">
-              <label for="inputLarge">Nama Pekerjaan</label>
-              <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-md" />
+          <?= form_open_multipart(), 'class="mt-10"', 'method="post"', 'id="myForm"'; ?>
+          <!-- Isi formulir -->
+          <div class="mb-5">
+            <label for="inputLarge">Nama Pekerjaan</label>
+            <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-md" />
+            <div class="invalid-feedback">
+              <?= form_error('nama_pekerjaan', '<p class="error-message">', '</p>'); ?>
             </div>
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Nama Perusahaan</label>
-              <input id="inputLarge" type="text" name="nama_perusahaan" placeholder="Masukkan Nama Perusahaan..." class="form-input form-input-md" />
-            </div>
+          <div class="mb-5">
+            <label for="inputLarge">Nama Perusahaan</label>
+            <input id="inputLarge" type="text" name="nama_perusahaan" placeholder="Masukkan Nama Perusahaan..." class="form-input form-input-md" />
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Lokasi</label>
-              <input id="inputLarge" type="text" name="lokasi" placeholder="Masukkan Lokasi..." class="form-input form-input-md" />
-            </div>
+          <div class="mb-5">
+            <label for="inputLarge">Lokasi</label>
+            <input id="inputLarge" type="text" name="lokasi" placeholder="Masukkan Lokasi..." class="form-input form-input-md" />
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Gaji</label>
-              <input id="inputLarge" type="text" name="gaji" placeholder="Masukkan Gaji..." class="form-input form-input-md" />
-            </div>
+          <div class="mb-5">
+            <label for="inputLarge">Gaji</label>
+            <input id="inputLarge" type="text" name="gaji" placeholder="Masukkan Gaji..." class="form-input form-input-md" />
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Pengalaman</label>
-              <input id="inputLarge" type="text" name="pengalaman" placeholder="Masukkan Minimal Pengalaman..." class="form-input form-input-md" />
-            </div>
+          <div class="mb-5">
+            <label for="inputLarge">Pengalaman</label>
+            <input id="inputLarge" type="text" name="pengalaman" placeholder="Masukkan Minimal Pengalaman..." class="form-input form-input-md" />
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Usia</label>
-              <input id="inputLarge" type="number" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
-            </div>
+          <div class="mb-5">
+            <label for="inputLarge">Usia</label>
+            <input id="inputLarge" type="number" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
+          </div>
 
-            <div class="mb-5">
-              <label for="jenis_kelaminSelect">Jenis Kelamin</label>
-              <select class="form-multiselect selectjenis_kelamin" name="jenis_kelamin">
-                <option selected value="Laki-laki">Laki-laki</option>
-                <option value="Perempuan">Perempuan</option>
-                <option value="Semua Jenis Kelamin">Perempuan</option>
-              </select>
-            </div>
+          <div class="mb-5">
+            <label for="jenis_kelaminSelect">Jenis Kelamin</label>
+            <select class="form-multiselect selectjenis_kelamin" name="jenis_kelamin">
+              <option selected value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+              <option value="Semua Jenis Kelamin">Semua Jenis Kelamin</option>
+            </select>
+          </div>
 
-            <div class="mb-5">
-              <label for="syaratSelect">Benefit</label>
-              <select class="form-multiselect selectbenefit" name="benefit[]" multiple="multiple">
-                <option value="BPJS">BPJS</option>
-                <option value="Gaji Pokok">Gaji Pokok</option>
-                <option value="Upah Lembur">Upah Lembur</option>
-                <option value="THR">THR</option>
-                <option value="Uang Makan">Uang Makan</option>
-                <option value="Asuransi Kesehatan">Asuransi Kesehatan</option>
-                <option value="Pelatihan/Kursus">Pelatihan/Kursus</option>
-                <option value="Bonus Kinerja">Bonus Kinerja</option>
-                <option value="Tunjangan Transportasi">Tunjangan Transportasi</option>
-                <option value="Tunjangan Tempat Tinggal">Tunjangan Tempat Tinggal</option>
-                <option value="Tunjangan Komunikasi">Tunjangan Komunikasi</option>
-                <option value="Cuti">Cuti</option>
-                <option value="Lainnya">Lainnya</option>
-              </select>
-            </div>
+          <div class="mb-5">
+            <label for="syaratSelect">Benefit</label>
+            <select class="form-multiselect selectbenefit" name="benefit[]" multiple="multiple">
+              <option value="BPJS">BPJS</option>
+              <option value="Gaji_Pokok">Gaji Pokok</option>
+              <option value="Upah_Lembur">Upah Lembur</option>
+              <option value="THR">THR</option>
+              <option value="Uang_Makan">Uang Makan</option>
+              <option value="Asuransi_Kesehatan">Asuransi Kesehatan</option>
+              <option value="Pelatihan/Kursus">Pelatihan/Kursus</option>
+              <option value="Bonus_Kinerja">Bonus Kinerja</option>
+              <option value="Tunjangan_Transportasi">Tunjangan Transportasi</option>
+              <option value="Tunjangan_Tempat Tinggal">Tunjangan Tempat Tinggal</option>
+              <option value="Tunjangan_Komunikasi">Tunjangan Komunikasi</option>
+              <option value="Cuti">Cuti</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
 
-            <div class="mb-5">
-              <label for="tipekerjaSelect">Tipe kerja</label>
-              <select class="form-multiselect selecttipekerja" name="tipe_kerja">
-                <option value="Full-time">Full-time</option>
-                <option value="Part-Time">Part-Time</option>
-                <option value="Magang">Magang</option>
-                <option value="Freelance">Freelance</option>
-                <option value="Kontrak">Kontrak</option>
-              </select>
-            </div>
+          <div class="mb-5">
+            <label for="tipekerjaSelect">Tipe kerja</label>
+            <select class="form-multiselect selecttipekerja" name="tipe_kerja">
+              <option value="Full-time">Full-time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Magang">Magang</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Kontrak">Kontrak</option>
+            </select>
+          </div>
 
-            <div class="mb-5">
-              <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
-              <select class="form-multiselect selectkebijakan" name="kebijakan">
-                <option value="Kerja di kantor">Kerja di kantor</option>
-                <option value="Kerja di rumah">Kerja di rumah</option>
-                <option value="Kerja di lapangan">Kerja di lapangan</option>
-                <option value="Kerja di kantor/rumah">Kerja di kantor/rumah</option>
-                <option value="Remote di lokasi tertentu">Remote di lokasi tertentu</option>
-              </select>
-            </div>
+          <div class="mb-5">
+            <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
+            <select class="form-multiselect selectkebijakan" name="kebijakan">
+              <option value="Kerja di kantor">Kerja di kantor</option>
+              <option value="Kerja di rumah">Kerja di rumah</option>
+              <option value="Kerja di lapangan">Kerja di lapangan</option>
+              <option value="Kerja di kantor/rumah">Kerja di kantor/rumah</option>
+              <option value="Remote di lokasi tertentu">Remote di lokasi tertentu</option>
+            </select>
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Hari Kerja</label>
-              <select id="daySelectawal" name="hari_awal">
-                <option value="Senin">Senin</option>
-                <option value="Selasa">Selasa</option>
-                <option value="Rabu">Rabu</option>
-                <option value="Kamis">Kamis</option>
-                <option value="Jumat">Jumat</option>
-                <option value="Sabtu">Sabtu</option>
-                <option value="Minggu">Minggu</option>
-              </select>
-              <select id="daySelectakhir" name="hari_akhir">
-                <option value="Senin">Senin</option>
-                <option value="Selasa">Selasa</option>
-                <option value="Rabu">Rabu</option>
-                <option value="Kamis">Kamis</option>
-                <option value="Jumat">Jumat</option>
-                <option value="Sabtu">Sabtu</option>
-                <option value="Minggu">Minggu</option>
-              </select>
-            </div>
-            <div class="mb-5">
-              <label for="inputLarge">Jam Kerja Awal</label>
-              <input type="time" name="jam_awal" placeholder="Masukkan Jam Awal Loker... " />
+          <div class="mb-5">
+            <label for="inputLarge">Hari Kerja</label>
+            <select id="daySelectawal" name="hari_awal">
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+            </select>
+            <select id="daySelectakhir" name="hari_akhir">
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label for="inputLarge">Jam Kerja Awal</label>
+            <input type="time" name="jam_awal" placeholder="Masukkan Jam Awal Loker... " />
 
-              <label for="inputLarge">Jam Kerja Akhir</label>
-              <input type="time" name="jam_akhir" placeholder="Masukkan Jam Akhir Loker... " />
+            <label for="inputLarge">Jam Kerja Akhir</label>
+            <input type="time" name="jam_akhir" placeholder="Masukkan Jam Akhir Loker... " />
+          </div>
+          <div class="mb-9">
+            <label for="">Deskripsi Pekerjaan</label>
+            <div id="editortunjangg">
             </div>
-            <div class="mb-9">
-              <label for="">Deskripsi Pekerjaan</label>
-              <div id="editortunjangg">
-              </div>
-              <textarea name="deskripsi" style="display:none" id="tunjang"></textarea>
-            </div>
+            <textarea name="deskripsi" style="display:none" id="tunjang"></textarea>
+          </div>
 
-            <div class="mb-5">
-              <label for="pendidikanSelect">Pendidikan</label>
-              <select class="form-multiselect selectpendidikan" name="pendidikan">
-                <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/ SMK/ Sederajat</option>
-                <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/ MTS/ Sederajat</option>
-                <option value="Minimal D3">Minimal D3</option>
-                <option value="Minimal D3/D4">Minimal D3/ D4</option>
-                <option value="Minimal S1">Minimal S1</option>
-                <option value="Minimal S1/S2">Minimal S1/S2</option>
-                <option value="Semua Jenjang">Semua Jenjang</option>
-              </select>
-            </div>
+          <div class="mb-5">
+            <label for="pendidikanSelect">Pendidikan</label>
+            <select class="form-multiselect selectpendidikan" name="pendidikan">
+              <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/ SMK/ Sederajat</option>
+              <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/ MTS/ Sederajat</option>
+              <option value="Minimal D3">Minimal D3</option>
+              <option value="Minimal D3/D4">Minimal D3/ D4</option>
+              <option value="Minimal S1">Minimal S1</option>
+              <option value="Minimal S1/S2">Minimal S1/S2</option>
+              <option value="Semua Jenjang">Semua Jenjang</option>
+            </select>
+          </div>
 
-            <div class="mb-5">
-              <label for="skillsSelect">Kategori Pekerjaan</label>
-              <select class="form-multiselect selectkategori" name="kategori[]" multiple="multiple">
-                <?php foreach ($kategori as $k) : ?>
-                  <option value="<?= $k['nama_kategori'] ?>"><?= $k['nama_kategori'] ?></option>
-                <?php endforeach; ?>
-              </select>
-              <input type="hidden" name="kategori_baru" id="kategoriBaru">
-            </div>
+          <div class="mb-5">
+            <label for="skillsSelect">Kategori Pekerjaan</label>
+            <select class="form-multiselect selectkategori" name="kategori[]" multiple="multiple">
+              <?php foreach ($kategori as $k) : ?>
+                <option value="<?= str_replace(' ', '_', $k['nama_kategori']); ?>"><?= $k['nama_kategori'] ?></option>
+              <?php endforeach; ?>
 
-            <div class="mb-5">
-              <label for="skillsSelect">Skills</label>
-              <select class="form-multiselect selectskills" name="skills[]" multiple="multiple" placeholder="Select skills">
-                <?php foreach ($skill as $s) : ?>
-                  <option value="<?= $s['nama_skill'] ?>"><?= $s['nama_skill'] ?></option>
-                <?php endforeach; ?>
-              </select>
-            </div>
+            </select>
+            <input type="hidden" name="kategori_baru" id="kategoriBaru">
+          </div>
 
-            <div class="mb-5">
-              <label for="inputLarge">Batas Akhir Loker</label>
-              <input id="inputLarge" type="date" name="tgl_akhir_loker" placeholder="Masukkan Batas Akhir Loker... " class="form-input form-input-md" />
-            </div>
+          <div class="mb-5">
+            <label for="skillsSelect">Skills</label>
+            <select class="form-multiselect selectskills" name="skills[]" multiple="multiple" placeholder="Select skills">
+              <?php foreach ($skill as $s) : ?>
+                <option value="<?= str_replace(' ', '_', $s['nama_skill']); ?>"><?= $s['nama_skill'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
 
-            <div class="flex items-center gap-3 justify-end mt-5">
-              <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
-              <button type="button" class="btn btn-danger">Batal</button>
-            </div>
-          </form>
+          <div class="mb-5">
+            <label for="inputLarge">Batas Akhir Loker</label>
+            <input id="inputLarge" type="date" name="tgl_akhir_loker" placeholder="Masukkan Batas Akhir Loker... " class="form-input form-input-md" />
+          </div>
+
+          <div class="flex items-center gap-3 justify-end mt-5">
+            <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
+            <button type="button" class="btn btn-danger">Batal</button>
+          </div>
+          <!-- </form> -->
+          <?php echo form_close(); ?>
+
         </div>
       </div>
       <!-- end main content section -->
-
       <!-- start footer section -->
       <div class="mt-auto p-6 text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
         © <span id="footer-year">2022</span>. Vristo All rights reserved.

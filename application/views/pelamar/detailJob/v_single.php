@@ -21,7 +21,6 @@
 			<div class="mt-10">
 				<div>
 					<a href="javascript:void(0);" onclick="window.history.go(-1);" class="flex items-center justify-start mb-10 gap-5">
-
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
 							<path fill="currentColor" d="M228 128a12 12 0 0 1-12 12H69l51.52 51.51a12 12 0 0 1-17 17l-72-72a12 12 0 0 1 0-17l72-72a12 12 0 0 1 17 17L69 116h147a12 12 0 0 1 12 12" />
 						</svg>
@@ -86,10 +85,9 @@
 							<h1 class="text-xl font-bold">Persyaratan</h1>
 						</div>
 						<div class="flex items-center mt-3 gap-3">
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari <?= $r['pengalaman'] ?></span>
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Minimal SMA / SMK</span>
+							<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari <?= $r['pengalaman'] ?> Tahun</span>
+							<span class="badge badge-outline-primary rounded-md text-center py-3"><?= $r['pendidikan'] ?></span>
 							<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Figma</span>
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Adobe XD</span>
 						</div>
 					</div>
 
@@ -97,12 +95,12 @@
 					<div class="block mt-5">
 						<h1 class="text-xl font-bold">Skill</h1>
 						<div class="flex items-center mt-3 gap-3">
-							<?php $dataarray = explode(" ", $r['skills']); ?>
-							<?php $array = $r['skills'];
+
+							<?php $dataarray = explode(" ", $r['skills']);
 							foreach ($dataarray as $data) {
 								$arrayd = explode(" ", $data);
 								$kataAcak = $arrayd[array_rand($arrayd)];
-								echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . $kataAcak . '</span>';
+								echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . str_replace('_', ' ', $kataAcak) . '</span>';
 							}
 							?>
 						</div>
@@ -144,7 +142,7 @@
 						<h1 class="font-bold text-lg">Deskripsi Pekerjaan <?= $r['nama_pekerjaan']; ?> <?= $r['nama_perusahaan']; ?></h1>
 						<div class="mt-5">
 							<ul class=" space-y-1 list-disc list-inside text-base flex flex-col gap-5">
-								<li>Melakukan wawancara, survei, dan observasi untuk memahami kebutuhan pengguna.</li>
+								<?= $r['deskripsi']; ?>
 								<li>Menganalisis data untuk menemukan pola perilaku pengguna.</li>
 								<li>Membuat persona pengguna untuk memahami karakteristik target audiens.</li>
 								<li>Merancang sketsa, wireframe, dan prototype untuk menggambarkan pengalaman pengguna.</li>
