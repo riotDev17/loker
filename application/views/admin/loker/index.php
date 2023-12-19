@@ -91,7 +91,8 @@
                                         <tbody>
                                             <?php if (empty($loker)) : ?>
                                                 <tr>
-                                                    <td colspan="6" style="text-align: center;" class="text-center">Tidak ada data pekerjaan yang tersedia.</td>
+                                                    <td colspan="6" style="text-align: center;" class="text-center">Tidak
+                                                        ada data pekerjaan yang tersedia.</td>
                                                 </tr>
                                             <?php else : ?>
                                                 <?php foreach ($loker as $l) : ?>
@@ -99,27 +100,37 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="flex w-max items-center">
-                                                                    <div><?= $l['nama_pekerjaan'] ?></div>
+                                                                    <div>
+                                                                        <?= $l['nama_pekerjaan'] ?>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="flex w-max items-center">
-                                                                    <div><?= $l['nama_perusahaan'] ?></div>
+                                                                    <div>
+                                                                        <?= $l['nama_perusahaan'] ?>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="flex w-max items-center">
-                                                                    <div>IDR<?= $l['gaji'] ?> / Bulan</div>
+                                                                    <div>IDR
+                                                                        <?= $l['gaji'] ?> / Bulan
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="flex w-max items-center">
-                                                                    <div><?= $l['tipe_kerja'] ?></div>
+                                                                    <div>
+                                                                        <?= $l['tipe_kerja'] ?>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="flex w-max items-center">
-                                                                    <div><?= $l['lokasi'] ?></div>
+                                                                    <div>
+                                                                        <?= $l['lokasi'] ?>
+                                                                    </div>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -130,12 +141,9 @@
                                                                     <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
                                                                         Edit
                                                                     </a>
-                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')" class="btn btn-sm btn-outline-danger">
+                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger">
                                                                         Hapus
                                                                     </a>
-                                                                    <button type="button    " @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')" class="btn btn-sm btn-outline-danger">
-                                                                        Hapus1
-                                                                    </button>
                                                                     <button type="button" class="btn btn-secondary" @click="showConfirm('Yakin Untuk Menghapus Data Ini?', 'top-center')">Top Center</button>
                                                                 </div>
                                                             </td>
@@ -161,38 +169,39 @@
     </div>
 
     <script>
-        showConfirm = (msg = 'Yakin Untuk Menghapus Data Ini?', position = 'bottom-start', idLoker) => {
-            const confirm = window.Swal.mixin({
-                position: position || 'bottom-start',
-                showCancelButton: true,
-                confirmButtonColor: '#E7515A',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal',
-            });
-            //             confirm.fire({
-            //                 title: msg,
-            //                 icon: 'question',
-            //             }).then((result) => {
-            //                 if (result.isConfirmed) {
-            //                     console.log('OK');
-            //                     window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-            //                 } else {
-            //                     console.log('klik Batal');
-            //                 }
-            //             });
+        async function showAlert(event) {
+            event.preventDefault(); // Mencegah tindakan default dari tautan
 
-            if (confirm.isConfirmed) {
-                try {
-                    window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
-                    Swal.fire({
-                        title: msg,
-                        icon: 'question',
-                    });
-                } catch (e) {
-                    console.log(e);
-                }
-            }
+            const result = await new window.Swal({
+                icon: 'warning',
+                title: 'Apakah Anda Yakin?',
+                text: "Ingin Menghapus Data Pekerjaan Ini?",
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+            });
+//             confirm.fire({
+//                 title: msg,
+//                 icon: 'question',
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     console.log('OK');
+//                     window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+//                 } else {
+//                     console.log('klik Batal');
+//                 }
+//             });
+
+if(confirm.isConfirmed){
+    try{
+        window.location.href = '<?= base_url('admin/loker/delete/') ?>' + idLoker;
+        Swal.fire({
+            title: msg,
+            icon: 'question',
+        });
+    } catch(e){
+        console.log(e);
+    }
+}
         };
     </script>
 
