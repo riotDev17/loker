@@ -12,4 +12,7 @@ class Lamaran extends CI_Controller
     {
         $this->load->view('pelamar/profil/v_status');
     }
+    public function status()
+    {
+    }
 }

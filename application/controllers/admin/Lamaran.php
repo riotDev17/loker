@@ -22,4 +22,7 @@ class Lamaran extends CI_Controller
 
         $this->load->view('admin/lamaran/v_lamaran', $data);
     }
+    public function status_lamaran()
+    {
+    }
 }

@@ -65,7 +65,7 @@
           </ul>
 
           <!-- MAIN -->
-          <?= form_open_multipart(), 'class="mt-10"', 'method="post"', 'id="myForm"'; ?>
+          <?php echo form_open_multipart('', 'class="mt-10"', 'method="post"', 'id="myForm"'); ?>
           <!-- Isi formulir -->
           <div class="mb-5">
             <label for="inputLarge">Nama Pekerjaan</label>
@@ -88,6 +88,30 @@
           <div class="mb-5">
             <label for="inputLarge">Gaji</label>
             <input id="inputLarge" type="text" name="gaji" placeholder="Masukkan Gaji..." class="form-input form-input-md" />
+          </div>
+          <div class="mb-5">
+            <label for="inputLarge">Provinsi</label>
+            <select id="provinsi" name="provinsi">
+              <option>Pilih</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label for="inputLarge">Kabupaten</label>
+            <select id="kab" name="kab">
+              <option>Pilih</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label for="inputLarge">Kota</label>
+            <select id="kota" name="kota">
+              <option>Pilih</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label for="inputLarge">Kelurahan</label>
+            <select id="lurah" name="lurah">
+              <option>Pilih</option>
+            </select>
           </div>
 
           <div class="mb-5">
@@ -247,10 +271,70 @@
   <script defer src="<?php echo base_url() ?>assets/js/alpine-focus.min.js"></script>
   <script defer src="<?php echo base_url() ?>assets/js/alpine.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
-  <!-- start hightlight js -->
   <script src="<?php echo base_url() ?>assets/js/highlight.min.js"></script>
-  <!-- end hightlight js -->
   <script src="<?php echo base_url() ?>assets/js/quill.js"></script>
+  <!-- Provinsi -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/provinces.json`)
+        .then(response => response.json())
+        .then(provinces => {
+          var data = provinces;
+          var prov = '<option>Pilih</option>';
+          data.forEach(element => {
+            prov += `<option  data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
+          });
+          document.getElementById('provinsi').innerHTML = prov;
+        });
+    });
+  </script>
+  <script>
+    // Kabupaten
+    const selectProvinsi = document.getElementById('provinsi');
+    selectProvinsi.addEventListener('change', (e) => {
+      var provinsi = e.target.options[e.target.selectedIndex].dataset.reg;
+      fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/regencies/${provinsi}.json`)
+        .then(response => response.json())
+        .then(regencies => {
+          var data = regencies;
+          var kab = '<option>Pilih</option>';
+          data.forEach(element => {
+            kab += `<option  data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
+          });
+          document.getElementById('kab').innerHTML = kab;
+        });
+    });
+    // Kota
+    const selectKab = document.getElementById('kab');
+    selectKab.addEventListener('change', (e) => {
+      var kab = e.target.options[e.target.selectedIndex].dataset.dist;
+      fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/districts/${kab}.json`)
+        .then(response => response.json())
+        .then(districts => {
+          var data = districts;
+          var kota = '<option>Pilih</option>';
+          data.forEach(element => {
+            kota += `<option  data-vill="${element.id}" value="${element.name}">${element.name}</option>`;
+          });
+          document.getElementById('kota').innerHTML = kota;
+        });
+    });
+    // Kelurahan
+    const selectKota = document.getElementById('kota');
+    selectKota.addEventListener('change', (e) => {
+      var kota = e.target.options[e.target.selectedIndex].dataset.vill;
+      fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kota}.json`)
+        .then(response => response.json())
+        .then(villages => {
+          var data = villages;
+          var kota = '<option>Pilih</option>';
+          data.forEach(element => {
+            kota += `<option  data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
+          });
+          document.getElementById('lurah').innerHTML = kota;
+        });
+    });
+  </script>
 
   <script>
     $(document).ready(function() {
@@ -267,6 +351,7 @@
       });
     });
   </script>
+
   <script>
     document.addEventListener('alpine:init', () => {
       // main section

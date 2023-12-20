@@ -77,6 +77,7 @@ class Loker extends CI_Controller
         $data['title'] = "Sistem Informasi Loker | Tambah Loker";
         $this->load->view('admin/loker/tambah_loker', $data);
     }
+
     public function read($id)
     {
         $data['record'] = $this->Loker_model->baca_detail($id);

@@ -62,44 +62,46 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <div>
-                                                <tr>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>Jhon Doe</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>Jl. Kesucian Diri</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>Jawir</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>jhondoe@gmail.com</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex w-max items-center">
-                                                            <div>0812345678</div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex items-center justify-center gap-4">
-                                                            <a href="detail-lamaran.html">
-                                                                <button type="button" class="btn btn-sm btn-outline-success">
-                                                                    Lihat
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </div>
+                                            <?php foreach ($datapelamar as $dp) : ?>
+                                                <div>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['nama'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['alamat'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div>Jawir</div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['email'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['no_telp'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex items-center justify-center gap-4">
+                                                                <a href="<?= base_url('admin/lamaran/read'); ?>">
+                                                                    <button type="button" class="btn btn-sm btn-outline-success">
+                                                                        Lihat
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                            <?php endforeach ?>
                                         </tbody>
                                     </table>
                                 </div>
