@@ -16,11 +16,11 @@ class Lamaran extends CI_Controller
 
         $this->load->view('admin/lamaran/index', $data);
     }
-    public function read($id)
+    public function read()
     {
-        $data['pelamar'] = $this->Pelamar_model->baca_detail($id);
+       
 
-        $this->load->view('admin/lamaran/v_lamaran', $data);
+        $this->load->view('admin/lamaran/v_lamaran');
     }
     public function status_lamaran()
     {

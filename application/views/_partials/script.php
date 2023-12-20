@@ -57,3 +57,14 @@
           }));
       });
   </script>
+  <script>
+      document.addEventListener("alpine:init", () => {
+          Alpine.data("modal", (initialOpenState = false) => ({
+              open: initialOpenState,
+
+              toggle() {
+                  this.open = !this.open;
+              },
+          }));
+      });
+  </script>

@@ -45,11 +45,6 @@
 									</div>
 								</div>
 								<div class="flex items-center font-semibold gap-3 mt-2">
-									<iconify-icon icon="material-symbols:attach-money" width="22"></iconify-icon>
-									<p class="text-base">IDR <?= $r['gaji'] ?>/ Bulan</p>
-								</div>
-
-								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="game-icons:sands-of-time" width="22"></iconify-icon>
 									<p class="text-base"><?= $r['tipe_kerja'] ?> &nbsp;
 									<ul style="list-style-type:disc;">
@@ -57,16 +52,21 @@
 									</ul>
 									</p>
 								</div>
-
 								<div class="flex items-center font-semibold gap-3 mt-2">
-									<iconify-icon icon="mdi:education-outline" width="22"></iconify-icon>
-									<p class="text-base"><?= $r['pendidikan'] ?></p>
+									<iconify-icon icon="material-symbols:attach-money" width="22"></iconify-icon>
+									<p class="text-base">IDR <?= $r['gaji'] ?>/ Bulan</p>
 								</div>
 
+
 								<div class="flex items-center font-semibold gap-3 mt-2">
+									<iconify-icon icon="carbon:location" width="22"></iconify-icon>
+									<p class="text-base"><?= ucwords($r['lokasi']) ?></p>
+								</div>
+
+								<!-- <div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="mdi:worker" width="22"></iconify-icon>
 									<p class="text-base">Pengalaman kurang dari <?= $r['pengalaman'] ?> Tahun</p>
-								</div>
+								</div> -->
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="mingcute:time-fill" width="22"></iconify-icon>
@@ -87,20 +87,19 @@
 						<div class="flex items-center mt-3 gap-3">
 							<span class="badge badge-outline-primary rounded-md text-center py-3">Pengalaman Kurang Dari <?= $r['pengalaman'] ?> Tahun</span>
 							<span class="badge badge-outline-primary rounded-md text-center py-3"><?= $r['pendidikan'] ?></span>
-							<span class="badge badge-outline-primary rounded-md text-center py-3">Menguasai Figma</span>
 						</div>
 					</div>
 
 					<!-- Skills -->
 					<div class="block mt-5">
-						<h1 class="text-xl font-bold">Skill</h1>
+						<h1 class="text-xl font-bold">Skill yang harus dimiliki</h1>
 						<div class="flex items-center mt-3 gap-3">
 
 							<?php $dataarray = explode(" ", $r['skills']);
 							foreach ($dataarray as $data) {
 								$arrayd = explode(" ", $data);
 								$kataAcak = $arrayd[array_rand($arrayd)];
-								echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . str_replace('_', ' ', $kataAcak) . '</span>';
+								echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . str_replace('_', ' ', ucwords($kataAcak)) . '</span>';
 							}
 							?>
 						</div>

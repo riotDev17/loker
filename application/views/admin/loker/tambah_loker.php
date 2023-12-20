@@ -18,6 +18,7 @@
   <script defer src="<?php echo base_url() ?>assets/js/tippy-bundle.umd.min.js"></script>
   <script defer src="<?php echo base_url() ?>assets/js/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/quill.snow.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/flatpickr.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker@3.1.0/daterangepicker.css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -65,194 +66,417 @@
           </ul>
 
           <!-- MAIN -->
-          <?php echo form_open_multipart('', 'class="mt-10"', 'method="post"', 'id="myForm"'); ?>
-          <!-- Isi formulir -->
-          <div class="mb-5">
-            <label for="inputLarge">Nama Pekerjaan</label>
-            <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-md" />
-            <div class="invalid-feedback">
-              <?= form_error('nama_pekerjaan', '<p class="error-message">', '</p>'); ?>
+          <form action="<?= base_url('admin/loker/insertloker') ?>" class="mt-10" method="post" id="myForm">
+            <!-- Isi formulir -->
+            <div class="mb-5">
+              <label for="inputLarge">Nama Pekerjaan</label>
+              <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-md" />
+              <div class="!mt-2">
+                <span class="text-white-dark text-[11px] inline-block">
+                  *Required Fields
+                  <?= form_error('nama_pekerjaan'); ?>
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div class="mb-5">
-            <label for="inputLarge">Nama Perusahaan</label>
-            <input id="inputLarge" type="text" name="nama_perusahaan" placeholder="Masukkan Nama Perusahaan..." class="form-input form-input-md" />
-          </div>
-
-          <div class="mb-5">
-            <label for="inputLarge">Lokasi</label>
-            <input id="inputLarge" type="text" name="lokasi" placeholder="Masukkan Lokasi..." class="form-input form-input-md" />
-          </div>
-
-          <div class="mb-5">
-            <label for="inputLarge">Gaji</label>
-            <input id="inputLarge" type="text" name="gaji" placeholder="Masukkan Gaji..." class="form-input form-input-md" />
-          </div>
-          <div class="mb-5">
-            <label for="inputLarge">Provinsi</label>
-            <select id="provinsi" name="provinsi">
-              <option>Pilih</option>
-            </select>
-          </div>
-          <div class="mb-5">
-            <label for="inputLarge">Kabupaten</label>
-            <select id="kab" name="kab">
-              <option>Pilih</option>
-            </select>
-          </div>
-          <div class="mb-5">
-            <label for="inputLarge">Kota</label>
-            <select id="kota" name="kota">
-              <option>Pilih</option>
-            </select>
-          </div>
-          <!-- <div class="mb-5">
-            <label for="inputLarge">Kelurahan</label>
-            <select id="lurah" name="lurah">
-              <option>Pilih</option>
-            </select>
-          </div> -->
-
-          <div class="mb-5">
-            <label for="inputLarge">Pengalaman</label>
-            <input id="inputLarge" type="text" name="pengalaman" placeholder="Masukkan Minimal Pengalaman..." class="form-input form-input-md" />
-          </div>
-
-          <div class="mb-5">
-            <label for="inputLarge">Usia</label>
-            <input id="inputLarge" type="number" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
-          </div>
-
-          <div class="mb-5">
-            <label for="jenis_kelaminSelect">Jenis Kelamin</label>
-            <select class="form-multiselect selectjenis_kelamin" name="jenis_kelamin">
-              <option selected value="Laki-laki">Laki-laki</option>
-              <option value="Perempuan">Perempuan</option>
-              <option value="Semua Jenis Kelamin">Semua Jenis Kelamin</option>
-            </select>
-          </div>
-
-          <div class="mb-5">
-            <label for="syaratSelect">Benefit</label>
-            <select class="form-multiselect selectbenefit" name="benefit[]" multiple="multiple">
-              <option value="BPJS">BPJS</option>
-              <option value="Gaji_Pokok">Gaji Pokok</option>
-              <option value="Upah_Lembur">Upah Lembur</option>
-              <option value="THR">THR</option>
-              <option value="Uang_Makan">Uang Makan</option>
-              <option value="Asuransi_Kesehatan">Asuransi Kesehatan</option>
-              <option value="Pelatihan/Kursus">Pelatihan/Kursus</option>
-              <option value="Bonus_Kinerja">Bonus Kinerja</option>
-              <option value="Tunjangan_Transportasi">Tunjangan Transportasi</option>
-              <option value="Tunjangan_Tempat Tinggal">Tunjangan Tempat Tinggal</option>
-              <option value="Tunjangan_Komunikasi">Tunjangan Komunikasi</option>
-              <option value="Cuti">Cuti</option>
-              <option value="Lainnya">Lainnya</option>
-            </select>
-          </div>
-
-          <div class="mb-5">
-            <label for="tipekerjaSelect">Tipe kerja</label>
-            <select class="form-multiselect selecttipekerja" name="tipe_kerja">
-              <option value="Full-time">Full-time</option>
-              <option value="Part-Time">Part-Time</option>
-              <option value="Magang">Magang</option>
-              <option value="Freelance">Freelance</option>
-              <option value="Kontrak">Kontrak</option>
-            </select>
-          </div>
-
-          <div class="mb-5">
-            <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
-            <select class="form-multiselect selectkebijakan" name="kebijakan">
-              <option value="Kerja di kantor">Kerja di kantor</option>
-              <option value="Kerja di rumah">Kerja di rumah</option>
-              <option value="Kerja di lapangan">Kerja di lapangan</option>
-              <option value="Kerja di kantor/rumah">Kerja di kantor/rumah</option>
-              <option value="Remote di lokasi tertentu">Remote di lokasi tertentu</option>
-            </select>
-          </div>
-
-          <div class="mb-5">
-            <label for="inputLarge">Hari Kerja</label>
-            <select id="daySelectawal" name="hari_awal">
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-            </select>
-            <select id="daySelectakhir" name="hari_akhir">
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-            </select>
-          </div>
-          <div class="mb-5">
-            <label for="inputLarge">Jam Kerja Awal</label>
-            <input type="time" name="jam_awal" placeholder="Masukkan Jam Awal Loker... " />
-
-            <label for="inputLarge">Jam Kerja Akhir</label>
-            <input type="time" name="jam_akhir" placeholder="Masukkan Jam Akhir Loker... " />
-          </div>
-          <div class="mb-9">
-            <label for="">Deskripsi Pekerjaan</label>
-            <div id="editortunjangg">
+            <div class="mb-5">
+              <label for="inputLarge">Nama Perusahaan</label>
+              <input id="inputLarge" type="text" name="nama_perusahaan" placeholder="Masukkan Nama Perusahaan..." class="form-input form-input-md" />
             </div>
-            <textarea name="deskripsi" style="display:none" id="tunjang"></textarea>
-          </div>
 
-          <div class="mb-5">
-            <label for="pendidikanSelect">Pendidikan</label>
-            <select class="form-multiselect selectpendidikan" name="pendidikan">
-              <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/ SMK/ Sederajat</option>
-              <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/ MTS/ Sederajat</option>
-              <option value="Minimal D3">Minimal D3</option>
-              <option value="Minimal D3/D4">Minimal D3/ D4</option>
-              <option value="Minimal S1">Minimal S1</option>
-              <option value="Minimal S1/S2">Minimal S1/S2</option>
-              <option value="Semua Jenjang">Semua Jenjang</option>
-            </select>
-          </div>
+            <div class="mb-5">
+              <label for="inputLarge">Lokasi</label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <select class="form-select" id="provinsi" name="provinsi">
+                  <option>Provinsi</option>
+                </select>
+                <select class="form-select" id="kab" name="kab">
+                  <option>Kabupaten</option>
+                </select>
+                <select class="form-select" id="kota" name="kota">
+                  <option>Kota</option>
+                </select>
+              </div>
+            </div>
 
-          <div class="mb-5">
-            <label for="skillsSelect">Kategori Pekerjaan</label>
-            <select class="form-multiselect selectkategori" name="kategori[]" multiple="multiple">
-              <?php foreach ($kategori as $k) : ?>
-                <option value="<?= str_replace(' ', '_', $k['nama_kategori']); ?>"><?= $k['nama_kategori'] ?></option>
-              <?php endforeach; ?>
+            <div class="mb-5">
+              <label for="inputLarge">Gaji</label>
+              <div class="grid grid-cols-1 sm:flex justify-between gap-5">
+                <input id="priceInpuawal" type="text" name="gaji" placeholder="Mulai" class="form-input form-input-md " />
+                <input id="priceInputakhir" type="text" name="gaji" placeholder="Sampai" class="form-input form-input-md " />
+              </div>
+            </div>
 
-            </select>
-            <input type="hidden" name="kategori_baru" id="kategoriBaru">
-          </div>
+            <div class="mb-5">
+              <label for="inputLarge">Pengalaman</label>
+              <input id="inputLarge" type="text" name="pengalaman" placeholder="Masukkan Minimal Pengalaman..." class="form-input form-input-md" />
+            </div>
 
-          <div class="mb-5">
-            <label for="skillsSelect">Skills</label>
-            <select class="form-multiselect selectskills" name="skills[]" multiple="multiple" placeholder="Select skills">
-              <?php foreach ($skill as $s) : ?>
-                <option value="<?= str_replace(' ', '_', $s['nama_skill']); ?>"><?= $s['nama_skill'] ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
+            <div class="mb-5">
+              <label for="inputLarge">Usia</label>
+              <input id="inputLarge" type="number" name="usia" placeholder="Masukkan Usia..." class="form-input form-input-md" />
+            </div>
 
-          <div class="mb-5">
-            <label for="inputLarge">Batas Akhir Loker</label>
-            <input id="inputLarge" type="date" name="tgl_akhir_loker" placeholder="Masukkan Batas Akhir Loker... " class="form-input form-input-md" />
-          </div>
+            <div class="mb-5">
+              <label for="jenis_kelaminSelect">Jenis Kelamin</label>
+              <select class="form-select selectjenis_kelamin" name="jenis_kelamin">
+                <option selected value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+                <option value="Semua Jenis Kelamin">Semua Jenis Kelamin</option>
+              </select>
+            </div>
 
-          <div class="flex items-center gap-3 justify-end mt-5">
-            <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
-            <button type="button" class="btn btn-danger">Batal</button>
-          </div>
-          <!-- </form> -->
-          <?php echo form_close(); ?>
+            <div class="mb-5">
+              <label for="syaratSelect">Benefit</label>
+              <select class="form-select selectbenefit" name="benefit[]" multiple="multiple">
+                <option value="BPJS">BPJS</option>
+                <option value="Gaji_Pokok">Gaji Pokok</option>
+                <option value="Upah_Lembur">Upah Lembur</option>
+                <option value="THR">THR</option>
+                <option value="Uang_Makan">Uang Makan</option>
+                <option value="Asuransi_Kesehatan">Asuransi Kesehatan</option>
+                <option value="Pelatihan/Kursus">Pelatihan/Kursus</option>
+                <option value="Bonus_Kinerja">Bonus Kinerja</option>
+                <option value="Tunjangan_Transportasi">Tunjangan Transportasi</option>
+                <option value="Tunjangan_Tempat Tinggal">Tunjangan Tempat Tinggal</option>
+                <option value="Tunjangan_Komunikasi">Tunjangan Komunikasi</option>
+                <option value="Cuti">Cuti</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="tipekerjaSelect">Tipe kerja</label>
+              <select class="form-select selecttipekerja" name="tipe_kerja">
+                <option value="Full-time">Full-time</option>
+                <option value="Part-Time">Part-Time</option>
+                <option value="Magang">Magang</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Kontrak">Kontrak</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
+              <select class="form-select selectkebijakan" name="kebijakan">
+                <option value="Kerja di kantor">Kerja di kantor</option>
+                <option value="Kerja di rumah">Kerja di rumah</option>
+                <option value="Kerja di lapangan">Kerja di lapangan</option>
+                <option value="Kerja di kantor/rumah">Kerja di kantor/rumah</option>
+                <option value="Remote di lokasi tertentu">Remote di lokasi tertentu</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="inputLarge">Hari Kerja</label>
+              <div class="grid grid-cols-1 sm:flex justify-between gap-5">
+                <select class="form-select" id="daySelectawal" name="hari_awal">
+                  <option value="Senin">Senin</option>
+                  <option value="Selasa">Selasa</option>
+                  <option value="Rabu">Rabu</option>
+                  <option value="Kamis">Kamis</option>
+                  <option value="Jumat">Jumat</option>
+                  <option value="Sabtu">Sabtu</option>
+                  <option value="Minggu">Minggu</option>
+                </select>
+                <select class="form-select" id="daySelectakhir" name="hari_akhir">
+                  <option value="Senin">Senin</option>
+                  <option value="Selasa">Selasa</option>
+                  <option value="Rabu">Rabu</option>
+                  <option value="Kamis">Kamis</option>
+                  <option value="Jumat">Jumat</option>
+                  <option value="Sabtu">Sabtu</option>
+                  <option value="Minggu">Minggu</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-5">
+              <label for="inputLarge">Jam Kerja</label>
+              <div class="grid grid-cols-1 sm:flex justify-between gap-5">
+                  <input id="preloading-timeawal" x-data="jamawal" name="jam_awal" x-model="date4" class="form-input" />
+                  <input id="preloading-timeakhir" x-data="jamakhir" name="jam_akhir" x-model="date4" class="form-input" />
+              </div>
+            </div>
+
+            <div class="mb-9">
+              <label for="">Deskripsi Pekerjaan</label>
+              <div id="editortunjangg">
+              </div>
+              <textarea name="deskripsi" style="display:none" id="tunjang"></textarea>
+            </div>
+
+            <div class="mb-5">
+              <label for="pendidikanSelect">Pendidikan</label>
+              <select class="form-select" name="pendidikan">
+                <option value="Minimal SMA/SMK/Sederajat">Minimal SMA/ SMK/ Sederajat</option>
+                <option value="Minimal SMP/MTS/Sederajat">Minimal SMP/ MTS/ Sederajat</option>
+                <option value="Minimal D3">Minimal D3</option>
+                <option value="Minimal D3/D4">Minimal D3/ D4</option>
+                <option value="Minimal S1">Minimal S1</option>
+                <option value="Minimal S1/S2">Minimal S1/S2</option>
+                <option value="Semua Jenjang">Semua Jenjang</option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label for="skillsSelect">Kategori Pekerjaan</label>
+              <select class="form-select selectkategori" name="kategori[]" multiple="multiple">
+                <?php foreach ($kategori as $k) : ?>
+                  <option value="<?= str_replace(' ', '_', $k['nama_kategori']); ?>"><?= $k['nama_kategori'] ?></option>
+                <?php endforeach; ?>
+
+              </select>
+              <input type="hidden" name="kategori_baru" id="kategoriBaru">
+            </div>
+
+            <div class="mb-5">
+              <label for="skillsSelect">Skills</label>
+              <select class="form-select selectskills" name="skills[]" multiple="multiple" placeholder="Select skills">
+                <optgroup label="Software Skills">
+                  <option value="figma">Figma</option>
+                  <option value="office">Microsoft Office Suite</option>
+                  <option value="premiere_pro">Adobe Premiere Pro</option>
+                  <option value="photoshop">Adobe Photoshop</option>
+                  <option value="html">HTML</option>
+                  <option value="php">PHP</option>
+                  <option value="react">React.js</option>
+                  <option value="vue">Vue.js</option>
+                  <option value="angular">Angular</option>
+                  <option value="reactNative">React Native</option>
+                  <option value="flutter">Flutter</option>
+                  <option value="xamarin">Xamarin</option>
+                  <option value="git">Git</option>
+                  <option value="github">GitHub</option>
+                  <option value="gitlab">GitLab</option>
+                  <option value="mysql">MySQL</option>
+                  <option value="postgresql">PostgreSQL</option>
+                  <option value="mongodb">MongoDB</option>
+                  <option value="node">Node.js</option>
+                  <option value="express">Express.js</option>
+                  <option value="django">Django (Python)</option>
+                  <option value="apiDesign">API Design</option>
+                  <option value="swagger">Swagger</option>
+                  <option value="openapi">OpenAPI</option>
+                  <option value="docker">Docker</option>
+                  <option value="kubernetes">Kubernetes</option>
+                  <option value="unitTesting">Unit Testing</option>
+                  <option value="integrationTesting">Integration Testing</option>
+                  <option value="testAutomation">Test Automation</option>
+                  <option value="jenkins">Jenkins</option>
+                  <option value="travisCI">Travis CI</option>
+                  <option value="gitlabCI">GitLab CI</option>
+                  <option value="aws">Amazon Web Services (AWS)</option>
+                  <option value="azure">Microsoft Azure</option>
+                  <option value="gcp">Google Cloud Platform (GCP)</option>
+                  <option value="apache">Apache</option>
+                  <option value="nginx">Nginx</option>
+                  <option value="npm">npm (Node Package Manager)</option>
+                  <option value="yarn">Yarn</option>
+                  <option value="grunt">Grunt</option>
+                  <option value="gulp">Gulp</option>
+                  <option value="vsCode">Visual Studio Code</option>
+                  <option value="sublimeText">Sublime Text</option>
+                  <option value="atom">Atom</option>
+                  <option value="intelliJ">IntelliJ IDEA</option>
+                  <option value="https">HTTPS</option>
+                  <option value="xss">Cross-Site Scripting (XSS) Prevention</option>
+                  <option value="csrf">Cross-Site Request Forgery (CSRF) Prevention</option>
+                  <option value="eslint">ESLint (JavaScript)</option>
+                  <option value="codeigniter">Codeigniter</option>
+                  <option value="lighthouse">Lighthouse</option>
+                  <option value="pageSpeed">PageSpeed Insights</option>
+                  <option value="adobeIllustrator">Adobe Illustrator</option>
+                  <option value="sketch">Sketch</option>
+                  <option value="premierePro">Adobe Premiere Pro</option>
+                  <option value="finalCutPro">Final Cut Pro</option>
+                  <option value="audacity">Audacity</option>
+                  <option value="garageBand">GarageBand</option>
+                  <option value="adobeAfterEffects">Adobe After Effects</option>
+                  <option value="davinciResolve">DaVinci Resolve</option>
+                  <option value="hitFilm">HitFilm</option>
+                  <option value="abletonLive">Ableton Live</option>
+                  <option value="logicPro">Logic Pro</option>
+                  <option value="flStudio">FL Studio</option>
+                  <option value="java">Java</option>
+                  <option value="cSharp">C#</option>
+                  <option value="ruby">Ruby</option>
+                  <option value="go">Go</option>
+                  <option value="swift">Swift</option>
+                  <option value="kotlin">Kotlin</option>
+                  <option value="bootstrap">Bootstrap</option>
+                  <option value="tailwindCss">Tailwind CSS</option>
+                  <option value="laravel">Laravel (PHP)</option>
+                  <option value="spring">Spring Boot (Java)</option>
+                  <option value="rubyOnRails">Ruby on Rails</option>
+                  <option value="ionic">Ionic</option>
+                  <option value="phoneGap">PhoneGap</option>
+                  <option value="tensorflow">TensorFlow</option>
+                  <option value="pyTorch">PyTorch</option>
+                  <option value="pandas">Pandas</option>
+                  <option value="numpy">NumPy</option>
+                  <option value="unity">Unity</option>
+                  <option value="unrealEngine">Unreal Engine</option>
+                  <option value="ansible">Ansible</option>
+                  <option value="terraform">Terraform</option>
+                  <option value="raspberryPi">Raspberry Pi</option>
+                  <option value="arduino">Arduino</option>
+                  <option value="figma">Figma</option>
+                  <option value="sketch">Sketch</option>
+                  <option value="adobeXD">Adobe XD</option>
+                  <option value="jira">Jira</option>
+                  <option value="trello">Trello</option>
+                  <option value="slack">Slack</option>
+                  <option value="microsoftTeams">Microsoft Teams</option>
+                  <option value="virtualBox">VirtualBox</option>
+                  <option value="vmWare">VMware</option>
+                  <option value="wireshark">Wireshark</option>
+                  <option value="nmap">Nmap</option>
+                </optgroup>
+                <!-- Soft Skills -->
+                <optgroup label="Soft Skills">
+                  <option value="komunikasi">Kemampuan Komunikasi</option>
+                  <option value="kerja_tim">Kemampuan Berkolaborasi (Kerja Tim)</option>
+                  <option value="problem_solving">Problem Solving</option>
+                  <option value="manajemen_waktu">Manajemen Waktu</option>
+                  <option value="kepemimpinan">Kepemimpinan</option>
+                  <!-- Tambahkan opsi keterampilan lunak lainnya -->
+                </optgroup>
+
+                <!-- Hard Skills -->
+                <optgroup label="Hard Skills">
+                  <option value="analisis_data">Analisis Data</option>
+                  <option value="koding">Koding dan Pengembangan Perangkat Lunak</option>
+                  <option value="manajemen_proyek">Manajemen Proyek</option>
+                  <option value="pemasaran_digital">Pemasaran Digital</option>
+                  <option value="jaringan_komputer">Jaringan Komputer</option>
+                  <!-- Tambahkan opsi keterampilan keras lainnya -->
+                </optgroup>
+
+                <!-- Keterampilan Staf Kantor -->
+                <optgroup label="Skills Staf Kantor">
+                  <option value="dukungan_administratif">Dukungan Administratif</option>
+                  <option value="input_data">Input Data</option>
+                  <option value="pelayanan_pelanggan">Pelayanan Pelanggan</option>
+                  <option value="kemampuan_organisasi">Kemampuan Organisasi</option>
+                  <option value="manajemen_waktu">Manajemen Waktu</option>
+                  <!-- Tambahkan opsi keterampilan staf kantor lainnya -->
+                </optgroup>
+
+                <!-- Keterampilan Staf Restoran -->
+                <optgroup label="Skills Staf Restoran">
+                  <option value="pelayanan_pelanggan">Pelayanan Pelanggan</option>
+                  <option value="penanganan_makanan">Penanganan Makanan</option>
+                  <option value="komunikasi_di_restoran">Komunikasi di Restoran</option>
+                  <option value="penanganan_uang_tunai">Penanganan Uang Tunai</option>
+                  <option value="kerja_tim">Berkolaborasi dalam Tim Restoran</option>
+                  <!-- Tambahkan opsi keterampilan staf restoran lainnya -->
+                </optgroup>
+
+                <!-- Keterampilan Kurir/Pengiriman -->
+                <optgroup label="Skills Kurir/Pengiriman">
+                  <option value="optimasi_rute_pengiriman">Optimasi Rute Pengiriman</option>
+                  <option value="manajemen_waktu_pengiriman">Manajemen Waktu Pengiriman</option>
+                  <option value="interaksi_dengan_pelanggan">Interaksi dengan Pelanggan</option>
+                  <option value="perhatian_terhadap_detail">Perhatian terhadap Detail</option>
+                  <option value="pengemudi_aman">Pengemudi Aman</option>
+                  <!-- Tambahkan opsi keterampilan kurir/pengiriman lainnya -->
+                </optgroup>
+
+                <!-- Keterampilan Penjualan -->
+                <optgroup label="Skills Penjualan">
+                  <option value="prospek">Prospek</option>
+                  <option value="pembangunan_hubungan">Pembangunan Hubungan</option>
+                  <option value="negosiasi">Negosiasi</option>
+                  <option value="penutupan">Penutupan</option>
+                  <option value="komunikasi_efektif">Komunikasi Efektif</option>
+                  <option value="pengetahuan_produk">Pengetahuan Produk</option>
+                  <option value="pelayanan_pelanggan">Pelayanan Pelanggan</option>
+                  <option value="problem_solving">Problem Solving</option>
+                  <option value="manajemen_waktu">Manajemen Waktu</option>
+                  <option value="keterampilan_presentasi">Keterampilan Presentasi</option>
+                  <option value="tindak_lanjut">Tindak Lanjut</option>
+                  <option value="persuasi">Persuasi</option>
+                  <option value="manajemen_hubungan_pelanggan">Manajemen Hubungan Pelanggan</option>
+                  <option value="teknik_penutupan">Teknik Penutupan</option>
+                  <option value="perencanaan_strategis">Perencanaan Strategis</option>
+                  <option value="riset_pasar">Riset Pasar</option>
+                  <!-- Tambahkan opsi keterampilan penjualan lainnya -->
+                </optgroup>
+
+                <!-- Keterampilan Pemasaran Digital -->
+                <optgroup label="Skills Pemasaran Digital">
+                  <option value="seo">Search Engine Optimization (SEO)</option>
+                  <option value="sem">Search Engine Marketing (SEM)</option>
+                  <option value="pemasaran_media_sosial">Pemasaran Media Sosial</option>
+                  <option value="pemasaran_konten">Pemasaran Konten</option>
+                  <option value="pemasaran_email">Pemasaran Email</option>
+                  <option value="google_analytics">Google Analytics</option>
+                  <option value="iklan_digital">Iklan Digital</option>
+                  <option value="analisis_web">Analisis Web</option>
+                  <option value="optimasi_konversi">Optimasi Konversi</option>
+                  <option value="pencitraan_online">Pencitraan Online</option>
+                  <option value="afiliasi_pemasaran">Afiliasi Pemasaran</option>
+                  <option value="pemasaran_pengaruh">Pemasaran Pengaruh</option>
+                  <option value="analisis_data">Analisis Data dalam Pemasaran Digital</option>
+                  <option value="otomatisasi_pemasaran">Otomatisasi Pemasaran</option>
+                  <option value="pemasaran_mobile">Pemasaran Mobile</option>
+                  <option value="pemetaan_perjalanan_pelanggan">Pemetaan Perjalanan Pelanggan</option>
+                  <option value="pengujian_a_b">Pengujian A/B</option>
+                  <option value="crm">Manajemen Hubungan Pelanggan (CRM)</option>
+                  <option value="manajemen_media_sosial">Manajemen Media Sosial</option>
+                  <option value="pemasaran_video">Pemasaran Video</option>
+                  <option value="desain_web">Desain Web Dasar untuk Pemasar</option>
+                  <!-- Tambahkan opsi keterampilan pemasaran digital lainnya -->
+                </optgroup>
+
+                <!-- Keterampilan Pengajaran -->
+                <optgroup label="Skills Pengajaran">
+                  <option value="perencanaan_pembelajaran">Perencanaan Pembelajaran</option>
+                  <option value="manajemen_kelas">Manajemen Kelas</option>
+                  <option value="desain_kurikulum">Desain Kurikulum</option>
+                  <option value="penilaian_siswa">Penilaian Siswa</option>
+                  <option value="pengajaran_berdiferensiasi">Pengajaran Berdiferensiasi</option>
+                  <option value="integrasi_teknologi">Integrasi Teknologi dalam Pengajaran</option>
+                  <option value="strategi_pembelajaran_interaktif">Strategi Pembelajaran Interaktif</option>
+                  <option value="pengajaran_kolaboratif">Pengajaran Kolaboratif</option>
+                  <option value="keterampilan_berkomunikasi">Keterampilan Berkomunikasi Efektif dengan Siswa dan Orang Tua</option>
+                  <option value="adaptabilitas">Adaptabilitas</option>
+                  <option value="teknologi_kelas">Penggunaan Teknologi dalam Kelas</option>
+                  <option value="pendidikan_inklusif">Pendidikan Inklusif</option>
+                  <option value="strategi_pengajaran_efektif">Strategi Pengajaran Efektif</option>
+                  <option value="teknik_motivasi_siswa">Teknik Motivasi Siswa</option>
+                  <option value="komunikasi_orang_tua_guru">Komunikasi Orang Tua-Guru</option>
+                  <option value="penilaian_dan_umpan_balik">Penilaian dan Umpan Balik</option>
+                  <option value="keterlibatan_kelas">Keterlibatan Kelas</option>
+                  <option value="pemajuan_berpikir_kritis">Pemajuan Berpikir Kritis</option>
+                  <option value="inovasi_kelas">Inovasi Kelas</option>
+                  <option value="alat_teknologi_pendidikan">Alat Teknologi Pendidikan</option>
+                  <!-- Tambahkan opsi keterampilan pengajaran lainnya -->
+                </optgroup>
+
+                <!-- Other Skills -->
+                <optgroup label="Lainnya">
+                  <option value="sales">Penjualan</option>
+                  <option value="marketing">Pemasaran</option>
+                  <option value="public_speaking">Berbicara di Depan Umum</option>
+                  <option value="inventory_management">Manajemen Inventaris</option>
+                  <option value="problem_solving">Problem Solving</option>
+                  <!-- Tambahkan opsi skill lainnya sesuai kebutuhan -->
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="mb-5" x-data="tgl">
+              <label for="inputLarge">Batas Akhir Loker</label>
+              <input id="basic" name="tgl_akhir_loker" x-model="date1" class="form-input" />
+            </div>
+
+            <div class="flex items-center gap-3 justify-end mt-5">
+              <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
+              <button type="button" class="btn btn-danger">Batal</button>
+            </div>
+            <!-- </form> -->
+          </form>
 
         </div>
       </div>
@@ -273,6 +497,84 @@
   <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
   <script src="<?php echo base_url() ?>assets/js/highlight.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/quill.js"></script>
+  <script src="<?php echo base_url() ?>assets/js/flatpickr.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#priceInputawal').on('input', function() {
+        var rawValue = $(this).val().replace(/\D/g, '');
+        var numericValue = parseInt(rawValue, 10);
+        if (!isNaN(numericValue)) {
+          var formattedValue = numericValue.toLocaleString('id-ID', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          });
+          $(this).val(formattedValue);
+        } else {
+          $(this).val('');
+        }
+      });
+    });
+    $(document).ready(function() {
+      $('#priceInputakhir').on('input', function() {
+        var rawValue = $(this).val().replace(/\D/g, '');
+        var numericValue = parseInt(rawValue, 10);
+        if (!isNaN(numericValue)) {
+          var formattedValue = numericValue.toLocaleString('id-ID', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          });
+          $(this).val(formattedValue);
+        } else {
+          $(this).val('');
+        }
+      });
+    });
+    $(document).ready(function() {
+      $('#priceInputawal').on('input', function() {
+        var rawValue = $(this).val().replace(/\D/g, '');
+        var numericValue = parseInt(rawValue, 10);
+        if (!isNaN(numericValue)) {
+          var formattedValue = numericValue.toLocaleString('id-ID', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+          });
+          $(this).val(formattedValue);
+        } else {
+          $(this).val('');
+        }
+      });
+    });
+
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("jamawal", () => ({
+        date4: '07:00',
+        init() {
+          flatpickr(document.getElementById('preloading-timeawal'), {
+            defaultDate: this.date4,
+            noCalendar: true,
+            enableTime: true,
+            dateFormat: 'H:i'
+          })
+        }
+      }));
+    });
+
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("jamakhir", () => ({
+        date4: '12:00',
+        init() {
+          flatpickr(document.getElementById('preloading-timeakhir'), {
+            defaultDate: this.date4,
+            noCalendar: true,
+            enableTime: true,
+            dateFormat: 'H:i'
+          })
+        }
+      }));
+    });
+  </script>
+
   <!-- Provinsi -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -280,7 +582,7 @@
         .then(response => response.json())
         .then(provinces => {
           var data = provinces;
-          var prov = '<option>Pilih</option>';
+          var prov = '<option>Provinsi</option>';
           data.forEach(element => {
             prov += `<option  data-reg="${element.id}" value="${element.name}">${element.name}</option>`;
           });
@@ -297,7 +599,7 @@
         .then(response => response.json())
         .then(regencies => {
           var data = regencies;
-          var kab = '<option>Pilih</option>';
+          var kab = '<option>Kabupaten</option>';
           data.forEach(element => {
             kab += `<option  data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
           });
@@ -312,7 +614,7 @@
         .then(response => response.json())
         .then(districts => {
           var data = districts;
-          var kota = '<option>Pilih</option>';
+          var kota = '<option>Kota</option>';
           data.forEach(element => {
             kota += `<option  data-vill="${element.id}" value="${element.name}">${element.name}</option>`;
           });
@@ -351,7 +653,19 @@
       });
     });
   </script>
-
+  <script>
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("tgl", () => ({
+        date1: '2022-07-05',
+        init() {
+          flatpickr(document.getElementById('basic'), {
+            dateFormat: 'Y-m-d',
+            defaultDate: this.date1,
+          })
+        }
+      }));
+    });
+  </script>
   <script>
     document.addEventListener('alpine:init', () => {
       // main section
@@ -403,6 +717,8 @@
       }));
     });
 
+
+
     $(document).ready(function() {
       $(".selectjenis_kelamin").select2({
         placeholder: "Pilih Jenis Kelamin "
@@ -411,11 +727,6 @@
     $(document).ready(function() {
       $(".selectkategori").select2({
         placeholder: "Pilih Kategori Pekerjaan"
-      });
-    });
-    $(document).ready(function() {
-      $(".selectpendidikan").select2({
-        placeholder: "Pilih Minimal Pendidikan"
       });
     });
     $(document).ready(function() {

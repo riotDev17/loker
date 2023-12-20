@@ -85,6 +85,14 @@
                             </div>
                         </li>
                         <li>
+                            <a href="" class="dark:hover:text-white" @click="toggle">
+                                <svg class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5" />
+                                    <path opacity="0.5" d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z" stroke="currentColor" stroke-width="1.5" />
+                                </svg>
+                                Login</a>
+                        </li>
+                        <li>
                             <a href="<?= base_url('profil') ?>" class="dark:hover:text-white" @click="toggle">
                                 <svg class="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="6" r="4" stroke="currentColor" stroke-width="1.5" />
@@ -112,6 +120,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- horizontal menu -->
         <!-- <ul class="horizontal-menu border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-[#0e1726] dark:text-white-dark lg:space-x-1.5 xl:space-x-8">
