@@ -107,12 +107,12 @@
               <option>Pilih</option>
             </select>
           </div>
-          <div class="mb-5">
+          <!-- <div class="mb-5">
             <label for="inputLarge">Kelurahan</label>
             <select id="lurah" name="lurah">
               <option>Pilih</option>
             </select>
-          </div>
+          </div> -->
 
           <div class="mb-5">
             <label for="inputLarge">Pengalaman</label>
@@ -320,20 +320,20 @@
         });
     });
     // Kelurahan
-    const selectKota = document.getElementById('kota');
-    selectKota.addEventListener('change', (e) => {
-      var kota = e.target.options[e.target.selectedIndex].dataset.vill;
-      fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kota}.json`)
-        .then(response => response.json())
-        .then(villages => {
-          var data = villages;
-          var kota = '<option>Pilih</option>';
-          data.forEach(element => {
-            kota += `<option  data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
-          });
-          document.getElementById('lurah').innerHTML = kota;
-        });
-    });
+    // const selectKota = document.getElementById('kota');
+    // selectKota.addEventListener('change', (e) => {
+    //   var kota = e.target.options[e.target.selectedIndex].dataset.vill;
+    //   fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kota}.json`)
+    //     .then(response => response.json())
+    //     .then(villages => {
+    //       var data = villages;
+    //       var kota = '<option>Pilih</option>';
+    //       data.forEach(element => {
+    //         kota += `<option  data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
+    //       });
+    //       document.getElementById('lurah').innerHTML = kota;
+    //     });
+    // });
   </script>
 
   <script>
