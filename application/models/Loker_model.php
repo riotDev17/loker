@@ -46,4 +46,9 @@ class Loker_model extends CI_Model
 
         return $data;
     }
+    public function update($id, $data, $table)
+    {
+        $this->db->where('id_loker', $id);
+        $this->db->update($table, $data);
+    }
 }

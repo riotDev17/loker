@@ -60,7 +60,7 @@
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="carbon:location" width="22"></iconify-icon>
-									<p class="text-base"><?= ucwords($r['kota']) . ', ' . ucwords($r['kabupaten']) . ', ' . ucwords($r['provinsi']) ?></p>
+									<p class="text-base"><?= $r['lokasi']  ?> | <?= ucwords($r['kota']) . ', ' . ucwords($r['kabupaten']) . ', ' . ucwords($r['provinsi']) ?></p>
 								</div>
 
 								<!-- <div class="flex items-center font-semibold gap-3 mt-2">

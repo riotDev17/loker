@@ -55,5 +55,6 @@ $route['profil'] = 'auth/profil';
 $route['status'] = 'lamaran';
 $route['status/detail'] = 'lamaran/read';
 $route['detail/(:any)/(:any)'] = 'loker/read/$1/$2';
-$route['404_override'] = '';
+$route['404_override'] = 'errors/custom_404';
+
 $route['translate_uri_dashes'] = FALSE;
