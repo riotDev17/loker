@@ -47,13 +47,11 @@
   <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
     <!-- start sidebar section -->
     <?php $this->load->view("/admin/layouts/sidebar.php") ?>
-
     <!-- end sidebar section -->
 
     <div class="main-content flex min-h-screen flex-col">
       <!-- start header section -->
       <?php $this->load->view("admin/layouts/navbar.php") ?>
-
       <!-- end header section -->
 
       <!-- start main content section -->
@@ -68,14 +66,16 @@
           <!-- MAIN -->
           <form action="<?= base_url('admin/loker/insertloker') ?>" class="mt-10" method="post" id="myForm">
             <!-- Isi formulir -->
-            <div class="mb-5">
-              <label for="inputLarge">Nama Pekerjaan</label>
-              <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." class="form-input form-input-md" />
-              <div class="!mt-2">
-                <span class="text-white-dark text-[11px] inline-block">
-                  *Required Fields
-                  <?= form_error('nama_pekerjaan'); ?>
-                </span>
+            <div class=" mb-5">
+              <div :class="[isSubmitForm1 ? (form1.name ? 'has-success' : 'has-error') : '']">
+                <label for="inputLarge">Nama Pekerjaan</label>
+                <input id="inputLarge" type="text" name="nama_pekerjaan" placeholder="Masukkan Nama Pekerjaan..." x-model="form1.name" class="form-input form-input-md" />
+                <template x-if="isSubmitForm1 && form1.name">
+                  <p class="text-[#1abc9c] mt-1">Looks Good!</p>
+                </template>
+                <template x-if="isSubmitForm1 && !form1.name">
+                  <p class="text-danger mt-1">Masukan Nama Lengkap</p>
+                </template>
               </div>
             </div>
 
@@ -98,12 +98,27 @@
                 </select>
               </div>
             </div>
+            <div class="mb-5">
+              <input id="inputLarge" type="text" name="lokasi" placeholder="Nama Jalan, Gedung, No.Rumah (Optional)" class="form-input form-input-md" />
+            </div>
 
             <div class="mb-5">
               <label for="inputLarge">Gaji</label>
               <div class="grid grid-cols-1 sm:flex justify-between gap-5">
-                <input id="priceInpuawal" type="text" name="gaji" placeholder="Mulai" class="form-input form-input-md " />
-                <input id="priceInputakhir" type="text" name="gaji" placeholder="Sampai" class="form-input form-input-md " />
+                <input id="priceInputawal" type="text" name="gajiawal" placeholder="Mulai" class="form-input form-input-md " />
+                <input id="priceInputakhir" type="text" name="gajiakhir" placeholder="Sampai" class="form-input form-input-md " />
+              </div>
+            </div>
+            <div class="mb-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="inputLarge">Tunjangan</label>
+                  <input id="inputLarge" type="text" name="tunjangan" placeholder="Tunjangan (Optional)" class="form-input form-input-md " />
+                </div>
+                <div>
+                  <label for="inputLarge">Keuntungan</label>
+                  <input id="inputLarge" type="text" name="keuntungan" placeholder="Keuntungan (Optional)" class="form-input form-input-md " />
+                </div>
               </div>
             </div>
 
@@ -119,7 +134,7 @@
 
             <div class="mb-5">
               <label for="jenis_kelaminSelect">Jenis Kelamin</label>
-              <select class="form-select selectjenis_kelamin" name="jenis_kelamin">
+              <select class="form-select" name="jenis_kelamin">
                 <option selected value="Laki-laki">Laki-laki</option>
                 <option value="Perempuan">Perempuan</option>
                 <option value="Semua Jenis Kelamin">Semua Jenis Kelamin</option>
@@ -147,7 +162,7 @@
 
             <div class="mb-5">
               <label for="tipekerjaSelect">Tipe kerja</label>
-              <select class="form-select selecttipekerja" name="tipe_kerja">
+              <select class="form-select" name="tipe_kerja">
                 <option value="Full-time">Full-time</option>
                 <option value="Part-Time">Part-Time</option>
                 <option value="Magang">Magang</option>
@@ -158,7 +173,7 @@
 
             <div class="mb-5">
               <label for="kebijakanSelect">Kebijakan Pekerjaan</label>
-              <select class="form-select selectkebijakan" name="kebijakan">
+              <select class="form-select " name="kebijakan">
                 <option value="Kerja di kantor">Kerja di kantor</option>
                 <option value="Kerja di rumah">Kerja di rumah</option>
                 <option value="Kerja di lapangan">Kerja di lapangan</option>
@@ -193,8 +208,8 @@
             <div class="mb-5">
               <label for="inputLarge">Jam Kerja</label>
               <div class="grid grid-cols-1 sm:flex justify-between gap-5">
-                  <input id="preloading-timeawal" x-data="jamawal" name="jam_awal" x-model="date4" class="form-input" />
-                  <input id="preloading-timeakhir" x-data="jamakhir" name="jam_akhir" x-model="date4" class="form-input" />
+                <input id="preloading-timeawal" x-data="jamawal" name="jam_awal" x-model="date4" class="form-input" />
+                <input id="preloading-timeakhir" x-data="jamakhir" name="jam_akhir" x-model="date4" class="form-input" />
               </div>
             </div>
 
@@ -470,10 +485,15 @@
               <label for="inputLarge">Batas Akhir Loker</label>
               <input id="basic" name="tgl_akhir_loker" x-model="date1" class="form-input" />
             </div>
-
+            <!-- <label class="inline-flex">
+              <input id="CheckboxId" type="checkbox" class="form-checkbox rounded-full" />
+              <span>Tanpa CV</span>
+            </label> -->
             <div class="flex items-center gap-3 justify-end mt-5">
               <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
-              <button type="button" class="btn btn-danger">Batal</button>
+              <a href="javascript:void(0);" onclick="window.history.go(-1);">
+                <button type="button" class="btn btn-danger">Batal</button>
+              </a>
             </div>
             <!-- </form> -->
           </form>
@@ -488,7 +508,7 @@
       <!-- end footer section -->
     </div>
   </div>
-
+  <!-- Script -->
   <script src="<?php echo base_url() ?>assets/js/alpine-collaspe.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/alpine-persist.min.js"></script>
   <script defer src="<?php echo base_url() ?>assets/js/alpine-ui.min.js"></script>
@@ -498,23 +518,70 @@
   <script src="<?php echo base_url() ?>assets/js/highlight.min.js"></script>
   <script src="<?php echo base_url() ?>assets/js/quill.js"></script>
   <script src="<?php echo base_url() ?>assets/js/flatpickr.js"></script>
+  <!-- end script -->
+
+  <!-- text/javascript -->
+  <script>
+    // checkbox
+    const checkbox = document.getElementById('CheckboxId');
+    checkbox.addEventListener('change', function() {
+      if (checkbox.checked) {
+        console.log('Checkbox checked');
+        new window.Swal({
+          icon: 'warning',
+          title: 'Anda Yakin?',
+          text: "Pekerjaan ini tanpa menggunakan CV?",
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          padding: '2em',
+        }).then((result) => {
+          if (result.value) {
+            const checkbox = document.getElementById('checkboxId');
+            checkbox.checked = true;
+            new window.Swal('Confirm!', 'Your checkbox has been activated.', 'success');
+          } else {
+            checkbox.checked = false;
+          }
+        });
+      } else {
+        console.log('Checkbox unchecked');
+      }
+    });
+  </script>
+  <!-- 
+  <script>
+    // Validate Input
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("form", () => ({
+        form1: {
+          name: ''
+        },
+        isSubmitForm1: false,
+        submitForm1() {
+          this.isSubmitForm1 = true;
+          if (this.name) {
+            this.showMessage('Form submitted successfully.');
+          }
+        },
+        showMessage(msg = '', type = 'success') {
+          const toast = window.Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          toast.fire({
+            icon: type,
+            title: msg,
+            padding: '10px 20px'
+          });
+        },
+      }));
+    });
+  </script> -->
 
   <script>
-    $(document).ready(function() {
-      $('#priceInputawal').on('input', function() {
-        var rawValue = $(this).val().replace(/\D/g, '');
-        var numericValue = parseInt(rawValue, 10);
-        if (!isNaN(numericValue)) {
-          var formattedValue = numericValue.toLocaleString('id-ID', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          });
-          $(this).val(formattedValue);
-        } else {
-          $(this).val('');
-        }
-      });
-    });
+    // format gaji dan waktu
     $(document).ready(function() {
       $('#priceInputakhir').on('input', function() {
         var rawValue = $(this).val().replace(/\D/g, '');
@@ -590,6 +657,7 @@
         });
     });
   </script>
+
   <script>
     // Kabupaten
     const selectProvinsi = document.getElementById('provinsi');
@@ -621,24 +689,10 @@
           document.getElementById('kota').innerHTML = kota;
         });
     });
-    // Kelurahan
-    // const selectKota = document.getElementById('kota');
-    // selectKota.addEventListener('change', (e) => {
-    //   var kota = e.target.options[e.target.selectedIndex].dataset.vill;
-    //   fetch(`https://kanglerian.github.io/api-wilayah-indonesia/api/villages/${kota}.json`)
-    //     .then(response => response.json())
-    //     .then(villages => {
-    //       var data = villages;
-    //       var kota = '<option>Pilih</option>';
-    //       data.forEach(element => {
-    //         kota += `<option  data-dist="${element.id}" value="${element.name}">${element.name}</option>`;
-    //       });
-    //       document.getElementById('lurah').innerHTML = kota;
-    //     });
-    // });
   </script>
 
   <script>
+    // Select benefit
     $(document).ready(function() {
       $('.selectbenefit').select2({
         tags: true,
@@ -652,8 +706,20 @@
         }
       });
     });
+    $(document).ready(function() {
+      $(".selectkategori").select2({
+        placeholder: "Pilih Kategori Pekerjaan"
+      });
+    });
+    $(document).ready(function() {
+      $(".selectskills").select2({
+        placeholder: "Pilih Skill Pekerjaan"
+      });
+    });
   </script>
+
   <script>
+    // tgl
     document.addEventListener("alpine:init", () => {
       Alpine.data("tgl", () => ({
         date1: '2022-07-05',
@@ -666,6 +732,7 @@
       }));
     });
   </script>
+
   <script>
     document.addEventListener('alpine:init', () => {
       // main section
@@ -676,7 +743,6 @@
             this.scrollFunction();
           };
         },
-
         scrollFunction() {
           if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
             this.showTopButton = true;
@@ -684,19 +750,15 @@
             this.showTopButton = false;
           }
         },
-
         goToTop() {
           document.body.scrollTop = 0;
           document.documentElement.scrollTop = 0;
         },
       }));
-
-      // theme customization
       Alpine.data('customizer', () => ({
         showCustomizer: false,
       }));
 
-      // sidebar section
       Alpine.data('sidebar', () => ({
         init() {
           const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
@@ -716,35 +778,9 @@
         },
       }));
     });
-
-
-
-    $(document).ready(function() {
-      $(".selectjenis_kelamin").select2({
-        placeholder: "Pilih Jenis Kelamin "
-      });
-    });
-    $(document).ready(function() {
-      $(".selectkategori").select2({
-        placeholder: "Pilih Kategori Pekerjaan"
-      });
-    });
-    $(document).ready(function() {
-      $(".selectskills").select2({
-        placeholder: "Pilih Skill Pekerjaan"
-      });
-    });
-    $(document).ready(function() {
-      $(".selecttipekerja").select2({
-        placeholder: "Pilih Tipe Pekerjaan"
-      });
-    });
-    $(document).ready(function() {
-      $(".selectkebijakan").select2({
-        placeholder: "Pilih Kebijakan Pekerjaan"
-      });
-    });
   </script>
+
+  <!-- Quill -->
   <script>
     new Quill('#editor', {
       theme: 'snow'
@@ -773,15 +809,12 @@
     toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
     toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
   </script>
-
   <script>
     document.getElementById('submitButton').addEventListener('click', function(e) {
       var quillData = quillt.root.innerHTML;
       $('#tunjang').val(quillData);
     });
   </script>
-
-
 </body>
 
 </html>

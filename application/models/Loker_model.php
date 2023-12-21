@@ -12,7 +12,7 @@ class Loker_model extends CI_Model
     public function read($table)
     {
         $this->db->from($table);
-    
+
         $this->db->order_by('id_loker', 'DESC');
 
         $query = $this->db->get();
@@ -32,5 +32,18 @@ class Loker_model extends CI_Model
     {
         $query = $this->db->query("SELECT * FROM loker WHERE id_loker='$id'");
         return $query->result_array();
+    }
+    public function edit($id, $table)
+    {
+        $this->db->where('id_loker', $id);
+        $query = $this->db->get($table);
+        if ($query->num_rows() > 0) {
+            $data = $query->row();
+            $query->free_result();
+        } else {
+            $data = NULL;
+        }
+
+        return $data;
     }
 }

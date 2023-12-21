@@ -32,20 +32,22 @@
 								</svg>
 							</div>
 							<h5 class="text-dark text-lg font-bold mb-3.5 dark:text-white-light mt-5"><?= $row['nama_pekerjaan']; ?></h5>
-							<?php
-							$deskripsi = $row['deskripsi'];
-							$words = explode(' ', $deskripsi);
-							$deskripsisingkat = implode(' ', array_slice($words, 0, 15));
-							?>
-							<p class="text-white-dark text-[15px] mb-3.5 text-base "> <?= $deskripsisingkat; ?></p>
-							<div class="grid grid-cols-3 mb-10 gap-3">
+							<p class="text-white-dark text-[15px] mb-3.5 text-base "><?= ucwords($row['lokasi']) ?></p>
+							<!-- <?php
+									$deskripsi = $row['deskripsi'];
+									$words = explode(' ', $deskripsi);
+									$deskripsisingkat = implode(' ', array_slice($words, 0, 15));
+									?>
+							<p class=" text-white-dark text-[15px] mb-3.5 text-base "> <?= $deskripsisingkat; ?></p> -->
+							<div class=" grid grid-cols-3 mb-10 gap-3">
 								<?php $dataarray = explode(" ", $row['kategori']);
 								foreach ($dataarray as $data) {
 									$arrayd = explode(" ", $data);
 									$kataAcak = $arrayd[array_rand($arrayd)];
 									echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . str_replace('_', ' ', $kataAcak) . '</span>';
 								}
-								?></div>
+								?>
+							</div>
 							<div class="flex md:flex-row flex-col items-start justify-start gap-5">
 								<a href="<?= base_url('detail/') ?><?= $row['id_loker']; ?>/<?= url_title($row['nama_pekerjaan']); ?>" class="btn btn-primary py-3 w-full">Apply Now</a>
 

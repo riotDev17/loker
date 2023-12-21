@@ -60,7 +60,7 @@
 
 								<div class="flex items-center font-semibold gap-3 mt-2">
 									<iconify-icon icon="carbon:location" width="22"></iconify-icon>
-									<p class="text-base"><?= ucwords($r['lokasi']) ?></p>
+									<p class="text-base"><?= ucwords($r['kota']) . ', ' . ucwords($r['kabupaten']) . ', ' . ucwords($r['provinsi']) ?></p>
 								</div>
 
 								<!-- <div class="flex items-center font-semibold gap-3 mt-2">
@@ -72,10 +72,11 @@
 									<iconify-icon icon="mingcute:time-fill" width="22"></iconify-icon>
 									<p class="text-base"><?= $r['hari_kerja'] ?> / <?= $r['jam_kerja'] ?></p>
 								</div>
-
-								<button class="btn btn-primary mt-10 px-16">
-									Apply Now
-								</button>
+								<a href="<?= base_url('applyloker') . '/' . $r['id_loker'] ?>/<?= $this->session->userdata('usernmae') ?>">
+									<button class="btn btn-primary mt-10 px-16">
+										Apply Now
+									</button>
+								</a>
 							</div>
 					</div>
 
@@ -106,35 +107,38 @@
 					</div>
 
 					<!-- Tunjangan & Keuntungan -->
-					<div class="block mt-10">
-						<h1 class="text-xl font-bold ">Tunjangan Dan Keuntungan</h1>
-						<div class="grid lg:grid-cols-32 mt-3 gap-5">
-
-							<!-- Tunjangan 1 -->
-							<div class="w-full p-5 bg-info-light rounded-lg">
-								<div class="flex gap-5">
-									<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
+					<?php if (empty($r['tunjangan'])) : ?>
+					<?php else : ?>
+						<div class="block mt-10">
+							<h1 class="text-xl font-bold ">Tunjangan Dan Keuntungan</h1>
+							<div class="grid lg:grid-cols-32 mt-3 gap-5">
+								<!-- Tunjangan  -->
+								<div class="w-full p-5 bg-info-light rounded-lg">
+									<div class="flex gap-5">
+										<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
+										</div>
+										<p>
+											<?= $r['tunjangan'] ?>
+										</p>
 									</div>
-									<p>
-										Perusahaan dapat menyediakan dana untuk pelatihan tambahan, kursus online, atau konferensi terkait
-										desain UI/UX. Ini membantu para desainer untuk tetap terkini dengan tren terbaru dan teknologi
-										baru dalam industri Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, id. Quas voluptate aliquam ipsum. Labore recusandae porro molestiae asperiores neque..
-									</p>
 								</div>
-							</div>
+							<?php endif ?>
+							<?php if (empty($r['keuntungan'])) : ?>
+							<?php else : ?>
+								<!-- Keuntungan  -->
+								<div class="w-full p-5 bg-info-light rounded-lg">
+									<div class="flex gap-5">
+										<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
+										</div>
+										<p>
 
-							<!-- Tunjangan 3 -->
-							<div class="w-full p-5 bg-info-light rounded-lg">
-								<div class="flex gap-5">
-									<div class="outline outline-primary text-white-light rounded-xl flex items-center justify-center">
+											<?= $r['keuntungan']; ?>
+										</p>
 									</div>
-									<p>
-										<?= $r['deskripsi']; ?>
-									</p>
 								</div>
 							</div>
 						</div>
-					</div>
+					<?php endif ?>
 
 					<!-- Deskripsi -->
 					<div class="block mt-10">
@@ -142,11 +146,7 @@
 						<div class="mt-5">
 							<ul class=" space-y-1 list-disc list-inside text-base flex flex-col gap-5">
 								<?= $r['deskripsi']; ?>
-								<li>Menganalisis data untuk menemukan pola perilaku pengguna.</li>
-								<li>Membuat persona pengguna untuk memahami karakteristik target audiens.</li>
-								<li>Merancang sketsa, wireframe, dan prototype untuk menggambarkan pengalaman pengguna.</li>
-								<li>Mengidentifikasi alur kerja (workflow) dan perancangan tata letak (layout) yang efisien.</li>
-								<li>Menciptakan desain yang intuitif dan mudah dipahami oleh pengguna.</li>
+
 							</ul>
 						</div>
 					</div>
