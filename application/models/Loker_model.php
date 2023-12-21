@@ -51,4 +51,12 @@ class Loker_model extends CI_Model
         $this->db->where('id_loker', $id);
         $this->db->update($table, $data);
     }
+    public function baca()
+    {
+        $this->db->select('*');
+        $this->db->from('lamaran');
+        $this->db->join('data_pelamar', 'lamaran.id_data_pelamar = data_pelamar.id_data_pelamar');
+        $this->db->join('loker', 'lamaran.id_loker = loker.id_loker');
+        return $this->db->get()->result_array();
+    }
 }

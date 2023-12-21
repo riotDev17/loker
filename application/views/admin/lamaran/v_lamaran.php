@@ -2,23 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>VRISTO - Multipurpose Tailwind Dashboard Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<?= base_url() ?>assets/css/perfect-scrollbar.min.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="<?= base_url() ?>assets/css/style.css" />
-    <link defer rel="stylesheet" type="text/css" media="screen" href="<?= base_url() ?>assets/css/animate.css" />
-    <script src="<?= base_url() ?>assets/js/perfect-scrollbar.min.js"></script>
-    <script defer src="<?= base_url() ?>assets/js/popper.min.js"></script>
-    <script defer src="<?= base_url() ?>assets/js/tippy-bundle.umd.min.js"></script>
-    <script defer src="<?= base_url() ?>assets/js/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/nice-select2.css" />
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/quill.snow.css" />
+    <?php $this->load->view("_partials/head.php") ?>
 </head>
 
 <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
@@ -41,7 +25,6 @@
     <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
         <!-- start sidebar section -->
         <?php $this->load->view("/admin/layouts/sidebar.php") ?>
-
         <!-- end sidebar section -->
 
         <div class="main-content flex min-h-screen flex-col">
@@ -55,273 +38,82 @@
                 <div>
                     <ul class="flex space-x-2 rtl:space-x-reverse">
                         <li>
-                            <a href="javascript:;" class="text-primary hover:underline">Detail</a>
+                            <a href="javascript:;" class="text-primary hover:underline">Data Pelamar</a>
                         </li>
                     </ul>
 
-                    <div class="flex flex-wrap items-center justify-between gap-4">
-                        <h2 class="text-xl mt-5">Detail Lamaran</h2>
-                    </div>
-
-
-                    <!-- MAIN -->
-                    <div class=" mt-10 gap-5">
-                        <div class=" bg-white p-5 shadow">
-                            <h1 class="font-bold text-xl mb-5">Detail Pelamar</h1>
-
-                            <!-- Nama Lengkap -->
-                            <div class="mb-5">
-                                <label for="inputLarge">Nama Lengkap</label>
-                                <input id="inputLarge" type="text" value="Jhon Doe" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
-                            </div>
-
-                            <!-- Alamat -->
-                            <div class="mb-5">
-                                <label for="inputLarge">Alamat</label>
-                                <input id="inputLarge" type="text" value="Jl. Kesucian Diri" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
-                            </div>
-
-                            <!-- Jenis Kelamin -->
-                            <div class="mb-5">
-                                <label for="inputLarge">Jenis Kelamin</label>
-                                <input id="inputLarge" type="text" value="Jawir" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
-                            </div>
-
-                            <!-- Email -->
-                            <div class="mb-5">
-                                <label for="inputLarge">Email</label>
-                                <input id="inputLarge" type="text" value="jhondoe@gmail.com" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
-                            </div>
-
-                            <!-- No Telp -->
-                            <div class="mb-5">
-                                <label for="inputLarge">Email</label>
-                                <input id="inputLarge" type="text" value="0812345678" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
-                            </div>
-
-                            <!-- Resume -->
-                            <div x-data="dropdown" class="mb-5 dropdown">
-                                <label id="dropdownLeft">Resume</label>
-                                <div class="flex">
-                                    <div class="bg-primary text-white flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] cursor-pointer" @click="toggle" @click.outside="open = false">Resume</div>
-                                    <input id="dropdownLeft" type="text" value="resume.pdf" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
+                    <!-- start main content section -->
+                    <div x-data="contacts">
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <h2 class="text-xl mt-5">Data Pelamar</h2>
+                        </div>
+                        <div class="panel mt-5 overflow-hidden border-0 p-0">
+                            <div>
+                                <div class="table-responsive">
+                                    <table class="table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="font-bold">Nama Lengkap</th>
+                                                <th class="font-bold">Email</th>
+                                                <th class="font-bold">No Telpon</th>
+                                                <th class="font-bold">Status</th>
+                                                <th class="!text-center font-bold">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($datapelamar as $dp) : ?>
+                                                <div>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['nama'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['email'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['no_telp'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex w-max items-center">
+                                                                <div><?= $dp['alamat'] ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex items-center justify-center gap-4">
+                                                                <a href="<?= base_url('admin/lamaran/detail_pelamar' . '/' . $dp['id_pelamar'] . '/' . $dp['nama_pekerjaan']); ?>">
+                                                                    <button type="button" class="btn btn-sm btn-outline-success">
+                                                                        Lihat
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                            <?php endforeach ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:left-0 rtl:right-0">
-                                    <li><a href="javascript:;" @click="toggle">Download</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="bg-white p-5 shadow">
-                            <h1 class="font-bold text-xl mb-5">Detail Pekerjaan</h1>
-                            <div class="table-responsive">
-                                <table class="table-striped bg-white">
-                                    <thead>
-                                        <tr>
-                                            <th class="font-semibold">Nama Pekerjaan </th>
-                                            <th class="font-semibold">: &nbsp; UI / UX Designer</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Nama Perusahaan </th>
-                                            <th class="font-semibold">: &nbsp; PT. Orang Ganteng</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Gaji </th>
-                                            <th class="font-semibold">: &nbsp; IDR3.000.000 - 8.000.000 / Bulan</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Durasi Kerja </th>
-                                            <th class="font-semibold">: &nbsp; Penuh Waktu</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Pendidikan </th>
-                                            <th class="font-semibold">: &nbsp; Minimal SMA / SMK</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Pengalaman </th>
-                                            <th class="font-semibold">: &nbsp; Pengalaman kurang dari 1 tahun</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Waktu Kerja </th>
-                                            <th class="font-semibold">: &nbsp; Senin - Jumat / 07:00 - 16:00</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Lokasi Kantor </th>
-                                            <th class="font-semibold">: &nbsp; Jl.Imam Bonjol</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Persyaratan </th>
-                                            <th class="font-semibold">: &nbsp; Pengalaman Kurang Dari 1 Tahun , Minimal SMA / SMK , Menguasai
-                                                Figma , Menguasai Adobe XD</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Skill Yang Harus Dikuasai </th>
-                                            <th class="font-semibold">: &nbsp; Adobe XD , Figma , Manajemen Waktu , Kreatif</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Tunjangan & Keuntungan </th>
-                                            <th>
-                                                <ul class="space-y-1 list-disc list-inside text-base">
-                                                    <li>Perusahaan dapat menyediakan dana untuk pelatihan tambahan, kursus online, atau konferensi
-                                                        terkait desain UI/UX. Ini membantu para desainer untuk tetap terkini dengan tren terbaru dan
-                                                        teknologi baru dalam industri.</li>
-                                                    <br>
-                                                    <li>
-                                                        Beberapa perusahaan menawarkan fleksibilitas dalam waktu kerja, seperti jam kerja yang
-                                                        fleksibel, bekerja dari rumah, atau jadwal kerja yang bisa disesuaikan, memungkinkan
-                                                        desainer
-                                                        untuk menyesuaikan kehidupan kerja dengan kebutuhan pribadi mereka.
-                                                    </li>
-                                                    <br>
-                                                    <li>
-                                                        Paket asuransi kesehatan yang komprehensif, yang mencakup kesehatan fisik dan mental,
-                                                        seringkali
-                                                        menjadi tunjangan yang sangat dihargai oleh para pekerja.
-                                                    </li>
-                                                </ul>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th class="font-semibold">Deskripsi Pekerjaan </th>
-                                            <th class="font-semibold">
-                                                <ul class="space-y-1 list-disc list-inside text-base">
-                                                    <li>
-                                                        Melakukan wawancara, survei, dan observasi untuk memahami kebutuhan pengguna.
-                                                    </li>
-                                                    <li>
-                                                        Menganalisis data untuk menemukan pola perilaku pengguna.
-                                                    </li>
-                                                    <li>
-                                                        Membuat persona pengguna untuk memahami karakteristik target audiens.
-                                                    </li>
-                                                    <li>
-                                                        Merancang sketsa, wireframe, dan prototype untuk menggambarkan pengalaman pengguna.
-                                                    </li>
-                                                    <li>
-                                                        Mengidentifikasi alur kerja (workflow) dan perancangan tata letak (layout) yang efisien.
-                                                    </li>
-                                                    <li>
-                                                        Menciptakan desain yang intuitif dan mudah dipahami oleh pengguna.
-                                                    </li>
-                                                </ul>
-                                            </th>
-                                        </tr>
-                                        </tr>
-                                    </thead>
-                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3 justify-end mt-5">
-                        <a href="data-pelamar.html">
-                            <button type="button" class="btn btn-success">Verifikasi</button>
-                        </a>
-                        <a href="data-pelamar.html">
-                            <button type="button" class="btn btn-warning">Perbaiki Data</button>
-                        </a>
-                        <a href="data-pelamar.html">
-                            <button type="button" class="btn btn-danger">Batal</button>
-                        </a>
-                    </div>
+                    <!-- end main content section -->
                 </div>
             </div>
             <!-- end main content section -->
 
             <!-- start footer section -->
-            <div class="mt-auto p-6 text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-                © <span id="footer-year">2022</span>. Vristo All rights reserved.
-            </div>
+            <?php $this->load->view("admin/layouts/footer.php") ?>
             <!-- end footer section -->
         </div>
     </div>
 
-    <script src="<?= base_url() ?>assets/js/alpine-collaspe.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/alpine-persist.min.js"></script>
-    <script defer src="<?= base_url() ?>assets/js/alpine-ui.min.js"></script>
-    <script defer src="<?= base_url() ?>assets/js/alpine-focus.min.js"></script>
-    <script defer src="<?= base_url() ?>assets/js/alpine.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/custom.js"></script>
-    <!-- start hightlight js -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/highlight.min.css" />
-    <script src="<?= base_url() ?>assets/js/highlight.min.js"></script>
-    <!-- end hightlight js -->
-    <script src="<?= base_url() ?>assets/js/nice-select2.js"></script>
-
-    <script src="<?= base_url() ?>assets/js/quill.js"></script>
-
-    <script>
-        document.addEventListener('alpine:init', () => {
-            // main section
-            Alpine.data('scrollToTop', () => ({
-                showTopButton: false,
-                init() {
-                    window.onscroll = () => {
-                        this.scrollFunction();
-                    };
-                },
-
-                scrollFunction() {
-                    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                        this.showTopButton = true;
-                    } else {
-                        this.showTopButton = false;
-                    }
-                },
-
-                goToTop() {
-                    document.body.scrollTop = 0;
-                    document.documentElement.scrollTop = 0;
-                },
-            }));
-
-            // theme customization
-            Alpine.data('customizer', () => ({
-                showCustomizer: false,
-            }));
-
-            // sidebar section
-            Alpine.data('sidebar', () => ({
-                init() {
-                    const selector = document.querySelector('.sidebar ul a[href="' + window.location.pathname + '"]');
-                    if (selector) {
-                        selector.classList.add('active');
-                        const ul = selector.closest('ul.sub-menu');
-                        if (ul) {
-                            let ele = ul.closest('li.menu').querySelectorAll('.nav-link');
-                            if (ele) {
-                                ele = ele[0];
-                                setTimeout(() => {
-                                    ele.click();
-                                });
-                            }
-                        }
-                    }
-                },
-            }));
-        });
-
-        document.addEventListener("DOMContentLoaded", function(e) {
-            // default
-            var els = document.querySelectorAll(".selectize");
-            els.forEach(function(select) {
-                NiceSelect.bind(select);
-            });
-        });
-
-        new Quill('#editor', {
-            theme: 'snow'
-        });
-        var toolbar = quill.container.previousSibling;
-        toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
-        toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
-        toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
-        toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
-        toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
-        toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
-        toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
-        toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
-    </script>
-
-
+    <?php $this->load->view("_partials/script.php") ?>
 </body>
 
 </html>

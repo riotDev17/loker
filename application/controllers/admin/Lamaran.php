@@ -6,21 +6,23 @@ class Lamaran extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Kategori_model');
-        $this->load->model('Pelamar_model');
-        $this->load->model('Skills_model');
+        $this->load->model('Lamaran_model', 'lamaran');
     }
     public function index()
     {
-        $data['datapelamar'] = $this->Pelamar_model->read('data_pelamar');
-
+        $data['lamaran'] = $this->lamaran->loker('loker');
+        $data['totalpelamar'] = $this->lamaran->total();
         $this->load->view('admin/lamaran/index', $data);
     }
-    public function read()
+    public function lamaran($id)
     {
-       
-
-        $this->load->view('admin/lamaran/v_lamaran');
+        $data['datapelamar'] = $this->lamaran->dataLamaran($id);
+        $this->load->view('admin/lamaran/v_lamaran', $data);
+    }
+    public function detail_pelamar($id)
+    {
+        $data['detail'] = $this->lamaran->detailPelamar($id);
+        $this->load->view('admin/lamaran/v_lamaran_user', $data);
     }
     public function status_lamaran()
     {

@@ -42,6 +42,9 @@
       </path>
     </svg>
   </div>
+
+
+
   <!-- scroll to top button -->
   <div class="fixed bottom-6 z-50 ltr:right-6 rtl:left-6" x-data="scrollToTop">
     <template x-if="showTopButton">

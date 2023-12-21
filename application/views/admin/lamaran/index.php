@@ -53,46 +53,47 @@
                                     <table class="table-striped table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="font-bold">Nama Lengkap</th>
-                                                <th class="font-bold">Alamat</th>
-                                                <th class="font-bold">Jenis Kelamin</th>
-                                                <th class="font-bold">Email</th>
-                                                <th class="font-bold">No Telp</th>
+                                                <th class="font-bold">Nama Pekerjaan</th>
+                                                <th class="font-bold">Nama Perusahaan</th>
+                                                <th class="font-bold">Kategori</th>
+                                                <th class="font-bold">Pelamar</th>
                                                 <th class="!text-center font-bold">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($datapelamar as $dp) : ?>
+                                            <?php foreach ($lamaran as $l) : ?>
                                                 <div>
                                                     <tr>
                                                         <td>
                                                             <div class="flex w-max items-center">
-                                                                <div><?= $dp['nama'] ?></div>
+                                                                <div><?= $l['nama_pekerjaan'] ?></div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="flex w-max items-center">
-                                                                <div><?= $dp['alamat'] ?></div>
+                                                                <div><?= $l['nama_perusahaan'] ?></div>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="flex w-max items-center">
-                                                                <div>Jawir</div>
+                                                                <div><?= $l['kategori'] ?></div>
+
+
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="flex w-max items-center">
-                                                                <div><?= $dp['email'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['no_telp'] ?></div>
+                                                                <!-- <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
+                                                                <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
+                                                                <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
+                                                                <span x-tooltip="Alan Green"><span class="flex justify-center items-center w-9 h-9 text-center rounded-full object-cover bg-info text-base ring-2 ring-white dark:ring-white-dark">AG</span></span>
+                                                             --> <?php $pelamar = $this->lamaran->pelamar($l['id_loker']);
+                                                                    echo count($pelamar) . ' Pelamar'; ?>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/lamaran/read'); ?>">
+                                                                <a href="<?= base_url('admin/lamaran/lamaran' . '/' . $l['id_loker']); ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>
