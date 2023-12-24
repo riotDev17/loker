@@ -72,16 +72,27 @@
 									<iconify-icon icon="mingcute:time-fill" width="22"></iconify-icon>
 									<p class="text-base"><?= $r['hari_kerja'] ?> / <?= $r['jam_kerja'] ?></p>
 								</div>
-								<a href="<?= base_url('applyloker') . '/' . $r['id_loker'] ?>/<?= $this->session->userdata('usernmae') ?>">
-									<button class="btn btn-primary mt-10 px-16">
-										Apply Now
+								<?php if ($this->Lamaran_model->SudahApply($this->session->userdata('id_pelamar'), $r['id_loker'])) : ?>
+									<button class="btn btn-success mt-10 px-16" disabled>
+										Sudah Apply
 									</button>
-								</a>
+								<?php else : ?>
+									<!-- <button class="btn btn-primary mt-10 px-16">
+										<a href="<?= base_url('applyloker') . '/' . $r['id_loker'] ?>/<?= $this->session->userdata('username') ?>" onclick="showAlert(event)">
+											Apply Now
+										</a>
+									</button> -->
+									<button class=" btn btn-primary mt-10 px-16">
+										<a href="<?= base_url('applyloker') . '/' . $r['id_loker'] ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showAlert(event)">
+											Apply Now
+										</a>
+									</button>
+								<?php endif; ?>
 							</div>
 					</div>
 
 					<!-- Persyaratan -->
-					<div class="block">
+					<div class=" block">
 						<div class="mt-5">
 							<h1 class="text-xl font-bold">Persyaratan</h1>
 						</div>
@@ -298,7 +309,26 @@
 	<?php $this->load->view("layouts/footer.php") ?>
 	</div>
 
+	<script>
+		async function showAlert(event) {
+			event.preventDefault(); // Mencegah tindakan default dari tautan
 
+			const result = await new window.Swal({
+				icon: 'warning',
+				title: 'Are you sure?',
+				text: "You won't be able to revert this!",
+				showCancelButton: true,
+				confirmButtonText: 'Apply',
+				padding: '2em',
+			});
+
+			if (result.value) {
+				// Arahkan pengguna ke URL penghapusan setelah konfirmasi diterima
+				window.location.href = event.target.getAttribute('href');
+
+			}
+		}
+	</script>
 	<?php $this->load->view("_partials/script.php") ?>
 </body>
 

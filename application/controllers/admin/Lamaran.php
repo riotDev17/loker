@@ -14,12 +14,12 @@ class Lamaran extends CI_Controller
         $data['totalpelamar'] = $this->lamaran->total();
         $this->load->view('admin/lamaran/index', $data);
     }
-    public function lamaran($id)
+    public function lamaran($id, $nama_pekerjaan)
     {
         $data['datapelamar'] = $this->lamaran->dataLamaran($id);
         $this->load->view('admin/lamaran/v_lamaran', $data);
     }
-    public function detail_pelamar($id)
+    public function detail_pelamar($id, $pelamar)
     {
         $data['detail'] = $this->lamaran->detailPelamar($id);
         $this->load->view('admin/lamaran/v_lamaran_user', $data);

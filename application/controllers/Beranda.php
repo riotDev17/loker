@@ -6,6 +6,7 @@ class Beranda extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model("Pelamar_model");
 		$this->load->model("Loker_model");
 	}
 	public function index()

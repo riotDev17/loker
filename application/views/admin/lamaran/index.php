@@ -93,7 +93,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/lamaran/lamaran' . '/' . $l['id_loker']); ?>">
+                                                                <a href="<?= base_url('admin/dataloker' . '/' . $l['id_loker'] . '/' . url_title($l['nama_pekerjaan'])); ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>

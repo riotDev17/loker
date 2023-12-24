@@ -18,6 +18,7 @@
 					<h1 class="text-2xl dark:text-white">Jobs Not Found</h1>
 				<?php else : ?>
 					<h1 class="text-2xl dark:text-white"><?= count($record) ?> Jobs Found</h1>
+					
 				<?php endif ?>
 			</div>
 			<!-- List Jobs -->
@@ -65,7 +66,25 @@
 		<!-- Footer -->
 		<?php $this->load->view("layouts/footer.php") ?>
 	</div>
+	<?php if ($this->session->flashdata('success')) : ?>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const toast = window.Swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000,
+					padding: '2em',
+				});
 
+				toast.fire({
+					icon: 'success',
+					title: '<?= $this->session->flashdata('success') ?>',
+					padding: '2em',
+				});
+			});
+		</script>
+	<?php endif; ?>
 	<?php $this->load->view("_partials/script.php") ?>
 </body>
 

@@ -86,7 +86,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/lamaran/detail_pelamar' . '/' . $dp['id_pelamar'] . '/' . $dp['nama_pekerjaan']); ?>">
+                                                                <a href="<?= base_url('admin/dataloker/detail' . '/' . $dp['id_loker'] . '/' . url_title($dp['id_pelamar'])) ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>

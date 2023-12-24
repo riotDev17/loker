@@ -158,50 +158,26 @@
                                             <th class="font-semibold">: &nbsp; <?= str_replace(' ', ', ', strtoupper($d['skills']))  ?></th>
                                         </tr>
                                         <tr>
-                                            <th class="font-semibold">Tunjangan & Keuntungan </th>
-                                            <th>
-                                                <ul class="space-y-1 list-disc list-inside text-base">
-                                                    <li>Perusahaan dapat menyediakan dana untuk pelatihan tambahan, kursus online, atau konferensi
-                                                        terkait desain UI/UX. Ini membantu para desainer untuk tetap terkini dengan tren terbaru dan
-                                                        teknologi baru dalam industri.</li>
-                                                    <br>
-                                                    <li>
-                                                        Beberapa perusahaan menawarkan fleksibilitas dalam waktu kerja, seperti jam kerja yang
-                                                        fleksibel, bekerja dari rumah, atau jadwal kerja yang bisa disesuaikan, memungkinkan
-                                                        desainer
-                                                        untuk menyesuaikan kehidupan kerja dengan kebutuhan pribadi mereka.
-                                                    </li>
-                                                    <br>
-                                                    <li>
-                                                        Paket asuransi kesehatan yang komprehensif, yang mencakup kesehatan fisik dan mental,
-                                                        seringkali
-                                                        menjadi tunjangan yang sangat dihargai oleh para pekerja.
-                                                    </li>
-                                                </ul>
-                                            </th>
+                                            <?php if (!empty($d['tunjangan']) or !empty($d['keuntungan'])) : ?>
+                                                <th class="font-semibold">Tunjangan & Keuntungan </th>
+                                                <th>
+                                                    <ul class="space-y-1 list-disc list-inside text-base">
+                                                        <li>
+                                                            <?= $d['tunjangan'] ?>
+                                                        </li>
+                                                        <br>
+                                                        <li>
+                                                            <?= $d['keuntungan'] ?>
+                                                        </li>
+                                                    </ul>
+                                                </th>
+                                            <?php endif ?>
                                         </tr>
                                         <tr>
                                             <th class="font-semibold">Deskripsi Pekerjaan </th>
                                             <th class="font-semibold">
                                                 <ul class="space-y-1 list-disc list-inside text-base">
-                                                    <li>
-                                                        Melakukan wawancara, survei, dan observasi untuk memahami kebutuhan pengguna.
-                                                    </li>
-                                                    <li>
-                                                        Menganalisis data untuk menemukan pola perilaku pengguna.
-                                                    </li>
-                                                    <li>
-                                                        Membuat persona pengguna untuk memahami karakteristik target audiens.
-                                                    </li>
-                                                    <li>
-                                                        Merancang sketsa, wireframe, dan prototype untuk menggambarkan pengalaman pengguna.
-                                                    </li>
-                                                    <li>
-                                                        Mengidentifikasi alur kerja (workflow) dan perancangan tata letak (layout) yang efisien.
-                                                    </li>
-                                                    <li>
-                                                        Menciptakan desain yang intuitif dan mudah dipahami oleh pengguna.
-                                                    </li>
+                                                    <?= $d['deskripsi'] ?>
                                                 </ul>
                                             </th>
                                         </tr>
