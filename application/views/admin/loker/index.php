@@ -144,14 +144,16 @@
                                                                 </div>
                                                             </td>
                                                             <td>
+                                                                <?php
+                                                                $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($l['id_loker']))); ?>
                                                                 <div class="flex items-center justify-center gap-4">
-                                                                    <a href="<?= base_url('admin/loker/read/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-success">
+                                                                    <a href="<?= base_url('admin/loker/read/') . $encrypted_id ?>" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </a>
-                                                                    <a href="<?= base_url('admin/loker/edit/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-primary">
+                                                                    <a href="<?= base_url('admin/loker/edit/') . $encrypted_id ?>" class="btn btn-sm btn-outline-primary">
                                                                         Edit
                                                                     </a>
-                                                                    <a href="<?= base_url('admin/loker/delete/') . $l['id_loker'] ?>" class="btn btn-sm btn-outline-danger" onclick="showAlert(event)">
+                                                                    <a href="<?= base_url('admin/loker/delete/') . $encrypted_id ?>" class="btn btn-sm btn-outline-danger" onclick="showAlert(event)">
                                                                         Hapus
                                                                     </a>
                                                                 </div>
@@ -176,7 +178,63 @@
             <!-- end footer section -->
         </div>
     </div>
- 
+    <?php if ($this->session->flashdata('pesan')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'success',
+                    title: '<?= $this->session->flashdata('pesan') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('error')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'error',
+                    title: '<?= $this->session->flashdata('error') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'success',
+                    title: '<?= $this->session->flashdata('success') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
     <script>
         async function showAlert(event) {
             event.preventDefault(); // Mencegah tindakan default dari tautan

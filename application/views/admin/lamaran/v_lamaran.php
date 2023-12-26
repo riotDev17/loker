@@ -88,11 +88,11 @@
                                                                 <?php
                                                                 } else if ($dp['status'] == '2') {
                                                                 ?>
-                                                                    <div class="btn btn-sm btn-warning">Perbaiki Data</div>
+                                                                    <div class="btn btn-sm btn-danger">Tidak Diterima</div>
                                                                 <?php
                                                                 } else if ($dp['status'] == '0') {
                                                                 ?>
-                                                                    <div class="btn btn-sm btn-danger">In Progress</div>
+                                                                    <div class="btn btn-sm btn-warning">In Progress</div>
                                                                 <?php
                                                                 }
                                                                 ?>

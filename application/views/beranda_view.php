@@ -18,7 +18,7 @@
 					<h1 class="text-2xl dark:text-white">Jobs Not Found</h1>
 				<?php else : ?>
 					<h1 class="text-2xl dark:text-white"><?= count($record) ?> Jobs Found</h1>
-					
+
 				<?php endif ?>
 			</div>
 			<!-- List Jobs -->
@@ -45,14 +45,17 @@
 								foreach ($dataarray as $data) {
 									$arrayd = explode(" ", $data);
 									$kataAcak = $arrayd[array_rand($arrayd)];
-									echo '<span class="badge badge-outline-primary rounded-md text-center py-3">' . str_replace('_', ' ', $kataAcak) . '</span>';
+									echo '<span class="badge badge-outline-primary rounded-md text-center py-2">' . str_replace('_', ' ', $kataAcak) . '</span>';
 								}
 								?>
 							</div>
 							<div class="flex md:flex-row flex-col items-start justify-start gap-5">
-								<a href="<?= base_url('detail/') ?><?= $row['id_loker']; ?>/<?= url_title($row['nama_pekerjaan']); ?>" class="btn btn-primary py-3 w-full">Apply Now</a>
+								<?php
 
-								<a href="<?= base_url('detail/') ?><?= $row['id_loker']; ?>/<?= url_title($row['nama_pekerjaan']); ?>" class="btn btn-dark py-3 w-full">See Job</a>
+								$encrypted_id = urlencode(base64_encode($this->encryption->encrypt($row['id_loker']))); ?>
+								<a href="<?= base_url('detail/') ?><?= $encrypted_id ?>/<?= url_title($row['nama_pekerjaan']); ?>" class="btn btn-primary py-3 w-full">Apply Now</a>
+
+								<a href="<?= base_url('detail/') ?><?= $encrypted_id ?>/<?= url_title($row['nama_pekerjaan']); ?>" class="btn btn-dark py-3 w-full">See Job</a>
 							</div>
 
 						</div>
@@ -80,6 +83,25 @@
 				toast.fire({
 					icon: 'success',
 					title: '<?= $this->session->flashdata('success') ?>',
+					padding: '2em',
+				});
+			});
+		</script>
+	<?php endif; ?>
+	<?php if ($this->session->flashdata('error')) : ?>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const toast = window.Swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000,
+					padding: '2em',
+				});
+
+				toast.fire({
+					icon: 'error',
+					title: '<?= $this->session->flashdata('error') ?>',
 					padding: '2em',
 				});
 			});

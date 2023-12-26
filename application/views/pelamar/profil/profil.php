@@ -90,19 +90,19 @@
                                     </div>
                                     <div class="grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2">
                                         <div>
-                                            <label for="name">Full Name</label>
+                                            <label for="name">Nama Lengkap</label>
                                             <input id="name" type="text" name="nama" placeholder="Input Your Name..." class="form-input py-3" value="<?= $users->nama ?>" />
 
                                         </div>
                                         <div>
-                                            <label for="address">Address</label>
+                                            <label for="address">Alamat</label>
                                             <input id="address" name="alamat" type="text" placeholder="Input Your Address..." class="form-input py-3" value="<?= $users->alamat ?>" />
                                             <div class="invalid-feedback">
                                                 <?= form_error('alamat', '<p class="error-message">', '</p>'); ?>
                                             </div>
                                         </div>
                                         <div>
-                                            <label for="gender">Gender</label>
+                                            <label for="gender">Jenis Kelamin</label>
                                             <select id="gender" name="jenis_kelamin" class="form-select text-dark py-3">
                                                 <option selected value="<?= $users->jenis_kelamin ?>"><?= $users->jenis_kelamin ?></option>
                                                 <option value="Laki-laki">Laki-laki</option>
@@ -114,7 +114,7 @@
                                             <input id="address" name="email" type="email" placeholder="Input Your Email..." class="form-input py-3" value="<?= $this->session->userdata('email') ?>" readonly />
                                         </div>
                                         <div>
-                                            <label for="phone">Phone</label>
+                                            <label for="phone">Telepon</label>
                                             <input id="phone" name="no_telp" type="nummber" placeholder="Input Your Number Phone..." class="form-input py-3" value="<?= $users->no_telp ?>" />
                                             <div class="invalid-feedback">
                                                 <?= form_error('no_telp', '<p class="error-message">', '</p>'); ?>

@@ -72,18 +72,15 @@
 									<iconify-icon icon="mingcute:time-fill" width="22"></iconify-icon>
 									<p class="text-base"><?= $r['hari_kerja'] ?> / <?= $r['jam_kerja'] ?></p>
 								</div>
+								<?php
+								$encrypted_id = urlencode(base64_encode($this->encryption->encrypt($r['id_loker']))); ?>
 								<?php if ($this->Lamaran_model->SudahApply($this->session->userdata('id_pelamar'), $r['id_loker'])) : ?>
 									<button class="btn btn-success mt-10 px-16" disabled>
 										Sudah Apply
 									</button>
 								<?php else : ?>
-									<!-- <button class="btn btn-primary mt-10 px-16">
-										<a href="<?= base_url('applyloker') . '/' . $r['id_loker'] ?>/<?= $this->session->userdata('username') ?>" onclick="showAlert(event)">
-											Apply Now
-										</a>
-									</button> -->
 									<button class=" btn btn-primary mt-10 px-16">
-										<a href="<?= base_url('applyloker') . '/' . $r['id_loker'] ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showAlert(event)">
+										<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showAlert(event)">
 											Apply Now
 										</a>
 									</button>

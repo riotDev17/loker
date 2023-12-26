@@ -8,7 +8,8 @@ class Pelamar extends CI_Controller
         parent::__construct();
         $this->load->model('Kategori_model');
         $this->load->model('Pelamar_model');
-        $this->load->model('Skills_model');
+
+        $this->load->library('encryption');
     }
     public function index()
     {

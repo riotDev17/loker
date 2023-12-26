@@ -107,13 +107,14 @@
                                 } else if ($r['status'] == '2') {
                                 ?>
                                     <div x-data="modal">
-                                        <button class="btn btn-warning mt-10 px-16" @click="toggle">
-                                            Perbaiki Data
+                                        <button class="btn btn-danger mt-10 px-16" @click="toggle">
+                                            Tidak Diterima
                                         </button>
                                         <div class="fixed inset-0 bg-[black]/60 z-[999] hidden overflow-y-auto" :class="open && '!block'">
                                             <div class="flex items-start justify-center min-h-screen px-4" @click.self="open = false">
                                                 <div x-show="open" x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden w-full max-w-lg my-8">
                                                     <div class="flex py-2 bg-[#fbfbfb] dark:bg-[#121c2c] items-center justify-center">
+                                                        <button type="button" class="text-white-dark hover:text-dark" @click="toggle">
                                                         <span class="flex items-center justify-center w-16 h-16 rounded-full bg-[#f1f2f3] dark:bg-white/10">
                                                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M19.0001 9.7041V9C19.0001 5.13401 15.8661 2 12.0001 2C8.13407 2 5.00006 5.13401 5.00006 9V9.7041C5.00006 10.5491 4.74995 11.3752 4.28123 12.0783L3.13263 13.8012C2.08349 15.3749 2.88442 17.5139 4.70913 18.0116C9.48258 19.3134 14.5175 19.3134 19.291 18.0116C21.1157 17.5139 21.9166 15.3749 20.8675 13.8012L19.7189 12.0783C19.2502 11.3752 19.0001 10.5491 19.0001 9.7041Z" stroke="currentColor" stroke-width="1.5"></path>
@@ -123,9 +124,10 @@
                                                     </div>
                                                     <div class="p-5">
                                                         <div class="py-5 text-white-dark text-center">
-                                                            <p>Data anda tidak sesuai dengan ketentuan pekerjaan ini. Silahkan cek kembali data anda.</p>
-                                                            <a href="<?= base_url('profil') ?>" class="btn btn-danger mt-10">Perbaiki Data</a>
-
+                                                            <strong>
+                                                                <p>Maaf anda belum mendapatkan kesempatan pada pekerjaan ini,
+                                                                    Semangat ye siane</p>
+                                                            </strong>
                                                         </div>
 
                                                     </div>
@@ -136,7 +138,7 @@
                                 <?php
                                 } else if ($r['status'] == '0') {
                                 ?>
-                                    <button class="btn btn-danger mt-10 px-16" disabled>
+                                    <button class="btn btn-warning mt-10 px-16" disabled>
                                         Proses
                                     </button>
                                 <?php

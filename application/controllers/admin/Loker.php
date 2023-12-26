@@ -8,9 +8,9 @@ class Loker extends CI_Controller
         parent::__construct();
         $this->load->model('Kategori_model');
         $this->load->model('Loker_model');
-        $this->load->model('Skills_model');
         $this->load->library('form_validation');
         $this->load->helper('form');
+        $this->load->library('encryption');
     }
     public function index()
     {
@@ -26,9 +26,10 @@ class Loker extends CI_Controller
         $this->load->view('admin/loker/tambah_loker', $data);
     }
 
-    public function read($id)
+    public function read($encrypted_id)
     {
-        $data['record'] = $this->Loker_model->baca_detail($id);
+        $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
+        $data['record'] = $this->Loker_model->baca_detail($decrypted_id);
         $data['title'] = "Detail Job";
         $this->load->view('admin/loker/v_loker', $data);
     }
@@ -87,13 +88,14 @@ class Loker extends CI_Controller
         return $new_kd;
     }
 
-    public function edit($id = 0)
+    public function edit($encrypted_id = 0)
     {
+        $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         $data['title'] = "Sistem Informasi Loker | Tambah Loker";
         if ($this->form_validation->run() == false) {
             $data = array(
                 'title' => 'Sistem Informasi Loker | Edit Loker',
-                'record' => $this->Loker_model->edit($id, 'loker'),
+                'record' => $this->Loker_model->edit($decrypted_id, 'loker'),
                 'kategori' => $this->Kategori_model->read('kategori'),
             );
             $this->load->view('admin/loker/edit_loker', $data);
@@ -104,6 +106,7 @@ class Loker extends CI_Controller
 
     public function update()
     {
+
         $id = $this->input->post('id_loker');
         $deskripsi = strip_tags($this->input->post('deskripsi'), '<li>');
         $data = array(
@@ -135,9 +138,10 @@ class Loker extends CI_Controller
         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-pesan">Data Pekerjaan berhasil diupdate.</div>');
         redirect('admin/loker');
     }
-    public function delete($id)
+    public function delete($encrypted_id)
     {
-        $this->db->where('id_loker', $id);
+        $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
+        $this->db->where('id_loker', $decrypted_id);
         $this->db->delete('loker');
         $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-pesan">Data Pekerjaan berhasil dihapus.</div>');
         redirect('admin/loker');

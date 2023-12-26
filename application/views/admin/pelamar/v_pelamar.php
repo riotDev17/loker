@@ -117,10 +117,10 @@
                                     <button type="button" class="btn btn-success">Verifikasi</button>
                                 </a>
                                 <a href="data-pelamar.html">
-                                    <button type="button" class="btn btn-warning">Perbaiki Data</button>
+                                    <button type="button" class="btn btn-danger">Tidak Diterima</button>
                                 </a>
                                 <a href="data-pelamar.html">
-                                    <button type="button" class="btn btn-danger">Batal</button>
+                                    <button type="button" class="btn btn-secondary">Batal</button>
                                 </a>
                             </div>
                         <?php endforeach ?>

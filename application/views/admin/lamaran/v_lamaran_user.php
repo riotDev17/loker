@@ -114,6 +114,7 @@
                                     </div>
                                     <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:left-0 rtl:right-0">
                                         <li><a href="<?= $cv_path ?>" download="<?= $file_cv_safe ?>" @click="toggle">Download</a></li>
+                                        <li><a href="<?= $cv_path ?>" target="_blank">Lihat</a></li>
                                     </ul>
                                 </div>
                         </div>
@@ -194,16 +195,29 @@
                         </div>
                     </div>
 
-
                     <div class="flex items-center gap-3 justify-end mt-5">
-                        <a href="<?= base_url('admin/lamaran/statuspelamar/verifikasi/' . $d['id_lamaran'] . '/' . $d['id_loker']) . '/' . url_title($d['nama_pekerjaan']) ?>">
-                            <input type="button" class="btn btn-success" name="terima" value="Verifikasi">
-                        </a>
-                        <a href="<?= base_url('admin/lamaran/statuspelamar/perbaiki/' . $d['id_lamaran'] . '/' . $d['id_loker']) . '/' . url_title($d['nama_pekerjaan']) ?>">
-                            <button type="button" name="perbaiki" class="btn btn-warning">Perbaiki Data</button>
-                        </a>
+                        <?php
+                        if ($d['status'] == '1') {
+                        ?>
+                            <input type="button" class="btn btn-success" name="terima" value="Terverifikasi" disabled>
+                        <?php
+                        } else if ($d['status'] == '2') {
+                        ?>
+                            <input type="button" class="btn btn-danger" name="terima" value="Tidak Diterima" disabled>
+                        <?php
+                        } else if ($d['status'] == '0') {
+                        ?>
+                            <a href="<?= base_url('admin/lamaran/statuspelamar/verifikasi/' . $d['id_lamaran'] . '/' . $d['id_loker']) . '/' . url_title($d['nama_pekerjaan']) ?>" onclick="showAlertVerif(event)">
+                                <input type="button" class="btn btn-success" name="terima" value="Verifikasi">
+                            </a>
+                            <a href="<?= base_url('admin/lamaran/statuspelamar/perbaiki/' . $d['id_lamaran'] . '/' . $d['id_loker']) . '/' . url_title($d['nama_pekerjaan']) ?>" onclick="showAlertUnverif(event)">
+                                <button type="button" name="perbaiki" class="btn btn-danger">Tidak Diterima</button>
+                            </a>
+                        <?php
+                        }
+                        ?>
                         <a href="javascript:void(0);" onclick="window.history.go(-1);">
-                            <button type="button" class="btn btn-danger">Batal</button>
+                            <button type="button" class="btn btn-dark">Batal</button>
                         </a>
                     </div>
 
@@ -233,7 +247,37 @@
     <script src="<?= base_url() ?>assets/js/nice-select2.js"></script>
 
     <script src="<?= base_url() ?>assets/js/quill.js"></script>
+    <script>
+        async function showAlertVerif(event) {
+            event.preventDefault();
 
+            const result = await new window.Swal({
+                icon: 'warning',
+                title: 'Apakah Anda Yakin?',
+                text: "Data Ini Tidak Dapat Diubah",
+                showCancelButton: true,
+                confirmButtonText: 'Verifikasi',
+            });
+            if (result.value) {
+                window.location.href = event.target.getAttribute('href');
+            }
+        }
+    </script>
+    <script>
+        async function showAlertUnverif(event) {
+            event.preventDefault();
+            const result = await new window.Swal({
+                icon: 'warning',
+                title: 'Apakah Anda Yakin?',
+                text: "Data Ini Tidak Dapat Diubah",
+                showCancelButton: true,
+                confirmButtonText: 'Yakin',
+            });
+            if (result.value) {
+                window.location.href = event.target.getAttribute('href');
+            }
+        }
+    </script>
     <script>
         document.addEventListener('alpine:init', () => {
             // main section

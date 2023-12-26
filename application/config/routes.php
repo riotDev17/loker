@@ -56,6 +56,7 @@ $route['login'] = 'auth';
 $route['registrasi'] = 'auth/registrasi';
 $route['logout'] = 'auth/logout';
 $route['status'] = 'lamaran';
+$route['search'] = 'beranda/search';
 $route['status/detail/(:any)/(:any)'] = 'lamaran/read/$1/$2';
 $route['detail/(:any)/(:any)'] = 'loker/read/$1/$2';
 $route['applyloker/(:any)'] = 'lamaran/apply/$1';

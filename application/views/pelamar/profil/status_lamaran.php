@@ -66,7 +66,7 @@
                                                 <th class="font-bold">Nama Perusahaan</th>
                                                 <th class="font-bold">Gaji</th>
                                                 <th class="font-bold">Durasi Kerja</th>
-                                                <th class="font-bold">Alamat</th>
+                                                <th class="font-bold">Status</th>
                                                 <th class="!text-center font-bold">Aksi</th>
                                             </tr>
                                         </thead>
@@ -95,14 +95,32 @@
                                                                 <div><?= $item['tipe_kerja'] ?></div>
                                                             </div>
                                                         </td>
+
                                                         <td>
                                                             <div class="flex w-max items-center">
-                                                                <div><?= ucwords($item['kota']) ?>, <?= ucwords($item['kabupaten']) ?>, <?= ucwords($item['provinsi']) ?></div>
+                                                                <?php
+                                                                if ($item['status'] == '1') {
+                                                                ?>
+                                                                    <div class="btn btn-sm btn-success">Diterima</div>
+                                                                <?php
+                                                                } else if ($item['status'] == '2') {
+                                                                ?>
+                                                                    <div class="btn btn-sm btn-danger">Tidak Diterima</div>
+                                                                <?php
+                                                                } else if ($item['status'] == '0') {
+                                                                ?>
+                                                                    <div class="btn btn-sm btn-warning">Proses</div>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </div>
+
                                                         </td>
                                                         <td>
+                                                            <?php
+                                                            $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($item['id_lamaran']))); ?>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('status/detail/') ?><?= $item['id_lamaran']; ?>/<?= url_title($item['nama_pekerjaan']); ?>">
+                                                                <a href="<?= base_url('status/detail/') ?><?= $encrypted_id ?>/<?= url_title($item['nama_pekerjaan']); ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>
