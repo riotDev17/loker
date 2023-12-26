@@ -176,25 +176,7 @@
             <!-- end footer section -->
         </div>
     </div>
-    <?php if ($this->session->flashdata('pesan')) : ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const toast = window.Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    padding: '2em',
-                });
-
-                toast.fire({
-                    icon: 'success',
-                    title: '<?= $this->session->flashdata('pesan') ?>',
-                    padding: '2em',
-                });
-            });
-        </script>
-    <?php endif; ?>
+ 
     <script>
         async function showAlert(event) {
             event.preventDefault(); // Mencegah tindakan default dari tautan

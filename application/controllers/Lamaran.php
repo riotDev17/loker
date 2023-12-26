@@ -26,9 +26,10 @@ class Lamaran extends CI_Controller
 
     public function read($id, $nama_pekerjaan)
     {
-        $data['lamaran'] = $this->lamaran->baca_detail($id);
+      $data['lamaran'] = $this->lamaran->detailPelamar($id);
+
         $data['title'] = "Detail Job";
-        $this->load->view('pelamar/profil/v_status');
+        $this->load->view('pelamar/profil/v_status', $data);
     }
     public function apply($id)
     {
@@ -74,7 +75,7 @@ class Lamaran extends CI_Controller
             !empty($data_pelamar['id_cv']);
     }
 
-
+    
     function get_kodLamar()
     {
         $this->db->select_max('id_lamaran', 'max_code');
@@ -92,4 +93,6 @@ class Lamaran extends CI_Controller
 
         return $new_kd;
     }
+   
+
 }

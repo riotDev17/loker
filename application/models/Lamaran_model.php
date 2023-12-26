@@ -40,7 +40,7 @@ class Lamaran_model extends CI_Model
         $this->db->join('data_pelamar', 'lamaran.id_pelamar = data_pelamar.id_pelamar');
         $this->db->join('pelamar', 'pelamar.id_pelamar = data_pelamar.id_pelamar');
         $this->db->join('loker', 'lamaran.id_loker = loker.id_loker');
-        $this->db->where('loker.id_loker', $id);
+        $this->db->where('lamaran.id_lamaran', $id);
         return $query = $this->db->get()->result_array();
     }
     public function detailPelamarStatus($id)
@@ -74,6 +74,12 @@ class Lamaran_model extends CI_Model
 
         return $data;
     }
+    public function datacv($id)
+    {
+        $q = $this->db->query("SELECT * FROM curriculum_vitae WHERE id_cv='$id'");
+        return $q->row_array(); // Menggunakan row_array() untuk mendapatkan hasil sebagai array asosiatif
+    }
+
     public function pelamar($id)
     {
         $q = $this->db->query("SELECT * FROM lamaran WHERE id_loker='$id'");
@@ -110,9 +116,17 @@ class Lamaran_model extends CI_Model
         return $result->num_rows() > 0;
     }
 
-    // Fungsi untuk menambahkan lamaran
     public function insertLamaran($data)
     {
         return $this->db->insert('lamaran', $data);
+    }
+
+    public function status()
+    {
+    }
+    public function updateStatus($id, $data)
+    {
+        $this->db->where('id_lamaran', $id);
+        $this->db->update('lamaran', $data);
     }
 }

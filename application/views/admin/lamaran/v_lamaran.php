@@ -81,12 +81,27 @@
                                                         </td>
                                                         <td>
                                                             <div class="flex w-max items-center">
-                                                                <div><?= $dp['alamat'] ?></div>
+                                                                <?php
+                                                                if ($dp['status'] == '1') {
+                                                                ?>
+                                                                    <div class="btn btn-sm btn-success">Terverifikasi</div>
+                                                                <?php
+                                                                } else if ($dp['status'] == '2') {
+                                                                ?>
+                                                                    <div class="btn btn-sm btn-warning">Perbaiki Data</div>
+                                                                <?php
+                                                                } else if ($dp['status'] == '0') {
+                                                                ?>
+                                                                    <div class="btn btn-sm btn-danger">In Progress</div>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </div>
+
                                                         </td>
                                                         <td>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/dataloker/detail' . '/' . $dp['id_loker'] . '/' . url_title($dp['id_pelamar'])) ?>">
+                                                                <a href="<?= base_url('admin/dataloker/detail' . '/' . $dp['id_lamaran'] . '/' . url_title($dp['id_pelamar'])) ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>
@@ -112,7 +127,44 @@
             <!-- end footer section -->
         </div>
     </div>
+    <?php if ($this->session->flashdata('error')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
 
+                toast.fire({
+                    icon: 'error',
+                    title: '<?= $this->session->flashdata('error') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'success',
+                    title: '<?= $this->session->flashdata('success') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
     <?php $this->load->view("_partials/script.php") ?>
 </body>
 

@@ -102,7 +102,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('status/detail/') ?><?= $item['id_loker']; ?>/<?= url_title($item['nama_pekerjaan']); ?>">
+                                                                <a href="<?= base_url('status/detail/') ?><?= $item['id_lamaran']; ?>/<?= url_title($item['nama_pekerjaan']); ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>
