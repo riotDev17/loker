@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Des 2023 pada 08.28
+-- Waktu pembuatan: 27 Des 2023 pada 11.53
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.0.28
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `curriculum_vitae` (
-  `id_cv` int(11) NOT NULL,
+  `id_cv` varchar(50) NOT NULL,
   `file_cv` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -54,52 +54,13 @@ CREATE TABLE `curriculum_vitae` (
 CREATE TABLE `data_pelamar` (
   `id_data_pelamar` varchar(50) NOT NULL,
   `id_pelamar` varchar(50) NOT NULL,
-  `email` varchar(150) NOT NULL,
-  `no_telp` varchar(20) NOT NULL,
-  `alamat` text NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL DEFAULT 'Laki-laki',
+  `no_telp` varchar(20) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
   `photo` varchar(100) NOT NULL,
-  `id_cv` varchar(50) NOT NULL
+  `id_cv` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `data_pelamar`
---
-
-INSERT INTO `data_pelamar` (`id_data_pelamar`, `id_pelamar`, `email`, `no_telp`, `alamat`, `photo`, `id_cv`) VALUES
-('1', 'USR001', 'messiguling@gmail.com', '082212922211', 'Jepang belakang pintu', 'blm', 'CV_001');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `j_skill`
---
-
-CREATE TABLE `j_skill` (
-  `id_loker` varchar(50) NOT NULL,
-  `id_skill` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `j_skill`
---
-
-INSERT INTO `j_skill` (`id_loker`, `id_skill`) VALUES
-('LKR002', 11),
-('LKR002', 10),
-('LKR002', 12),
-('LKR002', 11),
-('LKR002', 10),
-('LKR002', 9),
-('LKR002', 8),
-('LKR002', 7),
-('LKR002', 6),
-('LKR002', 5),
-('LKR002', 4),
-('LKR001', 12),
-('LKR001', 10),
-('LKR001', 9),
-('LKR001', 8),
-('LKR001', 7);
 
 -- --------------------------------------------------------
 
@@ -135,8 +96,8 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 CREATE TABLE `lamaran` (
   `id_lamaran` varchar(50) NOT NULL,
   `id_loker` varchar(50) NOT NULL,
-  `id_data_pelamar` varchar(50) NOT NULL,
-  `status` varchar(50) NOT NULL
+  `id_pelamar` varchar(50) NOT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -149,31 +110,32 @@ CREATE TABLE `loker` (
   `id_loker` varchar(50) NOT NULL,
   `nama_pekerjaan` varchar(200) NOT NULL,
   `nama_perusahaan` varchar(150) NOT NULL,
-  `lokasi` text NOT NULL,
+  `provinsi` varchar(100) NOT NULL,
+  `kabupaten` varchar(100) NOT NULL,
+  `kota` varchar(100) NOT NULL,
+  `lokasi` text DEFAULT NULL,
   `gaji` varchar(200) NOT NULL,
+  `gaji_akhir` varchar(200) NOT NULL,
+  `benefit` varchar(255) DEFAULT NULL,
+  `tunjangan` text DEFAULT NULL,
+  `keuntungan` text DEFAULT NULL,
   `deskripsi` text NOT NULL,
-  `benefit` varchar(255) NOT NULL,
   `tipe_kerja` varchar(50) NOT NULL,
   `kebijakan` varchar(50) NOT NULL,
-  `tgl_loker` date NOT NULL,
-  `tgl_akhir_loker` date DEFAULT NULL,
-  `hari_kerja` varchar(100) NOT NULL,
-  `jam_kerja` varchar(100) NOT NULL,
+  `hari_kerja` varchar(100) DEFAULT NULL,
+  `jam_kerja` varchar(100) DEFAULT NULL,
   `pendidikan` varchar(150) NOT NULL,
-  `usia` int(20) NOT NULL,
-  `jenis_kelamin` enum('Laki - Laki','Perempuan','Semua Jenis Kelamin') NOT NULL,
   `pengalaman` varchar(50) NOT NULL,
+  `jenis_kelamin` enum('Laki - Laki','Perempuan','Semua Jenis Kelamin') NOT NULL,
+  `usia` int(20) NOT NULL,
+  `skills` varchar(100) NOT NULL,
   `kategori` varchar(50) NOT NULL,
-  `skills` varchar(100) NOT NULL
+  `tgl_loker` date NOT NULL DEFAULT current_timestamp(),
+  `tgl_akhir_loker` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `loker`
---
-
-INSERT INTO `loker` (`id_loker`, `nama_pekerjaan`, `nama_perusahaan`, `lokasi`, `gaji`, `deskripsi`, `benefit`, `tipe_kerja`, `kebijakan`, `tgl_loker`, `tgl_akhir_loker`, `hari_kerja`, `jam_kerja`, `pendidikan`, `usia`, `jenis_kelamin`, `pengalaman`, `kategori`, `skills`) VALUES
-('LKR001', 'Barista', 'WK Goncang Lidah', 'Mempawah, Terusan', ' 1.500.000 - 3.500.000', '<p>ngetak ikan koi tiap hari</p>', 'BPJS Gaji Pokok Uang Makan Lainnya', 'Full-time', 'Kerja di kantor', '2023-12-17', '2023-12-17', 'Senin-Minggu', '14:25-14:26', 'Semua Jenjang', 20, 'Semua Jenis Kelamin', '1', 'Staf Restoran', 'Word'),
-('LKR002', 'Bejudi', 'PT. Gacor', 'Kuale', '2.000.000 - 1.500.000', '<p>ngetak kucing tiap hari</p>', 'Upah Lembur THR Asuransi Kesehatan Lainnya', 'Full-time', 'Kerja di kantor', '2023-12-17', '2023-12-17', 'Senin-Minggu', '12:00-00:00', 'Minimal SMA/SMK/Sederajat', 80, '', '1', 'Admin IT', 'Whatsapp');
 
 -- --------------------------------------------------------
 
@@ -183,57 +145,10 @@ INSERT INTO `loker` (`id_loker`, `nama_pekerjaan`, `nama_perusahaan`, `lokasi`, 
 
 CREATE TABLE `pelamar` (
   `id_pelamar` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `nama` varchar(150) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `email` varchar(150) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pelamar`
---
-
-INSERT INTO `pelamar` (`id_pelamar`, `username`, `nama`, `password`) VALUES
-('USR001', 'Jawir', 'Jawir Sunda', 'kull11');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `persyaratan`
---
-
-CREATE TABLE `persyaratan` (
-  `id_syarat` int(11) NOT NULL,
-  `syarat` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `skill`
---
-
-CREATE TABLE `skill` (
-  `id_skill` int(11) NOT NULL,
-  `nama_skill` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `skill`
---
-
-INSERT INTO `skill` (`id_skill`, `nama_skill`) VALUES
-(1, 'Figma'),
-(2, 'Word'),
-(3, 'Office'),
-(4, 'Adobe Photoshop'),
-(5, 'Adobe After Effects'),
-(6, 'Adobe Premiere Pro'),
-(7, 'Adobe Ilustrator'),
-(8, 'Whatsapp'),
-(9, 'Mysql'),
-(10, 'PHP'),
-(11, 'HTML'),
-(12, 'Fullstack');
 
 --
 -- Indexes for dumped tables
@@ -257,7 +172,8 @@ ALTER TABLE `curriculum_vitae`
 ALTER TABLE `data_pelamar`
   ADD PRIMARY KEY (`id_data_pelamar`),
   ADD KEY `id_pelamar` (`id_pelamar`),
-  ADD KEY `id_pelamar_2` (`id_pelamar`);
+  ADD KEY `id_pelamar_2` (`id_pelamar`),
+  ADD KEY `id_cv` (`id_cv`);
 
 --
 -- Indeks untuk tabel `kategori`
@@ -269,13 +185,16 @@ ALTER TABLE `kategori`
 -- Indeks untuk tabel `lamaran`
 --
 ALTER TABLE `lamaran`
-  ADD PRIMARY KEY (`id_lamaran`);
+  ADD PRIMARY KEY (`id_lamaran`),
+  ADD KEY `id_loker` (`id_loker`),
+  ADD KEY `id_data_pelamar` (`id_pelamar`);
 
 --
 -- Indeks untuk tabel `loker`
 --
 ALTER TABLE `loker`
-  ADD PRIMARY KEY (`id_loker`);
+  ADD PRIMARY KEY (`id_loker`),
+  ADD KEY `kategori` (`kategori`);
 
 --
 -- Indeks untuk tabel `pelamar`
@@ -284,26 +203,8 @@ ALTER TABLE `pelamar`
   ADD PRIMARY KEY (`id_pelamar`);
 
 --
--- Indeks untuk tabel `persyaratan`
---
-ALTER TABLE `persyaratan`
-  ADD PRIMARY KEY (`id_syarat`);
-
---
--- Indeks untuk tabel `skill`
---
-ALTER TABLE `skill`
-  ADD PRIMARY KEY (`id_skill`);
-
---
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
-
---
--- AUTO_INCREMENT untuk tabel `curriculum_vitae`
---
-ALTER TABLE `curriculum_vitae`
-  MODIFY `id_cv` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -312,26 +213,27 @@ ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `persyaratan`
---
-ALTER TABLE `persyaratan`
-  MODIFY `id_syarat` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `skill`
---
-ALTER TABLE `skill`
-  MODIFY `id_skill` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Ketidakleluasaan untuk tabel `pelamar`
+-- Ketidakleluasaan untuk tabel `curriculum_vitae`
 --
-ALTER TABLE `pelamar`
-  ADD CONSTRAINT `pelamar_ibfk_1` FOREIGN KEY (`id_pelamar`) REFERENCES `data_pelamar` (`id_pelamar`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `curriculum_vitae`
+  ADD CONSTRAINT `curriculum_vitae_ibfk_1` FOREIGN KEY (`id_cv`) REFERENCES `data_pelamar` (`id_cv`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `data_pelamar`
+--
+ALTER TABLE `data_pelamar`
+  ADD CONSTRAINT `data_pelamar_ibfk_1` FOREIGN KEY (`id_pelamar`) REFERENCES `pelamar` (`id_pelamar`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `lamaran`
+--
+ALTER TABLE `lamaran`
+  ADD CONSTRAINT `lamaran_ibfk_1` FOREIGN KEY (`id_loker`) REFERENCES `loker` (`id_loker`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `lamaran_ibfk_2` FOREIGN KEY (`id_pelamar`) REFERENCES `data_pelamar` (`id_pelamar`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
