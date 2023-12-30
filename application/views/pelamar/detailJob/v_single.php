@@ -79,12 +79,20 @@
 										Sudah Apply
 									</button>
 								<?php else : ?>
-									<button class=" btn btn-primary mt-10 px-16">
-										<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showAlert(event)">
-											Apply Now
-										</a>
-									</button>
-								<?php endif; ?>
+									<?php if ($this->Riwayat_model->SudahApply($this->session->userdata('id_pelamar'), $r['id_loker'])) : ?>
+										<button class=" btn btn-primary mt-10 px-16">
+											<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showApply(event)">
+												Apply Now
+											</a>
+										</button>
+									<?php else : ?>
+										<button class=" btn btn-primary mt-10 px-16">
+											<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showAlert(event)">
+												Apply Now
+											</a>
+										<?php endif; ?>
+										</button>
+									<?php endif; ?>
 							</div>
 					</div>
 
@@ -305,15 +313,30 @@
 		<!-- Footer -->
 	<?php $this->load->view("layouts/footer.php") ?>
 	</div>
+	<script>
+		async function showApply(event) {
+			event.preventDefault();
 
+			const result = await new window.Swal({
+				icon: 'warning',
+				title: 'Ingin Apply Kembali?',
+				text: "Anda Sudah Apply Pada Pekerjaan ini sebelumnya",
+				showCancelButton: true,
+				confirmButtonText: 'Apply',
+			});
+			if (result.value) {
+				window.location.href = event.target.getAttribute('href');
+			}
+		}
+	</script>
 	<script>
 		async function showAlert(event) {
 			event.preventDefault(); // Mencegah tindakan default dari tautan
 
 			const result = await new window.Swal({
 				icon: 'warning',
-				title: 'Are you sure?',
-				text: "You won't be able to revert this!",
+				title: 'Ingin Apply Pekerjaan ini?',
+				text: "Pastikan Data Anda Sesuai Pada Pekerjaan ini!",
 				showCancelButton: true,
 				confirmButtonText: 'Apply',
 				padding: '2em',

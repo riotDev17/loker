@@ -51,13 +51,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'beranda';
 $route['admin'] = 'admin/beranda';
+$route['loginadmin'] = 'admin/auth';
+$route['regisadmin'] = 'admin/auth/registrasi';
+$route['logoutadmin'] = 'admin/auth/logout';
 $route['profil'] = 'profil/ubah';
 $route['login'] = 'auth';
 $route['registrasi'] = 'auth/registrasi';
 $route['logout'] = 'auth/logout';
 $route['status'] = 'lamaran';
+$route['riwayat'] = 'riwayat';
 $route['search'] = 'beranda/search';
 $route['status/detail/(:any)/(:any)'] = 'lamaran/read/$1/$2';
+$route['riwayat/detail/(:any)/(:any)'] = 'riwayat/read/$1/$2';
 $route['detail/(:any)/(:any)'] = 'loker/read/$1/$2';
 $route['applyloker/(:any)'] = 'lamaran/apply/$1';
 $route['admin/dataloker/(:any)/(:any)'] = 'admin/lamaran/lamaran/$1/$2';

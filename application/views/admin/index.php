@@ -49,7 +49,7 @@
                             <!-- Users Visit -->
                             <div class="panel bg-gradient-to-r from-cyan-500 to-cyan-400">
                                 <div class="flex justify-between">
-                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Users Visit</div>
+                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Loker</div>
                                     <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                         <a href="javascript:;" @click="toggle">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 hover:opacity-80">
@@ -59,13 +59,13 @@
                                             </svg>
                                         </a>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="text-black ltr:right-0 rtl:left-0 dark:text-white-dark">
-                                            <li><a href="javascript:;" @click="toggle">View Report</a></li>
+                                            <li><a href="<?= base_url('admin/loker') ?>" @click="toggle">View Report</a></li>
                                             <li><a href="javascript:;" @click="toggle">Edit Report</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="mt-5 flex items-center">
-                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">$170.46</div>
+                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= count($loker) ?></div>
                                     <div class="badge bg-white/30">+ 2.35%</div>
                                 </div>
                                 <div class="mt-5 flex items-center font-semibold">
@@ -80,7 +80,7 @@
                             <!-- Sessions -->
                             <div class="panel bg-gradient-to-r from-violet-500 to-violet-400">
                                 <div class="flex justify-between">
-                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Sessions</div>
+                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Pelamar</div>
                                     <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                         <a href="javascript:;" @click="toggle">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 hover:opacity-80">
@@ -90,13 +90,13 @@
                                             </svg>
                                         </a>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="text-black ltr:right-0 rtl:left-0 dark:text-white-dark">
-                                            <li><a href="javascript:;" @click="toggle">View Report</a></li>
+                                            <li><a href="<?= base_url('admin/pelamar') ?>" @click="toggle">View Report</a></li>
                                             <li><a href="javascript:;" @click="toggle">Edit Report</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="mt-5 flex items-center">
-                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">74,137</div>
+                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= count($pelamar) ?></div>
                                     <div class="badge bg-white/30">- 2.35%</div>
                                 </div>
                                 <div class="mt-5 flex items-center font-semibold">
@@ -111,7 +111,7 @@
                             <!-- Time On-Site -->
                             <div class="panel bg-gradient-to-r from-blue-500 to-blue-400">
                                 <div class="flex justify-between">
-                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Time On-Site</div>
+                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Lamaran</div>
                                     <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                         <a href="javascript:;" @click="toggle">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 hover:opacity-80">
@@ -121,13 +121,13 @@
                                             </svg>
                                         </a>
                                         <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="text-black ltr:right-0 rtl:left-0 dark:text-white-dark">
-                                            <li><a href="javascript:;" @click="toggle">View Report</a></li>
+                                            <li><a href="<?= base_url('admin/lamaran') ?>" @click="toggle">View Report</a></li>
                                             <li><a href="javascript:;" @click="toggle">Edit Report</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="mt-5 flex items-center">
-                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">38,085</div>
+                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= count($lamaran) ?></div>
                                     <div class="badge bg-white/30">+ 1.35%</div>
                                 </div>
                                 <div class="mt-5 flex items-center font-semibold">
@@ -142,7 +142,7 @@
                             <!-- Bounce Rate -->
                             <div class="panel bg-gradient-to-r from-fuchsia-500 to-fuchsia-400">
                                 <div class="flex justify-between">
-                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Bounce Rate</div>
+                                    <div class="text-md font-semibold ltr:mr-1 rtl:ml-1">Loker Diterima</div>
                                     <div x-data="dropdown" @click.outside="open = false" class="dropdown">
                                         <a href="javascript:;" @click="toggle">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-70 hover:opacity-80">
@@ -158,7 +158,16 @@
                                     </div>
                                 </div>
                                 <div class="mt-5 flex items-center">
-                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">49.10%</div>
+                                    <?php
+                                    $totalStatusSatu = 0;
+                                    foreach ($lamaran as $l) {
+                                        if ($l['status'] == 1) {
+                                            $totalStatusSatu++;
+                                        }
+                                    }
+                                    ?>
+                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= $totalStatusSatu; ?>
+                                    </div>
                                     <div class="badge bg-white/30">- 0.35%</div>
                                 </div>
                                 <div class="mt-5 flex items-center font-semibold">
@@ -170,7 +179,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
             <!-- end main content section -->

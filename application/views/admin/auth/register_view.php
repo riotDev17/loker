@@ -20,14 +20,8 @@
                 <div class="w-full p-5  md:p-16">
                     <h2 class="mb-3 text-3xl font-bold">Sign Up</h2>
                     <p class="mb-7">Enter your name, username and password to register</p>
-                    <form class="space-y-5 mb-12" action="<?= base_url('auth/regis') ?>" method="POST">
-                        <div>
-                            <label for="email">Email</label>
-                            <input name="email" id="email" type="text" class="form-input py-3" placeholder="Enter Email" />
-                            <div class="invalid-feedback">
-                                <?= form_error('email', '<p class="error-message">', '</p>'); ?>
-                            </div>
-                        </div>
+                    <form class="space-y-5 mb-12" action="<?= base_url('admin/auth/regis') ?>" method="POST">
+
                         <div>
                             <label for="username">Username</label>
                             <input name="username" id="username" type="text" class="form-input py-3" placeholder="Enter Username" />

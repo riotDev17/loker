@@ -54,7 +54,7 @@
                             </a>
                         </div>
                         <div class="flex flex-wrap items-center justify-between gap-4">
-                            <h2 class="text-xl">Status Job</h2>
+                            <h2 class="text-xl">Riwayat Job</h2>
                         </div>
                         <div class="panel mt-5 overflow-hidden border-0 p-0">
                             <div>
@@ -73,7 +73,7 @@
                                         </thead>
                                         <tbody>
                                             <div>
-                                                <?php foreach ($lamaran as $item) : ?>
+                                                <?php foreach ($riwayat as $item) : ?>
                                                     <tr>
 
                                                         <td>
@@ -126,7 +126,7 @@
                                                             <?php
                                                             $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($item['id_lamaran']))); ?>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('status/detail/') ?><?= $encrypted_id ?>/<?= url_title($item['nama_pekerjaan']); ?>">
+                                                                <a href="<?= base_url('riwayat/detail/') ?><?= $encrypted_id ?>/<?= url_title($item['nama_pekerjaan']); ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>

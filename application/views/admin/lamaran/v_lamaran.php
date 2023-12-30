@@ -54,63 +54,82 @@
                                         <thead>
                                             <tr>
                                                 <th class="font-bold">Nama Lengkap</th>
-                                                <th class="font-bold">Email</th>
-                                                <th class="font-bold">No Telpon</th>
+                                                <th class="font-bold">Nama Pekerjaan</th>
+                                                <th class="font-bold">Tanggal Apply</th>
                                                 <th class="font-bold">Status</th>
                                                 <th class="!text-center font-bold">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($datapelamar as $dp) : ?>
+                                            <?php if (empty($datapelamar)) : ?>
                                                 <div>
                                                     <tr>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['nama'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['email'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['no_telp'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <?php
-                                                                if ($dp['status'] == '1') {
-                                                                ?>
-                                                                    <div class="btn btn-sm btn-success">Terverifikasi</div>
-                                                                <?php
-                                                                } else if ($dp['status'] == '2') {
-                                                                ?>
-                                                                    <div class="btn btn-sm btn-danger">Tidak Diterima</div>
-                                                                <?php
-                                                                } else if ($dp['status'] == '0') {
-                                                                ?>
-                                                                    <div class="btn btn-sm btn-warning">In Progress</div>
-                                                                <?php
-                                                                }
-                                                                ?>
-                                                            </div>
-
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/dataloker/detail' . '/' . $dp['id_lamaran'] . '/' . url_title($dp['id_pelamar'])) ?>">
-                                                                    <button type="button" class="btn btn-sm btn-outline-success">
-                                                                        Lihat
-                                                                    </button>
-                                                                </a>
-                                                            </div>
-                                                        </td>
+                                                        <td colspan="6" style="text-align: center;" class="text-center">Tidak
+                                                            ada data pelamar yang tersedia.</td>
                                                     </tr>
                                                 </div>
-                                            <?php endforeach ?>
+                                            <?php else : ?>
+                                                <?php foreach ($datapelamar as $dp) : ?>
+                                                    <div>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['nama'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['nama_pekerjaan'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <?php
+                                                                    $jam = $dp['created_at_lamar'];
+                                                                    ?>
+                                                                    <div>
+
+                                                                        <?= tgl_indo($jam) ?><br>
+                                                                        <?= time_since($jam) ?>
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <?php
+                                                                    if ($dp['status'] == '1') {
+                                                                    ?>
+                                                                        <div class="btn btn-sm btn-success">Terverifikasi</div>
+                                                                    <?php
+                                                                    } else if ($dp['status'] == '2') {
+                                                                    ?>
+                                                                        <div class="btn btn-sm btn-danger">Tidak Diterima</div>
+                                                                    <?php
+                                                                    } else if ($dp['status'] == '0') {
+                                                                    ?>
+                                                                        <div class="btn btn-sm btn-warning">In Progress</div>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </div>
+
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex items-center justify-center gap-4">
+                                                                    <a href="<?= base_url('admin/dataloker/detail' . '/' . $dp['id_lamaran'] . '/' . $dp['id_pelamar']) ?>">
+                                                                        <button type="button" class="btn btn-sm btn-outline-success">
+                                                                            Lihat
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </div>
+                                                <?php endforeach ?>
+                                            <?php endif ?>
                                         </tbody>
                                     </table>
                                 </div>

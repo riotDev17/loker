@@ -6,10 +6,12 @@ class Lamaran extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('tglindo_helper');
+
         $this->load->model("Pelamar_model");
+        $this->load->model('Riwayat_model', 'riwayat');
         $this->load->model('Lamaran_model', 'lamaran');
         $this->load->library('encryption');
-
         $this->getsecurity();
     }
     function getsecurity($value = '')
@@ -23,49 +25,59 @@ class Lamaran extends CI_Controller
     public function index()
     {
         $data['lamaran'] = $this->lamaran->detailPelamarStatus($this->session->userdata('id_pelamar'));
+        $data['riwayat'] = $this->riwayat->detailPelamarStatus($this->session->userdata('id_pelamar'));
         $this->load->view('pelamar/profil/status_lamaran', $data);
     }
 
     public function read($encrypted_id, $nama_pekerjaan)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
-        $data['lamaran'] = $this->lamaran->detailPelamar($decrypted_id);
-        $data['title'] = "Detail Job";
-        $this->load->view('pelamar/profil/v_status', $data);
+        if ($decrypted_id) {
+            $data['riwayat'] = $this->riwayat->detailPelamar($decrypted_id);
+            $data['lamaran'] = $this->lamaran->detailPelamar($decrypted_id);
+            $data['title'] = "Detail Job";
+            $this->load->view('pelamar/profil/v_status', $data);
+        } else {
+            redirect('error_page');
+        }
     }
     public function apply($encrypted_id)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
-        $user_id = $this->session->userdata('id_pelamar');
-        if ($this->lamaran->SudahApply($user_id, $decrypted_id)) {
-            $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Anda sudah mengajukan lamaran untuk lowongan pekerjaan ini sebelumnya.</div>');
-            redirect('status');
-        }
-        $jumlah_lamaran = $this->lamaran->getJumlahLamaranByPelamar($user_id);
-        if ($jumlah_lamaran < 3) {
-            $data_pelamar = $this->lamaran->getDataPelamarById($user_id);
-            if ($this->isDataPelamarComplete($data_pelamar)) {
-                $kodeLamar = $this->get_kodLamar();
-                $data = [
-                    'id_lamaran' => $kodeLamar,
-                    'id_loker' => $decrypted_id,
-                    'id_pelamar' => $user_id,
-                    'status' => 0
-                ];
-                if ($this->lamaran->insertLamaran($data)) {
-                    $this->session->set_flashdata('success', '<div class="alert alert-success alert-pesan">Apply Loker Berhasil! Silahkan Tunggu Konfirmasi Admin.</div>');
-                    redirect('status');
+        if ($decrypted_id) {
+            $user_id = $this->session->userdata('id_pelamar');
+            if ($this->lamaran->SudahApply($user_id, $decrypted_id)) {
+                $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Anda sudah mengajukan lamaran untuk lowongan pekerjaan ini sebelumnya.</div>');
+                redirect('status');
+            }
+            $jumlah_lamaran = $this->riwayat->getJumlahLamaranByPelamar($user_id);
+            if ($jumlah_lamaran < 3) {
+                $data_pelamar = $this->riwayat->getDataPelamarById($user_id);
+                if ($this->isDataPelamarComplete($data_pelamar)) {
+                    $kodeLamar = $this->get_kodLamar();
+                    $data = [
+                        'id_lamaran' => $kodeLamar,
+                        'id_loker' => $decrypted_id,
+                        'id_pelamar' => $user_id,
+                        'status' => 0
+                    ];
+                    if ($this->riwayat->insertLamaran($data)) {
+                        $this->session->set_flashdata('success', '<div class="alert alert-success alert-pesan">Apply Loker Berhasil! Silahkan Tunggu Konfirmasi Admin.</div>');
+                        redirect('status');
+                    } else {
+                        $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Apply Gagal! Silahkan Periksa Data Anda.</div>');
+                        redirect('status');
+                    }
                 } else {
-                    $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Apply Gagal! Silahkan Periksa Data Anda.</div>');
-                    redirect('status');
+                    $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Lengkapi profil Anda sebelum mengajukan lamaran.</div>');
+                    redirect('profil');
                 }
             } else {
-                $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Lengkapi profil Anda sebelum mengajukan lamaran.</div>');
-                redirect('profil');
+                $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Anda sudah mengajukan 3 lamaran. Tidak dapat mengajukan lebih banyak lagi.</div>');
+                redirect('status');
             }
         } else {
-            $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Anda sudah mengajukan 3 lamaran. Tidak dapat mengajukan lebih banyak lagi.</div>');
-            redirect('status');
+            redirect('error_page');
         }
     }
 

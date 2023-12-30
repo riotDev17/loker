@@ -83,7 +83,7 @@
                                             <div>
                                                 <label for="ctnFile" class="text-center mt-10">Profile
                                                     Picture</label>
-                                                <input id="ctnFile" type="file" name="fotouser" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary" />
+                                                <input id="ctnFileft" type="file" name="fotouser" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary" />
                                             </div>
                                         </div>
 
@@ -91,15 +91,12 @@
                                     <div class="grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2">
                                         <div>
                                             <label for="name">Nama Lengkap</label>
-                                            <input id="name" type="text" name="nama" placeholder="Input Your Name..." class="form-input py-3" value="<?= $users->nama ?>" />
-
+                                            <input id="nama" type="text" name="nama" placeholder="Input Your Name..." class="form-input py-3" value="<?= $users->nama ?>" />
                                         </div>
                                         <div>
                                             <label for="address">Alamat</label>
-                                            <input id="address" name="alamat" type="text" placeholder="Input Your Address..." class="form-input py-3" value="<?= $users->alamat ?>" />
-                                            <div class="invalid-feedback">
-                                                <?= form_error('alamat', '<p class="error-message">', '</p>'); ?>
-                                            </div>
+                                            <input id="alamat" name="alamat" type="text" placeholder="Input Your Address..." class="form-input py-3" value="<?= $users->alamat ?>" />
+                                            <?= form_error('alamat', '<p class="text-[#1abc9c] mt-1">', '</p>'); ?>
                                         </div>
                                         <div>
                                             <label for="gender">Jenis Kelamin</label>
@@ -115,17 +112,17 @@
                                         </div>
                                         <div>
                                             <label for="phone">Telepon</label>
-                                            <input id="phone" name="no_telp" type="nummber" placeholder="Input Your Number Phone..." class="form-input py-3" value="<?= $users->no_telp ?>" />
+                                            <input id="no_telp" name="no_telp" type="nummber" placeholder="Input Your Number Phone..." class="form-input py-3" value="<?= $users->no_telp ?>" />
                                             <div class="invalid-feedback">
                                                 <?= form_error('no_telp', '<p class="error-message">', '</p>'); ?>
                                             </div>
                                         </div>
                                         <div>
                                             <label for="ctnFile">Resume</label>
-                                            <input id="ctnFile" name="cvuser" type="file" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary" />
+                                            <input id="ctnFilecv" name="cvuser" type="file" class="form-input file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-primary/90 ltr:file:mr-5 rtl:file:ml-5 file:text-white file:hover:bg-primary" />
                                         </div>
                                         <div class="sm:col-span-2">
-                                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Save</button>
+                                            <button type="submit" name="submit" value="submit" class="btn btn-primary" id="saveButton" disabled>Save</button>
                                         </div>
                                     </div>
                                 </div>
@@ -183,6 +180,63 @@
             });
         </script>
     <?php endif; ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputNama = document.getElementById('nama');
+            const inputAlamat = document.getElementById('alamat');
+            const inputNoTelp = document.getElementById('no_telp');
+            const inputFT = document.getElementById('ctnFileft');
+            const inputCV = document.getElementById('ctnFilecv');
+            const saveButton = document.getElementById('saveButton');
+
+            const initialValueNama = inputNama.value;
+            const initialValueAlamat = inputAlamat.value;
+            const initialValueNoTelp = inputNoTelp.value;
+            const initialValueFT = inputFT.value;
+            const initialValueCV = inputCV.value;
+
+            function checkNamaChange() {
+                saveButton.disabled = false;
+            }
+
+            function checkAlamatChange() {
+                const trimmedValue = inputAlamat.value.trim();
+
+                saveButton.disabled = trimmedValue === initialValueAlamat || trimmedValue === '';
+            }
+
+            function checkNoTelpChange() {
+                const trimmedValue = inputNoTelp.value.trim();
+
+                saveButton.disabled = trimmedValue === initialValueNoTelp || trimmedValue === '';
+            }
+
+            function checkFTChange() {
+                const trimmedValue = inputFT.value.trim();
+
+                saveButton.disabled = trimmedValue === initialValueFT || trimmedValue === '';
+            }
+
+            function checkCVChange() {
+                const trimmedValue = inputCV.value.trim();
+
+                saveButton.disabled = trimmedValue === initialValueCV || trimmedValue === '';
+            }
+
+            inputNama.addEventListener('change', checkNamaChange);
+            inputAlamat.addEventListener('change', checkAlamatChange);
+            inputNoTelp.addEventListener('change', checkNoTelpChange);
+            inputFT.addEventListener('change', checkFTChange);
+            inputCV.addEventListener('change', checkCVChange);
+
+            checkNamaChange();
+            checkAlamatChange();
+            checkNoTelpChange();
+            checkFTChange();
+            checkCVChange();
+        });
+    </script>
+
     <script src="<?= base_url() ?>assets/js/alpine-collaspe.min.js"></script>
     <script src="<?= base_url() ?>assets/js/alpine-persist.min.js"></script>
     <script defer src="<?= base_url() ?>assets/js/alpine-ui.min.js"></script>
@@ -194,7 +248,6 @@
     <script src="<?= base_url() ?>assets/js/highlight.min.js"></script>
     <!-- end hightlight js -->
 
-    <script src="<?= base_url() ?>assets/js/quill.js"></script>
 
     <script>
         document.addEventListener('alpine:init', () => {
@@ -246,23 +299,6 @@
                 },
             }));
         });
-        $(document).ready(function() {
-            $(".selectskills").select2({
-                placeholder: "Pilih Skill Pekerjaan"
-            });
-        });
-        new Quill('#editor', {
-            theme: 'snow'
-        });
-        var toolbar = quill.container.previousSibling;
-        toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
-        toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
-        toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
-        toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
-        toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
-        toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
-        toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
-        toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
     </script>
 </body>
 

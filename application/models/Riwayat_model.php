@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Lamaran_model extends CI_Model
+class Riwayat_model extends CI_Model
 {
     public function read($table)
     {
@@ -44,38 +44,38 @@ class Lamaran_model extends CI_Model
     public function dataLamaran($id)
     {
         $this->db->select('*');
-        $this->db->from('lamaran');
-        $this->db->join('data_pelamar', 'lamaran.id_pelamar = data_pelamar.id_pelamar', 'left');
+        $this->db->from('riwayat_lamaran');
+        $this->db->join('data_pelamar', 'riwayat_lamaran.id_pelamar = data_pelamar.id_pelamar', 'left');
         $this->db->join('pelamar', 'data_pelamar.id_pelamar = pelamar.id_pelamar', 'left');
-        $this->db->join('loker', 'lamaran.id_loker = loker.id_loker');
-        $this->db->where('lamaran.id_loker', $id);
+        $this->db->join('loker', 'riwayat_lamaran.id_loker = loker.id_loker');
+        $this->db->where('riwayat_lamaran.id_loker', $id);
         return $this->db->get()->result_array();
     }
     public function detailPelamar($id)
     {
-        $this->db->select('lamaran.*, loker.*, data_pelamar.*, pelamar.*');
-        $this->db->from('lamaran');
-        $this->db->join('data_pelamar', 'lamaran.id_pelamar = data_pelamar.id_pelamar');
+        $this->db->select('riwayat_lamaran.*, loker.*, data_pelamar.*, pelamar.*');
+        $this->db->from('riwayat_lamaran');
+        $this->db->join('data_pelamar', 'riwayat_lamaran.id_pelamar = data_pelamar.id_pelamar');
         $this->db->join('pelamar', 'pelamar.id_pelamar = data_pelamar.id_pelamar');
-        $this->db->join('loker', 'lamaran.id_loker = loker.id_loker');
-        $this->db->where('lamaran.id_lamaran', $id);
+        $this->db->join('loker', 'riwayat_lamaran.id_loker = loker.id_loker');
+        $this->db->where('riwayat_lamaran.id_lamaran', $id);
         return $query = $this->db->get()->result_array();
     }
     public function detailPelamarStatus($id)
     {
-        $this->db->select('lamaran.*, loker.*, data_pelamar.*, pelamar.*');
-        $this->db->from('lamaran');
-        $this->db->join('data_pelamar', 'lamaran.id_pelamar = data_pelamar.id_pelamar');
+        $this->db->select('riwayat_lamaran.*, loker.*, data_pelamar.*, pelamar.*');
+        $this->db->from('riwayat_lamaran');
+        $this->db->join('data_pelamar', 'riwayat_lamaran.id_pelamar = data_pelamar.id_pelamar');
         $this->db->join('pelamar', 'pelamar.id_pelamar = data_pelamar.id_pelamar');
-        $this->db->join('loker', 'lamaran.id_loker = loker.id_loker');
+        $this->db->join('loker', 'riwayat_lamaran.id_loker = loker.id_loker');
         $this->db->where('pelamar.id_pelamar', $id);
         return $query = $this->db->get()->result_array();
     }
     public function total()
     {
         $this->db->select('*');
-        $this->db->from('lamaran');
-        $this->db->join('data_pelamar', 'lamaran.id_pelamar = data_pelamar.id_pelamar');
+        $this->db->from('riwayat_lamaran');
+        $this->db->join('data_pelamar', 'riwayat_lamaran.id_pelamar = data_pelamar.id_pelamar');
 
         return $this->db->get()->result_array();
     }
@@ -129,7 +129,7 @@ class Lamaran_model extends CI_Model
     {
         $this->db->where('id_pelamar', $user_id);
         $this->db->where('id_loker', $job_id);
-        $result = $this->db->get('lamaran');
+        $result = $this->db->get('riwayat_lamaran');
 
         return $result->num_rows() > 0;
     }

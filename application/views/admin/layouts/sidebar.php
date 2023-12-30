@@ -2,8 +2,8 @@
             <nav x-data="sidebar" class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
                 <div class="h-full bg-white dark:bg-[#0e1726]">
                     <div class="flex items-center justify-between px-4 py-3">
-                        <a href="index.html" class="main-logo flex shrink-0 items-center">
-                            <img class="ml-[5px] w-8 flex-none" src="assets/images/logo.svg" alt="image" />
+                        <a href="<?= base_url('admin')?>" class="main-logo flex shrink-0 items-center">
+                            <img class="ml-[5px] w-8 flex-none" src="<?= base_url('assets/images/logo.svg') ?>" alt="image" />
                             <span class="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">VRISTO</span>
                         </a>
                         <a href="javascript:;" class="collapse-icon flex h-8 w-8 items-center rounded-full transition duration-300 hover:bg-gray-500/10 rtl:rotate-180 dark:text-white-light dark:hover:bg-dark-light/10" @click="$store.app.toggleSidebar()">
@@ -38,7 +38,7 @@
 
                         <li class="nav-item">
                             <ul>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="kategori.html" class="group">
                                         <div class="flex items-center">
                                             <svg class="shrink-0 group-hover:!text-primary" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -47,7 +47,7 @@
                                             <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Kategori</span>
                                         </div>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/loker') ?>" class="group">
                                         <div class="flex items-center">
@@ -59,22 +59,22 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/pelamar') ?>" class="group">
-                                        <div class="flex items-center">
-                                            <svg class="shrink-0 group-hover:!text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
-                                            </svg>
-                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Data Pelamar</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="<?= base_url('admin/lamaran') ?>" class="group">
                                         <div class="flex items-center">
                                             <svg class="shrink-0 group-hover:!text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zm4 2h6m-6 4h6m-6 4h4" />
                                             </svg>
                                             <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Lamaran</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/pelamar') ?>" class="group">
+                                        <div class="flex items-center">
+                                            <svg class="shrink-0 group-hover:!text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
+                                            </svg>
+                                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Data Pelamar</span>
                                         </div>
                                     </a>
                                 </li>

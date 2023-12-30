@@ -64,9 +64,7 @@ class Profil extends CI_Controller
                 $config['allowed_types']    = 'jpg|png|jpeg';
                 $config['max_size']         = '2048';
                 $config['file_name']        =  'foto_' . $this->session->userdata('username');
-
                 $this->load->library('upload', $config);
-
                 if ($this->upload->do_upload('fotouser')) {
 
                     $b = $this->upload->data();
@@ -84,8 +82,8 @@ class Profil extends CI_Controller
                         }
                     }
                 }
-                $cvFileName = ''; // Nama file CV
 
+                $cvFileName = '';
                 if (!empty($_FILES['cvuser']['name'])) {
                     $cvConfig['upload_path']      = './assets/cv/';
                     $cvConfig['allowed_types']    = 'pdf|doc|docx';
@@ -96,15 +94,14 @@ class Profil extends CI_Controller
                     $existcvid = $p->id_cv;
                     $cvExists = $this->Pelamar_model->getData('curriculum_vitae', ['id_cv' => $existcvid]);
                     $c = $cvExists->row();
-                    if ($c->file_cv != 'default.jpg' && $c->file_cv != '') {
+                    if (!empty($c->file_cv)) {
                         $cvPath = FCPATH . 'assets/cv/';
                         $mainCvPath = $cvPath . $c->file_cv;
                         if (file_exists($mainCvPath)) {
                             unlink($mainCvPath);
-                        } else {
-                            die(print_r(($mainCvPath)));
                         }
                     }
+
                     if ($cvExists->num_rows() > 0) {
 
                         $updateCurriculumVitae = [
@@ -116,7 +113,6 @@ class Profil extends CI_Controller
                         ];
                         $this->Pelamar_model->update('curriculum_vitae', $updateCurriculumVitae, $whereCurriculumVitae);
                     } else {
-
                         $id_cv = $this->get_kodCV();
                         $insertCurriculumVitae = [
                             'id_cv' => $id_cv,
@@ -129,10 +125,10 @@ class Profil extends CI_Controller
                             'id_pelamar' => $this->security->xss_clean($p->id_pelamar)
                         ];
                         $this->Pelamar_model->update('data_pelamar', $update, $where);
-
                         $this->db->insert('curriculum_vitae', $insertCurriculumVitae);
                     }
                 }
+
                 $update = [
                     'nama' => $this->security->xss_clean($this->input->post('nama', TRUE)),
                     'jenis_kelamin' => $this->security->xss_clean($this->input->post('jenis_kelamin', TRUE)),
@@ -169,18 +165,13 @@ class Profil extends CI_Controller
     public function validate_cv_upload($cv)
     {
         if (empty($_FILES['cvuser']['name'])) {
-            // Tidak ada file yang diupload, tidak ada validasi yang diperlukan
             return true;
         }
-
         $config['upload_path']      = './assets/cv/';
         $config['allowed_types']    = 'pdf|doc|docx';
         $config['max_size']         = '2048';
-        $config['file_name']        =
-            'cv_' . $this->session->userdata('username') . time();
-
+        $config['file_name']        = 'cv_' . $this->session->userdata('username') . time();
         $this->load->library('upload', $config);
-
         if ($this->upload->do_upload('cvuser')) {
             return true;
         } else {
@@ -188,25 +179,12 @@ class Profil extends CI_Controller
             return false;
         }
     }
-    private function hapusFileCVSebelumnya($id_cv)
-    {
-        $cvExists = $this->Pelamar_model->getData('curriculum_vitae', ['id_cv' => $id_cv]);
-        $cvExistsData = $cvExists->row();
 
-        $cvPath = FCPATH . 'assets/cv/';
-        $profileCvPath = $cvPath . $cvExistsData->file_cv;
-
-        if (file_exists($profileCvPath)) {
-            unlink($profileCvPath);
-        }
-    }
     function get_kodCV()
     {
         $this->db->select_max('id_cv', 'max_code');
         $result = $this->db->get('curriculum_vitae')->row();
-
         $max_code = $result->max_code;
-
         if (!empty($max_code)) {
             $numeric_part = (int)substr($max_code, 3);
             $new_numeric_part = $numeric_part + 1;
@@ -214,7 +192,6 @@ class Profil extends CI_Controller
         } else {
             $new_kd = 'CV001';
         }
-
         return $new_kd;
     }
 }

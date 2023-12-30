@@ -8,9 +8,19 @@ class Loker extends CI_Controller
         parent::__construct();
         $this->load->model('Kategori_model');
         $this->load->model('Loker_model');
+        $this->load->model('Admin_model');
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->library('encryption');
+        $this->getsecurity();
+    }
+    function getsecurity($value = '')
+    {
+        $is_admin = $this->session->userdata('is_admin') == 1;
+        if (empty($is_admin)) {
+            $this->session->sess_destroy();
+            redirect('loginadmin');
+        }
     }
     public function index()
     {
@@ -29,9 +39,13 @@ class Loker extends CI_Controller
     public function read($encrypted_id)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
-        $data['record'] = $this->Loker_model->baca_detail($decrypted_id);
-        $data['title'] = "Detail Job";
-        $this->load->view('admin/loker/v_loker', $data);
+        if ($decrypted_id) {
+            $data['record'] = $this->Loker_model->baca_detail($decrypted_id);
+            $data['title'] = "Detail Job";
+            $this->load->view('admin/loker/v_loker', $data);
+        } else {
+            redirect('error_page');
+        }
     }
     public function insertloker()
     {
@@ -91,16 +105,20 @@ class Loker extends CI_Controller
     public function edit($encrypted_id = 0)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
-        $data['title'] = "Sistem Informasi Loker | Tambah Loker";
-        if ($this->form_validation->run() == false) {
-            $data = array(
-                'title' => 'Sistem Informasi Loker | Edit Loker',
-                'record' => $this->Loker_model->edit($decrypted_id, 'loker'),
-                'kategori' => $this->Kategori_model->read('kategori'),
-            );
-            $this->load->view('admin/loker/edit_loker', $data);
+        if ($decrypted_id) {
+            $data['title'] = "Sistem Informasi Loker | Tambah Loker";
+            if ($this->form_validation->run() == false) {
+                $data = array(
+                    'title' => 'Sistem Informasi Loker | Edit Loker',
+                    'record' => $this->Loker_model->edit($decrypted_id, 'loker'),
+                    'kategori' => $this->Kategori_model->read('kategori'),
+                );
+                $this->load->view('admin/loker/edit_loker', $data);
+            } else {
+                # code...
+            }
         } else {
-            # code...
+            redirect('error_page');
         }
     }
 
@@ -141,9 +159,13 @@ class Loker extends CI_Controller
     public function delete($encrypted_id)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
-        $this->db->where('id_loker', $decrypted_id);
-        $this->db->delete('loker');
-        $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-pesan">Data Pekerjaan berhasil dihapus.</div>');
-        redirect('admin/loker');
+        if ($decrypted_id) {
+            $this->db->where('id_loker', $decrypted_id);
+            $this->db->delete('loker');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-pesan">Data Pekerjaan berhasil dihapus.</div>');
+            redirect('admin/loker');
+        } else {
+            redirect('error_page');
+        }
     }
 }

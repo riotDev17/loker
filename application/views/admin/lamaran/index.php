@@ -61,48 +61,55 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($lamaran as $l) : ?>
+                                            <?php if (empty($lamaran)) : ?>
                                                 <div>
                                                     <tr>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['nama_pekerjaan'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['nama_perusahaan'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $l['kategori'] ?></div>
-
-
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <!-- <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
+                                                        <td colspan="6" style="text-align: center;" class="text-center">Tidak
+                                                            ada data pekerjaan yang tersedia.</td>
+                                                    </tr>
+                                                </div>
+                                            <?php else : ?>
+                                                <?php foreach ($lamaran as $l) : ?>
+                                                    <div>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['nama_pekerjaan'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['nama_perusahaan'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $l['kategori'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <!-- <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
                                                                 <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
                                                                 <span x-tooltip="Judy Holmes"><img class="w-9 h-9 rounded-full object-cover ring-2 ring-white dark:ring-white-dark" src="/assets/images/profile-9.jpeg" alt="image" /></span>
                                                                 <span x-tooltip="Alan Green"><span class="flex justify-center items-center w-9 h-9 text-center rounded-full object-cover bg-info text-base ring-2 ring-white dark:ring-white-dark">AG</span></span>
                                                              --> <?php $pelamar = $this->lamaran->pelamar($l['id_loker']);
                                                                     echo count($pelamar) . ' Pelamar'; ?>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/dataloker' . '/' . $l['id_loker'] . '/' . url_title($l['nama_pekerjaan'])); ?>">
-                                                                    <button type="button" class="btn btn-sm btn-outline-success">
-                                                                        Lihat
-                                                                    </button>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </div>
-                                            <?php endforeach ?>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex items-center justify-center gap-4">
+                                                                    <a href="<?= base_url('admin/dataloker' . '/' . $l['id_loker'] . '/' . url_title($l['nama_pekerjaan'])); ?>">
+                                                                        <button type="button" class="btn btn-sm btn-outline-success">
+                                                                            Lihat
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </div>
+                                                <?php endforeach ?>
+                                            <?php endif ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -119,7 +126,44 @@
             <!-- end footer section -->
         </div>
     </div>
+    <?php if ($this->session->flashdata('error')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
 
+                toast.fire({
+                    icon: 'error',
+                    title: '<?= $this->session->flashdata('error') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'success',
+                    title: '<?= $this->session->flashdata('success') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
     <?php $this->load->view("_partials/script.php") ?>
 </body>
 

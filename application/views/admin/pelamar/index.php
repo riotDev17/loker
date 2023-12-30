@@ -53,6 +53,7 @@
                                     <table class="table-striped table-hover">
                                         <thead>
                                             <tr>
+                                                <th class="font-bold">Username</th>
                                                 <th class="font-bold">Nama Lengkap</th>
                                                 <th class="font-bold">Alamat</th>
                                                 <th class="font-bold">Jenis Kelamin</th>
@@ -63,44 +64,64 @@
                                         </thead>
                                         <tbody>
                                             <div>
-                                                <?php foreach ($datapelamar as $dp) : ?>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['nama'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['alamat'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div>Jawir</div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['email'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex w-max items-center">
-                                                                <div><?= $dp['no_telp'] ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('admin/pelamar/read/') . $dp['id_pelamar'] ?>">
-                                                                    <button type="button" class="btn btn-sm btn-outline-success">
+                                                <?php if (empty($datapelamar)) : ?>
+                                                    <div>
+                                                        <tr>
+                                                            <td colspan="6" style="text-align: center;" class="text-center">Tidak
+                                                                ada data pelamar yang tersedia.</td>
+                                                        </tr>
+                                                    </div>
+                                                <?php else : ?>
+                                                    <?php foreach ($datapelamar as $dp) : ?>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['username'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['nama'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['alamat'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['jenis_kelamin'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['email'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="flex w-max items-center">
+                                                                    <div><?= $dp['no_telp'] ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <?php
+                                                                $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($dp['id_pelamar']))); ?>
+                                                                <div class="flex items-center justify-center gap-4">
+                                                                    <a href="<?= base_url('admin/pelamar/read/') . $encrypted_id ?>" class="btn btn-sm btn-outline-success">
                                                                         Lihat
-                                                                    </button>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach ?>
+                                                                    </a>
+                                                                    <a href="<?= base_url('admin/pelamar/ubah/') . $encrypted_id  ?>" class="btn btn-sm btn-outline-primary">
+                                                                        Edit
+                                                                    </a>
+                                                                    <a href="<?= base_url('admin/loker/delete/') . $encrypted_id ?>" class="btn btn-sm btn-outline-danger" onclick="showAlert(event)">
+                                                                        Hapus
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach ?>
+                                                <?php endif ?>
                                             </div>
                                         </tbody>
                                     </table>
@@ -118,7 +139,44 @@
             <!-- end footer section -->
         </div>
     </div>
+    <?php if ($this->session->flashdata('error')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
 
+                toast.fire({
+                    icon: 'error',
+                    title: '<?= $this->session->flashdata('error') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'success',
+                    title: '<?= $this->session->flashdata('success') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
     <?php $this->load->view("_partials/script.php") ?>
 </body>
 

@@ -73,6 +73,7 @@
                                 <div class="mb-5">
                                     <label for="inputLarge">Nama Lengkap</label>
                                     <input id="inputLarge" type="text" value="<?= $d['nama'] ?>" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
+                                    <input id="inputLarge" name="id_pelamar" type="hidden" value="<?= $d['id_pelamar'] ?>" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
                                 </div>
 
                                 <!-- Alamat -->
@@ -207,10 +208,10 @@
                         <?php
                         } else if ($d['status'] == '0') {
                         ?>
-                            <a href="<?= base_url('admin/lamaran/statuspelamar/verifikasi/' . $d['id_lamaran'] . '/' . $d['id_loker']) . '/' . url_title($d['nama_pekerjaan']) ?>" onclick="showAlertVerif(event)">
+                            <a href="<?= base_url('admin/lamaran/statuspelamar/verifikasi/' . $d['id_lamaran'] . '/' . $d['id_loker'] . '/' . $d['id_pelamar']) . '/' . url_title($d['nama_pekerjaan']) ?>">
                                 <input type="button" class="btn btn-success" name="terima" value="Verifikasi">
                             </a>
-                            <a href="<?= base_url('admin/lamaran/statuspelamar/perbaiki/' . $d['id_lamaran'] . '/' . $d['id_loker']) . '/' . url_title($d['nama_pekerjaan']) ?>" onclick="showAlertUnverif(event)">
+                            <a href="<?= base_url('admin/lamaran/statuspelamar/perbaiki/' . $d['id_lamaran'] . '/' . $d['id_loker'] . '/' . $d['id_pelamar']) . '/' . url_title($d['nama_pekerjaan']) ?>" >
                                 <button type="button" name="perbaiki" class="btn btn-danger">Tidak Diterima</button>
                             </a>
                         <?php

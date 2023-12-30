@@ -1,18 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Loker extends CI_Controller
+class Riwayat extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('tglindo_helper');
         $this->load->model("Pelamar_model");
-        $this->load->model('Lamaran_model');
-        $this->load->model('Riwayat_model');
-        $this->load->model('Loker_model');
+        $this->load->model('Riwayat_model', 'riwayat');
         $this->load->library('encryption');
+        $this->getsecurity();
     }
-
     function getsecurity($value = '')
     {
         $username = $this->session->userdata('username');
@@ -23,16 +22,17 @@ class Loker extends CI_Controller
     }
     public function index()
     {
-        $this->load->view('pelamar/detailJob/index');
+        $data['riwayat'] = $this->riwayat->detailPelamarStatus($this->session->userdata('id_pelamar'));
+        $this->load->view('pelamar/profil/riwayat_lamaran', $data);
     }
+
     public function read($encrypted_id, $nama_pekerjaan)
     {
-        $this->getsecurity();
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         if ($decrypted_id) {
-            $data['record'] = $this->Loker_model->baca_detail($decrypted_id);
+            $data['lamaran'] = $this->riwayat->detailPelamar($decrypted_id);
             $data['title'] = "Detail Job";
-            $this->load->view('pelamar/detailJob/v_single', $data);
+            $this->load->view('pelamar/profil/v_status', $data);
         } else {
             redirect('error_page');
         }
