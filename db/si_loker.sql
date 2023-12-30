@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Des 2023 pada 11.53
+-- Waktu pembuatan: 30 Des 2023 pada 12.17
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.0.28
 
@@ -30,9 +30,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` varchar(50) NOT NULL,
   `nama` varchar(100) NOT NULL,
+  `email` varchar(150) DEFAULT NULL,
+  `photo` varchar(150) NOT NULL,
   `username` varchar(150) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `email`, `photo`, `username`, `password`, `is_admin`) VALUES
+('adminganteng', 'Admin Ganteng', '', '', 'jennv', '$2y$10$UxLrYuK2JYzvP2SSTvBAxuos/iUIagfv.PoqrWwVtp.YYEXqTNwSi', 1);
 
 -- --------------------------------------------------------
 
@@ -44,6 +54,13 @@ CREATE TABLE `curriculum_vitae` (
   `id_cv` varchar(50) NOT NULL,
   `file_cv` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `curriculum_vitae`
+--
+
+INSERT INTO `curriculum_vitae` (`id_cv`, `file_cv`) VALUES
+('CV001', 'cv_jennv1703679110.pdf');
 
 -- --------------------------------------------------------
 
@@ -61,6 +78,14 @@ CREATE TABLE `data_pelamar` (
   `photo` varchar(100) NOT NULL,
   `id_cv` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `data_pelamar`
+--
+
+INSERT INTO `data_pelamar` (`id_data_pelamar`, `id_pelamar`, `nama`, `jenis_kelamin`, `no_telp`, `alamat`, `photo`, `id_cv`) VALUES
+('DTS001', 'USR001', 'MUHAMMAD RIDHO ADHARI', 'Laki-laki', '0896556433558', 'Mempawah Timur,Jln Bardan Nadi Gg.Alatief', 'default.jpg', 'CV001'),
+('DTS002', 'USR002', 'Muhammad Ridho', 'Laki-laki', '0896556433558', 'Mempawah Timur,Jln Bardan Nadi Gg.Alatief', 'default.jpg', NULL);
 
 -- --------------------------------------------------------
 
@@ -97,8 +122,18 @@ CREATE TABLE `lamaran` (
   `id_lamaran` varchar(50) NOT NULL,
   `id_loker` varchar(50) NOT NULL,
   `id_pelamar` varchar(50) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `created_at_lamar` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at_lamar` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `lamaran`
+--
+
+INSERT INTO `lamaran` (`id_lamaran`, `id_loker`, `id_pelamar`, `status`, `created_at_lamar`, `updated_at_lamar`) VALUES
+('LMR001', 'LKR004', 'USR001', '0', '2023-12-30 11:04:33', '2023-12-30 11:04:33'),
+('LMR002', 'LKR002', 'USR001', '0', '2023-12-30 11:16:12', '2023-12-30 11:16:12');
 
 -- --------------------------------------------------------
 
@@ -137,6 +172,16 @@ CREATE TABLE `loker` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `loker`
+--
+
+INSERT INTO `loker` (`id_loker`, `nama_pekerjaan`, `nama_perusahaan`, `provinsi`, `kabupaten`, `kota`, `lokasi`, `gaji`, `gaji_akhir`, `benefit`, `tunjangan`, `keuntungan`, `deskripsi`, `tipe_kerja`, `kebijakan`, `hari_kerja`, `jam_kerja`, `pendidikan`, `pengalaman`, `jenis_kelamin`, `usia`, `skills`, `kategori`, `tgl_loker`, `tgl_akhir_loker`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('LKR001', 'Android Developer', 'PT Sinergi Nature Udah gede Pake Nature', 'kalimantan barat', 'kabupaten mempawah', 'mempawah hilir', 'Mempawah, Terusan', '1.000.000 - 4.300.000', '', 'BPJS Gaji_Pokok Uang_Makan', 'Tunjangan Transportasi Dll', '', 'Todo List App - Stay organized and increase your productivity with a simple and intuitive task management tool.Manage and Organize your tasks for everyday use and keep track of your daily tasks, deadlines, and goals with a feature-rich Todo List app..', 'Full-time', 'Kerja di kantor', 'Senin-Jumat', '07:00-15:00', 'Semua Jenjang', '  1  ', '', 22, 'photoshop premierePro adobeAfterEffects', 'Sales Marketing IT', '2023-12-27', '2023-09-28', '2023-12-27 11:08:02', '2023-12-27 11:10:15', NULL),
+('LKR002', 'Barista', 'PT. Gacor', 'nusa tenggara barat', 'kabupaten lombok tengah', 'batukliang utara', 'Pelosok Sanggau', '1.000.000 - 1.200.000', '', 'Gaji_Pokok Uang_Makan Cuti', '', '', 'Todo List App - Stay organized and increase your productivity with a simple and intuitive task management tool.Manage and Organize your tasks for everyday use and keep track of your daily tasks, deadlines, and goals with a feature-rich Todo List app..Todo List App - Stay organized and increase your productivity with a simple and intuitive task management tool.Manage and Organize your tasks for everyday use and keep track of your daily tasks, deadlines, and goals with a feature-rich Todo List app..', 'Full-time', 'Kerja di kantor', 'Senin-Minggu', '07:00-15:00', 'Semua Jenjang', '2', '', 18, 'pelayanan_pelanggan sales marketing', 'Staf_Restoran', '2023-12-27', '2022-07-05', '2023-12-27 11:11:34', '2023-12-27 11:11:34', NULL),
+('LKR003', 'Bejudi', 'PT. Gacor', 'nusa tenggara barat', 'kabupaten lombok tengah', 'batukliang', 'Mempawah, Terusan', '1.000.000 - 1.200.000', '', 'Gaji_Pokok', 'Tkde', 'Gaji Gede Loh', 'apapun kerjekan yak bang e aku pun dh tktau<li>ngentak beling</li><li>mngetak cv</li><li>lemflef</li>', 'Full-time', 'Kerja di kantor', 'Senin-Senin', '07:00-13:00', 'Semua Jenjang', '1', 'Semua Jenis Kelamin', 22, 'html', 'Admin', '2023-12-29', '2022-07-05', '2023-12-29 12:14:29', '2023-12-29 12:14:29', NULL),
+('LKR004', 'Dokter', 'PT. Gacor', 'kalimantan barat', 'kabupaten melawi', 'pinoh utara', 'Mempawah, Terusan', '1.000.000 - 4.300.000', '', 'THR Uang_Makan', 'Tkde', 'Gaji Gede Loh', 'sdsadasdsad', 'Full-time', 'Kerja di kantor', 'Senin-Senin', '07:00-12:00', 'Minimal S1/S2', '3', '', 23, 'office premiere_pro photoshop', 'Marketing', '2023-12-29', '2022-07-05', '2023-12-29 12:15:13', '2023-12-29 12:15:13', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +194,38 @@ CREATE TABLE `pelamar` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pelamar`
+--
+
+INSERT INTO `pelamar` (`id_pelamar`, `email`, `username`, `password`) VALUES
+('USR001', 'user1@gmail.com', 'jennv', '$2y$10$lgVZWQx8ukxBCDG6CaiZN.QDj0JtLIo/d.II0TfEYwdwzO.O0v516'),
+('USR002', 'user2@gmail.com', 'adminganteng', '$2y$10$Wc12q6j2udhquhTBAHwy4.eNDUR0SplCwynFGFgTcxMbO/J9VVnJu');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `riwayat_lamaran`
+--
+
+CREATE TABLE `riwayat_lamaran` (
+  `id` int(11) NOT NULL,
+  `id_lamaran` varchar(50) NOT NULL,
+  `id_pelamar` varchar(50) NOT NULL,
+  `id_loker` varchar(50) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `riwayat_lamaran`
+--
+
+INSERT INTO `riwayat_lamaran` (`id`, `id_lamaran`, `id_pelamar`, `id_loker`, `status`, `created_at`) VALUES
+(1, 'LMR001', 'USR001', 'LKR002', '1', '2023-12-30 10:40:33'),
+(2, 'LMR002', 'USR001', 'LKR001', '2', '2023-12-30 10:41:32'),
+(3, 'LMR001', 'USR001', 'LKR004', '1', '2023-12-30 10:56:41');
 
 --
 -- Indexes for dumped tables
@@ -203,6 +280,12 @@ ALTER TABLE `pelamar`
   ADD PRIMARY KEY (`id_pelamar`);
 
 --
+-- Indeks untuk tabel `riwayat_lamaran`
+--
+ALTER TABLE `riwayat_lamaran`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
@@ -213,14 +296,14 @@ ALTER TABLE `kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT untuk tabel `riwayat_lamaran`
 --
+ALTER TABLE `riwayat_lamaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Ketidakleluasaan untuk tabel `curriculum_vitae`
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
-ALTER TABLE `curriculum_vitae`
-  ADD CONSTRAINT `curriculum_vitae_ibfk_1` FOREIGN KEY (`id_cv`) REFERENCES `data_pelamar` (`id_cv`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `data_pelamar`
