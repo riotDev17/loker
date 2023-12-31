@@ -127,7 +127,11 @@
                                     </div>
                                 </div>
                                 <div class="mt-5 flex items-center">
-                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= count($lamaran) ?></div>
+                                    <?php if (!empty($lamaran)) : ?>
+                                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3">
+                                            <?= count($lamaran) ?>
+                                        </div>
+                                    <?php endif ?>
                                     <div class="badge bg-white/30">+ 1.35%</div>
                                 </div>
                                 <div class="mt-5 flex items-center font-semibold">
@@ -157,19 +161,21 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="mt-5 flex items-center">
-                                    <?php
-                                    $totalStatusSatu = 0;
-                                    foreach ($lamaran as $l) {
-                                        if ($l['status'] == 1) {
-                                            $totalStatusSatu++;
+                                <?php if (!empty($lamaran)) : ?>
+                                    <div class="mt-5 flex items-center">
+                                        <?php
+                                        $totalStatusSatu = 0;
+                                        foreach ($lamaran as $l) {
+                                            if ($l['status'] == 1) {
+                                                $totalStatusSatu++;
+                                            }
                                         }
-                                    }
-                                    ?>
-                                    <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= $totalStatusSatu; ?>
+                                        ?>
+                                        <div class="text-3xl font-bold ltr:mr-3 rtl:ml-3"><?= $totalStatusSatu; ?>
+                                        </div>
+                                        <div class="badge bg-white/30">- 0.35%</div>
                                     </div>
-                                    <div class="badge bg-white/30">- 0.35%</div>
-                                </div>
+                                <?php endif ?>
                                 <div class="mt-5 flex items-center font-semibold">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 ltr:mr-2 rtl:ml-2">
                                         <path opacity="0.5" d="M3.27489 15.2957C2.42496 14.1915 2 13.6394 2 12C2 10.3606 2.42496 9.80853 3.27489 8.70433C4.97196 6.49956 7.81811 4 12 4C16.1819 4 19.028 6.49956 20.7251 8.70433C21.575 9.80853 22 10.3606 22 12C22 13.6394 21.575 14.1915 20.7251 15.2957C19.028 17.5004 16.1819 20 12 20C7.81811 20 4.97196 17.5004 3.27489 15.2957Z" stroke="currentColor" stroke-width="1.5"></path>
@@ -179,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <!-- end main content section -->

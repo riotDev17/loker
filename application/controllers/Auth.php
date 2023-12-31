@@ -87,7 +87,7 @@ class Auth extends CI_Controller
                 'id_data_pelamar' => $kodeUSERD,
                 'id_pelamar' => $data['id_pelamar'],
                 'jenis_kelamin' => 'Laki-laki',
-                'photo' => 'default.jpg',
+                'photo' => 'default.png',
             ];
 
             if ($this->db->insert('pelamar', $data)) {

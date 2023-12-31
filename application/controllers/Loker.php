@@ -27,7 +27,6 @@ class Loker extends CI_Controller
     }
     public function read($encrypted_id, $nama_pekerjaan)
     {
-        $this->getsecurity();
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         if ($decrypted_id) {
             $data['record'] = $this->Loker_model->baca_detail($decrypted_id);

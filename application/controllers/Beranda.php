@@ -6,17 +6,18 @@ class Beranda extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('tglindo_helper');
 		$this->load->model("Pelamar_model");
 		$this->load->model("Beranda_model");
 		$this->load->model("Loker_model");
 		$this->load->library('encryption');
-
 	}
 	public function index()
 	{
-		
+
 		$data = array(
 			'record' => $this->Loker_model->read('loker'),
+			'title' => 'CariKerja'
 		);
 		$this->load->view('beranda_view', $data);
 	}
@@ -51,14 +52,25 @@ class Beranda extends CI_Controller
 						'kategori' => $row->kategori,
 						'tgl_loker' => $row->tgl_loker,
 						'tgl_akhir_loker' => $row->tgl_akhir_loker,
+						'created_at' => $row->created_at,
+						'updated_at' => $row->updated_at,
 					);
 				}
-				$data['title'] = "Search";
+				$data['title'] = "CariKerja | Search";
 				$this->load->view('beranda_view', $data);
 			} else {
 				$this->session->set_flashdata('error', '<div class="alert alert-success alert-pesan">Pekerjaan Yang kamu cari tidak ada</div>');
 				redirect('');
 			}
 		}
+	}
+	public function get_data()
+	{
+		// Ambil nilai pencarian dari parameter POST
+		$search = $this->input->post('search');
+		$data['items'] = $this->Beranda_model->get_items($search);
+		// echo($data);
+		header('Content-Type: application/json');
+		echo json_encode($data);
 	}
 }

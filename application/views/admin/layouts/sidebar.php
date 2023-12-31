@@ -2,9 +2,9 @@
             <nav x-data="sidebar" class="sidebar fixed bottom-0 top-0 z-50 h-full min-h-screen w-[260px] shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-all duration-300">
                 <div class="h-full bg-white dark:bg-[#0e1726]">
                     <div class="flex items-center justify-between px-4 py-3">
-                        <a href="<?= base_url('admin')?>" class="main-logo flex shrink-0 items-center">
+                        <a href="<?= base_url('admin') ?>" class="main-logo flex shrink-0 items-center">
                             <img class="ml-[5px] w-8 flex-none" src="<?= base_url('assets/images/logo.svg') ?>" alt="image" />
-                            <span class="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">VRISTO</span>
+                            <span class="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">Cari<strong>Kerja</strong></span>
                         </a>
                         <a href="javascript:;" class="collapse-icon flex h-8 w-8 items-center rounded-full transition duration-300 hover:bg-gray-500/10 rtl:rotate-180 dark:text-white-light dark:hover:bg-dark-light/10" @click="$store.app.toggleSidebar()">
                             <svg class="m-auto h-5 w-5" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,8 +38,8 @@
 
                         <li class="nav-item">
                             <ul>
-                                <!-- <li class="nav-item">
-                                    <a href="kategori.html" class="group">
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/kategori') ?>" class="group">
                                         <div class="flex items-center">
                                             <svg class="shrink-0 group-hover:!text-primary" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                                 <path fill="currentColor" d="M6.5 11L12 2l5.5 9zm11 11q-1.875 0-3.187-1.312T13 17.5q0-1.875 1.313-3.187T17.5 13q1.875 0 3.188 1.313T22 17.5q0 1.875-1.312 3.188T17.5 22M3 21.5v-8h8v8z" />
@@ -47,7 +47,7 @@
                                             <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Kategori</span>
                                         </div>
                                     </a>
-                                </li> -->
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/loker') ?>" class="group">
                                         <div class="flex items-center">

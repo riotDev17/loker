@@ -8,7 +8,6 @@ class Pelamar extends CI_Controller
         parent::__construct();
         $this->load->model('Kategori_model');
         $this->load->model('Lamaran_model', 'lamaran');
-
         $this->load->model('Admin_model');
         $this->load->model('Pelamar_model');
         $this->load->library('encryption');
@@ -106,6 +105,18 @@ class Pelamar extends CI_Controller
         if ($decrypted_id) {
             $data['pelamar'] = $this->Pelamar_model->baca_detail($decrypted_id);
             $this->load->view('admin/pelamar/edit_pelamar', $data);
+        } else {
+            redirect('error_page');
+        }
+    }
+    public function delete($encrypted_id)
+    {
+        $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
+        if ($decrypted_id) {
+            $this->db->where('id_pelamar', $decrypted_id);
+            $this->db->delete('pelamar');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-pesan">Data Pekerjaan berhasil dihapus.</div>');
+            redirect('admin/pelamar');
         } else {
             redirect('error_page');
         }

@@ -25,4 +25,11 @@ class Beranda_model extends CI_Model
 
         return $this->db->get('loker')->result();
     }
+    public function get_items($search = '')
+    {
+        // Query untuk mengambil data dari database (contoh: tabel 'items') dengan filter pencarian
+        $this->db->like('nama_pekerjaan', $search); // Gantilah 'field_name' dengan nama kolom yang sesuai
+        $query = $this->db->get('loker');
+        return $query->result();
+    }
 }

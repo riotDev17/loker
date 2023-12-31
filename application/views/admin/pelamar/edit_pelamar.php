@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>VRISTO - Multipurpose Tailwind Dashboard Template</title>
+    <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -116,7 +116,7 @@
                         </div>
                         <div class="flex items-center gap-3 justify-end mt-5">
                             <button type="submit" value="submit" name="submit" class="btn btn-success">Ubah</button>
-                            <button type="button" class="btn btn-secondary">Batal</button>
+                            <a href="javascript:void(0);" onclick="window.history.go(-1);" class="btn btn-secondary">Batal</a>
                         </div>
                     <?php endforeach ?>
                     <?php echo form_close() ?>

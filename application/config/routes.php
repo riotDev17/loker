@@ -50,10 +50,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'beranda';
+// $route['auth'] = 'error_page';
 $route['admin'] = 'admin/beranda';
-$route['loginadmin'] = 'admin/auth';
-$route['regisadmin'] = 'admin/auth/registrasi';
-$route['logoutadmin'] = 'admin/auth/logout';
 $route['profil'] = 'profil/ubah';
 $route['login'] = 'auth';
 $route['registrasi'] = 'auth/registrasi';
@@ -65,6 +63,10 @@ $route['status/detail/(:any)/(:any)'] = 'lamaran/read/$1/$2';
 $route['riwayat/detail/(:any)/(:any)'] = 'riwayat/read/$1/$2';
 $route['detail/(:any)/(:any)'] = 'loker/read/$1/$2';
 $route['applyloker/(:any)'] = 'lamaran/apply/$1';
+// admin
+$route['loginadmin'] = 'admin/auth';
+$route['regisadmin'] = 'admin/auth/registrasi';
+$route['logoutadmin'] = 'admin/auth/logout';
 $route['admin/dataloker/(:any)/(:any)'] = 'admin/lamaran/lamaran/$1/$2';
 $route['admin/dataloker/detail/(:any)/(:any)'] = 'admin/lamaran/detail_pelamar/$1/$2';
 $route['404_override'] = 'errors/custom_404';

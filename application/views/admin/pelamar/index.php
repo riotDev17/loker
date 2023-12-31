@@ -139,6 +139,25 @@
             <!-- end footer section -->
         </div>
     </div>
+    <script>
+        async function showAlert(event) {
+            event.preventDefault(); // Mencegah tindakan default dari tautan
+
+            const result = await new window.Swal({
+                icon: 'warning',
+                title: 'Apakah Anda Yakin?',
+                text: "Ingin Menghapus Pelamar Ini?",
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+            });
+
+            if (result.value) {
+                // Arahkan pengguna ke URL penghapusan setelah konfirmasi diterima
+                window.location.href = event.target.getAttribute('href');
+
+            }
+        }
+    </script>
     <?php if ($this->session->flashdata('error')) : ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {

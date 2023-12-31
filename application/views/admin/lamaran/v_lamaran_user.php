@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>VRISTO - Multipurpose Tailwind Dashboard Template</title>
+    <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -211,7 +211,7 @@
                             <a href="<?= base_url('admin/lamaran/statuspelamar/verifikasi/' . $d['id_lamaran'] . '/' . $d['id_loker'] . '/' . $d['id_pelamar']) . '/' . url_title($d['nama_pekerjaan']) ?>">
                                 <input type="button" class="btn btn-success" name="terima" value="Verifikasi">
                             </a>
-                            <a href="<?= base_url('admin/lamaran/statuspelamar/perbaiki/' . $d['id_lamaran'] . '/' . $d['id_loker'] . '/' . $d['id_pelamar']) . '/' . url_title($d['nama_pekerjaan']) ?>" >
+                            <a href="<?= base_url('admin/lamaran/statuspelamar/perbaiki/' . $d['id_lamaran'] . '/' . $d['id_loker'] . '/' . $d['id_pelamar']) . '/' . url_title($d['nama_pekerjaan']) ?>">
                                 <button type="button" name="perbaiki" class="btn btn-danger">Tidak Diterima</button>
                             </a>
                         <?php
@@ -229,7 +229,7 @@
 
             <!-- start footer section -->
             <div class="mt-auto p-6 text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-                © <span id="footer-year">2022</span>. Vristo All rights reserved.
+                © <span id="footer-year">2024</span>. CariKerja All rights reserved.
             </div>
             <!-- end footer section -->
         </div>

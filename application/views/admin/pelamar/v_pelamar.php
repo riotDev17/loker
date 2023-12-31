@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>VRISTO - Multipurpose Tailwind Dashboard Template</title>
+    <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -99,27 +99,37 @@
                             </div>
 
                             <!-- Resume -->
+                            <?php
+                            $cv = $this->lamaran->datacv($p['id_cv']);
+                            $file_cv = isset($cv['file_cv']) ? $cv['file_cv'] : '';
+                            $file_cv_safe = htmlentities($file_cv, ENT_QUOTES, 'UTF-8');
+                            $cv_path = base_url('assets/cv/' . $file_cv_safe);
+                            ?>
                             <div x-data="dropdown" class="mb-5 dropdown">
                                 <label id="dropdownLeft">Resume</label>
                                 <div class="flex">
                                     <div class="bg-primary text-white flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] cursor-pointer" @click="toggle" @click.outside="open = false">Resume</div>
-                                    <input id="dropdownLeft" type="text" value="resume.pdf" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
+                                    <input id="dropdownLeft" type="text" value="<?= $file_cv_safe ?>" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
                                 </div>
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:left-0 rtl:right-0">
-                                    <li><a href="javascript:;" @click="toggle">Download</a></li>
+                                    <li><a href="<?= $cv_path ?>" download="<?= $file_cv_safe ?>" @click="toggle">Download</a></li>
+                                    <li><a href="<?= $cv_path ?>" target="_blank">Lihat</a></li>
                                 </ul>
                             </div>
 
 
 
+                            <?php
+                            $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($p['id_pelamar']))); ?>
                             <div class="flex items-center gap-3 justify-end mt-5">
-                                <a href="data-pelamar.html">
-                                    <button type="button" class="btn btn-success">Verifikasi</button>
+
+                                <a href="<?= base_url('admin/pelamar/ubah/') . $encrypted_id  ?>" class="btn btn-warning">
+                                    Edit
                                 </a>
-                                <a href="data-pelamar.html">
-                                    <button type="button" class="btn btn-danger">Tidak Diterima</button>
+                                <a href="<?= base_url('admin/pelamar/delete/') . $encrypted_id ?>" class="btn btn-danger" onclick="showAlert(event)">
+                                    Hapus
                                 </a>
-                                <a href="data-pelamar.html">
+                                <a href="javascript:void(0);" onclick="window.history.go(-1);">
                                     <button type="button" class="btn btn-secondary">Batal</button>
                                 </a>
                             </div>
@@ -149,7 +159,25 @@
     <script src="<?= base_url() ?>assets/js/nice-select2.js"></script>
 
     <script src="<?= base_url() ?>assets/js/quill.js"></script>
+    <script>
+        async function showAlert(event) {
+            event.preventDefault(); // Mencegah tindakan default dari tautan
 
+            const result = await new window.Swal({
+                icon: 'warning',
+                title: 'Apakah Anda Yakin?',
+                text: "Ingin Menghapus Pelamar Ini?",
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+            });
+
+            if (result.value) {
+                // Arahkan pengguna ke URL penghapusan setelah konfirmasi diterima
+                window.location.href = event.target.getAttribute('href');
+
+            }
+        }
+    </script>
     <script>
         document.addEventListener('alpine:init', () => {
             // main section

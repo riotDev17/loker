@@ -4,7 +4,7 @@
             <div class="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2">
                 <a href="<?= base_url('') ?>" class="main-logo flex shrink-0 items-center">
                     <img class="inline w-8 ltr:-ml-1 rtl:-mr-1" src="assets/images/logo.svg" alt="logo navbar" />
-                    <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">VRISTO</span>
+                    <span class="hidden align-middle text-2xl font-semibold transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">Cari<strong>Luy</strong></span>
                 </a>
             </div>
             <div class="hidden ltr:mr-2 rtl:ml-2 sm:block">
@@ -13,29 +13,7 @@
             </div>
             <div x-data="header" class="flex items-center space-x-1.5 ltr:ml-auto rtl:mr-auto rtl:space-x-reverse dark:text-[#d0d2d6] sm:flex-1 ltr:sm:ml-0 sm:rtl:mr-0 lg:space-x-2">
                 <div class="sm:ltr:mr-auto sm:rtl:ml-auto" x-data="{ search: false }" @click.outside="search = false">
-                    <form id="liveSearchForm" class="absolute inset-x-0 top-1/2 z-10 mx-4 hidden -translate-y-1/2 sm:relative sm:top-0 sm:mx-0 sm:block sm:translate-y-0" action="<?= base_url('search') ?>">
-                        <div class="relative">
-                            <input type="text" name="fr" id="liveSearchInput" class="peer form-input bg-gray-100 placeholder:tracking-widest ltr:pl-9 ltr:pr-9 rtl:pl-9 rtl:pr-9 sm:bg-transparent ltr:sm:pr-4 rtl:sm:pl-4" placeholder="Search Jobs..." />
-                            <button type="submit" class="absolute inset-0 h-9 w-9 appearance-none peer-focus:text-primary ltr:right-auto rtl:left-auto">
-                                <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-                                    <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
-                            </button>
-                            <button type="submit" class="absolute top-1/2 block -translate-y-1/2 hover:opacity-80 ltr:right-2 rtl:left-2 sm:hidden" @click="search = true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-                                    <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                    <button type="button" class="search_btn rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 dark:bg-dark/40 dark:hover:bg-dark/60 sm:hidden" @click="search = ! search">
-                        <svg class="mx-auto h-4.5 w-4.5 dark:text-[#d0d2d6]" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
-                            <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-                        </svg>
-                    </button>
+                    <!-- Form Search -->
                 </div>
                 <div>
                     <a href="javascript:;" x-cloak x-show="$store.app.theme === 'light'" href="javascript:;" class="flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="$store.app.toggleTheme('dark')">
@@ -64,146 +42,7 @@
                         </svg>
                     </a>
                 </div>
-                <div class="dropdown" x-data="dropdown" @click.outside="open = false">
-                    <a href="javascript:;" class="relative block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60" @click="toggle">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.0001 9.7041V9C19.0001 5.13401 15.8661 2 12.0001 2C8.13407 2 5.00006 5.13401 5.00006 9V9.7041C5.00006 10.5491 4.74995 11.3752 4.28123 12.0783L3.13263 13.8012C2.08349 15.3749 2.88442 17.5139 4.70913 18.0116C9.48258 19.3134 14.5175 19.3134 19.291 18.0116C21.1157 17.5139 21.9166 15.3749 20.8675 13.8012L19.7189 12.0783C19.2502 11.3752 19.0001 10.5491 19.0001 9.7041Z" stroke="currentColor" stroke-width="1.5"></path>
-                            <path d="M7.5 19C8.15503 20.7478 9.92246 22 12 22C14.0775 22 15.845 20.7478 16.5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M12 6V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                        </svg>
-
-                        <span class="absolute top-0 flex h-3 w-3 ltr:right-0 rtl:left-0">
-                            <span class="absolute -top-[3px] inline-flex h-full w-full animate-ping rounded-full bg-success/50 opacity-75 ltr:-left-[3px] rtl:-right-[3px]"></span>
-                            <span class="relative inline-flex h-[6px] w-[6px] rounded-full bg-success"></span>
-                        </span>
-                    </a>
-                    <ul x-show="open" x-transition="" x-transition.duration.300ms="" class="top-11 w-[300px] divide-y !py-0 text-dark ltr:-right-2 rtl:-left-2 dark:divide-white/10 dark:text-white-dark sm:w-[350px]" style="display: none;">
-                        <li>
-                            <div class="flex items-center justify-between px-4 py-2 font-semibold hover:!bg-transparent">
-                                <h4 class="text-lg">Notification</h4>
-                                <template x-if="notifications.length">
-                                    <span class="badge bg-primary/80" x-text="notifications.length + 'New'"></span>
-                                </template><span class="badge bg-primary/80" x-text="notifications.length + 'New'">3New</span>
-                            </div>
-                        </li>
-                        <template x-for="notification in notifications">
-                            <li class="dark:text-white-light/90">
-                                <div class="group flex items-center px-4 py-2" @click.self="toggle">
-                                    <div class="grid place-content-center rounded">
-                                        <div class="relative h-12 w-12">
-                                            <img class="h-12 w-12 rounded-full object-cover" :src="`assets/images/${notification.profile}`" alt="image">
-                                            <span class="absolute right-[6px] bottom-0 block h-2 w-2 rounded-full bg-success"></span>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-auto ltr:pl-3 rtl:pr-3">
-                                        <div class="ltr:pr-3 rtl:pl-3">
-                                            <h6 x-html="notification.message"></h6>
-                                            <span class="block text-xs font-normal dark:text-gray-500" x-text="notification.time"></span>
-                                        </div>
-                                        <button type="button" class="text-neutral-300 opacity-0 hover:text-danger group-hover:opacity-100 ltr:ml-auto rtl:mr-auto" @click="removeNotification(notification.id)">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
-                                                <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </template>
-                        <li class="dark:text-white-light/90">
-                            <div class="group flex items-center px-4 py-2" @click.self="toggle">
-                                <div class="grid place-content-center rounded">
-                                    <div class="relative h-12 w-12">
-                                        <img class="h-12 w-12 rounded-full object-cover" :src="`assets/images/${notification.profile}`" alt="image" src="assets/images/user-profile.jpeg">
-                                        <span class="absolute right-[6px] bottom-0 block h-2 w-2 rounded-full bg-success"></span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-auto ltr:pl-3 rtl:pr-3">
-                                    <div class="ltr:pr-3 rtl:pl-3">
-                                        <h6 x-html="notification.message"><strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong></h6>
-                                        <span class="block text-xs font-normal dark:text-gray-500" x-text="notification.time">45 min ago</span>
-                                    </div>
-                                    <button type="button" class="text-neutral-300 opacity-0 hover:text-danger group-hover:opacity-100 ltr:ml-auto rtl:mr-auto" @click="removeNotification(notification.id)">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
-                                            <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dark:text-white-light/90">
-                            <div class="group flex items-center px-4 py-2" @click.self="toggle">
-                                <div class="grid place-content-center rounded">
-                                    <div class="relative h-12 w-12">
-                                        <img class="h-12 w-12 rounded-full object-cover" :src="`assets/images/${notification.profile}`" alt="image" src="assets/images/profile-34.jpeg">
-                                        <span class="absolute right-[6px] bottom-0 block h-2 w-2 rounded-full bg-success"></span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-auto ltr:pl-3 rtl:pr-3">
-                                    <div class="ltr:pr-3 rtl:pl-3">
-                                        <h6 x-html="notification.message"><strong class="text-sm mr-1">Adam Nolan</strong>mentioned you to <strong>UX Basics</strong></h6>
-                                        <span class="block text-xs font-normal dark:text-gray-500" x-text="notification.time">9h Ago</span>
-                                    </div>
-                                    <button type="button" class="text-neutral-300 opacity-0 hover:text-danger group-hover:opacity-100 ltr:ml-auto rtl:mr-auto" @click="removeNotification(notification.id)">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
-                                            <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dark:text-white-light/90">
-                            <div class="group flex items-center px-4 py-2" @click.self="toggle">
-                                <div class="grid place-content-center rounded">
-                                    <div class="relative h-12 w-12">
-                                        <img class="h-12 w-12 rounded-full object-cover" :src="`assets/images/${notification.profile}`" alt="image" src="assets/images/profile-16.jpeg">
-                                        <span class="absolute right-[6px] bottom-0 block h-2 w-2 rounded-full bg-success"></span>
-                                    </div>
-                                </div>
-                                <div class="flex flex-auto ltr:pl-3 rtl:pr-3">
-                                    <div class="ltr:pr-3 rtl:pl-3">
-                                        <h6 x-html="notification.message"><strong class="text-sm mr-1">Anna Morgan</strong>Upload a file</h6>
-                                        <span class="block text-xs font-normal dark:text-gray-500" x-text="notification.time">9h Ago</span>
-                                    </div>
-                                    <button type="button" class="text-neutral-300 opacity-0 hover:text-danger group-hover:opacity-100 ltr:ml-auto rtl:mr-auto" @click="removeNotification(notification.id)">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle opacity="0.5" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"></circle>
-                                            <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                        <template x-if="notifications.length">
-                            <li>
-                                <div class="p-4">
-                                    <button class="btn btn-primary btn-small block w-full" @click="toggle">Read All Notifications</button>
-                                </div>
-                            </li>
-                        </template>
-                        <li>
-                            <div class="p-4">
-                                <button class="btn btn-primary btn-small block w-full" @click="toggle">Read All Notifications</button>
-                            </div>
-                        </li>
-                        <template x-if="!notifications.length">
-                            <li>
-                                <div class="!grid min-h-[200px] place-content-center text-lg hover:!bg-transparent">
-                                    <div class="mx-auto mb-4 rounded-full text-primary ring-4 ring-primary/30">
-                                        <svg width="40" height="40" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path opacity="0.5" d="M20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10Z" fill="currentColor"></path>
-                                            <path d="M10 4.25C10.4142 4.25 10.75 4.58579 10.75 5V11C10.75 11.4142 10.4142 11.75 10 11.75C9.58579 11.75 9.25 11.4142 9.25 11V5C9.25 4.58579 9.58579 4.25 10 4.25Z" fill="currentColor"></path>
-                                            <path d="M10 15C10.5523 15 11 14.5523 11 14C11 13.4477 10.5523 13 10 13C9.44772 13 9 13.4477 9 14C9 14.5523 9.44772 15 10 15Z" fill="currentColor"></path>
-                                        </svg>
-                                    </div>
-                                    No data available.
-                                </div>
-                            </li>
-                        </template>
-                    </ul>
-                </div>
+              
                 <div class="dropdown flex-shrink-0" x-data="dropdown" @click.outside="open = false">
                     <?php if ($this->session->userdata('id_pelamar')) : ?>
                         <a href="javascript:;" class="group relative" @click="toggle()">
@@ -270,42 +109,5 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- horizontal menu -->
-        <!-- <ul class="horizontal-menu border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-[#0e1726] dark:text-white-dark lg:space-x-1.5 xl:space-x-8">
-            <li class="menu nav-item relative">
-                <a href="javascript:;" class="nav-link active">
-                    <div class="flex items-center gap-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-600" width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M4 21q-.825 0-1.412-.587T2 19V8q0-.825.588-1.412T4 6h4V4q0-.825.588-1.412T10 2h4q.825 0 1.413.588T16 4v2h4q.825 0 1.413.588T22 8v11q0 .825-.587 1.413T20 21zm6-15h4V4h-4z" />
-                        </svg>
-                        <span class="px-1">Jobs</span>
-                    </div>
-                    <div class="right_arrow">
-                        <svg class="h-4 w-4 rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a href="index.html" class="active">All Jobs</a>
-                    </li>
-                    <li>
-                        <a href="sales.html">Sales</a>
-                    </li>
-                    <li>
-                        <a href="analytics.html">UI / UX</a>
-                    </li>
-                    <li>
-                        <a href="finance.html">Web Developer</a>
-                    </li>
-                    <li>
-                        <a href="crypto.html">Cyber Security</a>
-                    </li>
-                </ul>
-            </li>
-        </ul> -->
     </div>
 </header>
