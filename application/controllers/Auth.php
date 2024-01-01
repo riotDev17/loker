@@ -12,7 +12,8 @@ class Auth extends CI_Controller
     }
     public function index()
     {
-        $this->load->view('pelamar/auth/login_view');
+        $data['title'] = 'Login';
+        $this->load->view('pelamar/auth/login_view', $data);
     }
     public function login()
     {
@@ -41,7 +42,8 @@ class Auth extends CI_Controller
     }
     public function registrasi()
     {
-        $this->load->view('pelamar/auth/register_view');
+        $data['title'] = 'Registrasi';
+        $this->load->view('pelamar/auth/register_view', $data);
     }
     public function regis()
     {
@@ -137,10 +139,10 @@ class Auth extends CI_Controller
 
         return $new_kd;
     }
-
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect(base_url('beranda'));
+        $this->session->set_flashdata('logout_message', 'Anda telah berhasil logout.');
+        redirect(base_url(''));
     }
 }

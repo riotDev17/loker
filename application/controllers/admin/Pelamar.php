@@ -26,11 +26,13 @@ class Pelamar extends CI_Controller
     }
     public function index()
     {
+        $data['title'] = 'Pelamar';
         $data['datapelamar'] = $this->Pelamar_model->read('data_pelamar');
         $this->load->view('admin/pelamar/index', $data);
     }
     public function read($id)
     {
+        $data['title'] = 'Detail Pelamar';
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($id)));
         if ($decrypted_id) {
             $data['pelamar'] = $this->Pelamar_model->baca_detail($decrypted_id);

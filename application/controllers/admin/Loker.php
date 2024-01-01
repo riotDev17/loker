@@ -24,6 +24,7 @@ class Loker extends CI_Controller
     }
     public function index()
     {
+        $data['title'] = 'Lowongan Pekerjaan';
         $data['loker'] = $this->Loker_model->read('loker');
         $this->load->view('admin/loker/index', $data);
     }
@@ -32,7 +33,7 @@ class Loker extends CI_Controller
     {
 
         $data['kategori'] = $this->Kategori_model->read('kategori');
-        $data['title'] = "Sistem Informasi Loker | Tambah Loker";
+        $data['title'] = "Tambah Lowongan Pekerjaan";
         $this->load->view('admin/loker/tambah_loker', $data);
     }
 
@@ -106,10 +107,10 @@ class Loker extends CI_Controller
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         if ($decrypted_id) {
-            $data['title'] = "Sistem Informasi Loker | Tambah Loker";
+            $data['title'] = "Tambah Loker";
             if ($this->form_validation->run() == false) {
                 $data = array(
-                    'title' => 'Sistem Informasi Loker | Edit Loker',
+                    'title' => 'Edit Loker',
                     'record' => $this->Loker_model->edit($decrypted_id, 'loker'),
                     'kategori' => $this->Kategori_model->read('kategori'),
                 );

@@ -83,7 +83,6 @@
 									<p class="text-base"><?= $r['hari_kerja'] ?> / <?= $r['jam_kerja'] ?></p>
 								</div>
 								<?php if ($this->session->userdata('username')) : ?>
-
 									<?php
 									$encrypted_id = urlencode(base64_encode($this->encryption->encrypt($r['id_loker']))); ?>
 									<?php if ($this->Lamaran_model->SudahApply($this->session->userdata('id_pelamar'), $r['id_loker'])) : ?>
@@ -93,27 +92,27 @@
 									<?php else : ?>
 										<?php if ($this->Riwayat_model->SudahApply($this->session->userdata('id_pelamar'), $r['id_loker'])) : ?>
 											<button class=" btn btn-primary mt-10 px-16">
-												<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showApply(event)">
+												<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>" onclick="showApply(event)">
 													Apply Now
 												</a>
 											</button>
 										<?php else : ?>
 											<button class=" btn btn-primary mt-10 px-16">
-												<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>/<?= $this->session->userdata('usernmae') ?>" onclick="showAlert(event)">
+												<a href="<?= base_url('applyloker') . '/' . $encrypted_id ?>" onclick="showAlert(event)">
 													Apply Now
 												</a>
-											<?php endif; ?>
 											</button>
 										<?php endif; ?>
-									<?php else : ?>
-										<button class=" btn btn-primary mt-10 px-16">
-											<a href="<?= base_url('login') ?>">
-												Apply Now
-											</a>
-										<?php endif ?>
+									<?php endif; ?>
+								<?php else : ?>
+									<button class=" btn btn-primary mt-10 px-16">
+										<a href="<?= base_url('login') ?>">
+											Apply Now
+										</a>
+									</button>
+								<?php endif; ?>
 							</div>
 					</div>
-
 					<!-- Persyaratan -->
 					<div class=" block">
 						<div class="mt-5">

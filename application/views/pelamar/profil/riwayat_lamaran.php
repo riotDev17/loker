@@ -124,9 +124,9 @@
                                                         </td>
                                                         <td>
                                                             <?php
-                                                            $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($item['id_lamaran']))); ?>
+                                                            $encrypted_id = urlencode(base64_encode($this->encryption->encrypt($item['id']))); ?>
                                                             <div class="flex items-center justify-center gap-4">
-                                                                <a href="<?= base_url('riwayat/detail/') ?><?= $encrypted_id ?>/<?= url_title($item['nama_pekerjaan']); ?>">
+                                                                <a href="<?= base_url('riwayat/detail/') ?><?= $encrypted_id ?>">
                                                                     <button type="button" class="btn btn-sm btn-outline-success">
                                                                         Lihat
                                                                     </button>

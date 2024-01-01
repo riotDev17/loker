@@ -219,6 +219,32 @@
 			});
 		</script>
 	<?php endif; ?>
+	<!-- <?php if ($logout_message) : ?>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const toast = window.Swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000,
+					padding: '2em',
+				});
+
+				toast.fire({
+					icon: 'success',
+					title: '<?= $logout_message; ?>',
+					padding: '2em',
+				});
+			});
+		</script>
+	<?php endif; ?> -->
+	<?php if ($logout_message) : ?>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				alert('<?= $logout_message; ?>');
+			});
+		</script>
+	<?php endif; ?>
 	<?php $this->load->view("_partials/script.php") ?>
 
 </body>

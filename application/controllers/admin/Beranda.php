@@ -23,6 +23,7 @@ class Beranda extends CI_Controller
     }
     public function index()
     {
+        $data['title'] = 'Beranda';
         $data['pelamar'] = $this->Pelamar_model->read('data_pelamar');
         $data['loker'] = $this->Loker_model->read('loker');
         $data['lamaran'] = $this->lamaran->read('lamaran');

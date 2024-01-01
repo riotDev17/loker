@@ -14,7 +14,8 @@ class Auth extends CI_Controller
     }
     public function index()
     {
-        $this->load->view('admin/auth/login_view');
+        $data['title'] = 'Login Admin';
+        $this->load->view('admin/auth/login_view',$data);
     }
     public function login()
     {
@@ -42,7 +43,8 @@ class Auth extends CI_Controller
     }
     public function registrasi()
     {
-        $this->load->view('admin/auth/register_view');
+        $data['title'] = 'Registrasi';
+        $this->load->view('admin/auth/register_view', $data);
     }
     public function regis()
     {

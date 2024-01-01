@@ -22,17 +22,18 @@ class Riwayat extends CI_Controller
     }
     public function index()
     {
+        $data['title'] = 'CariKerja | Riwayat Lamaran';
         $data['riwayat'] = $this->riwayat->detailPelamarStatus($this->session->userdata('id_pelamar'));
         $this->load->view('pelamar/profil/riwayat_lamaran', $data);
     }
 
-    public function read($encrypted_id, $nama_pekerjaan)
+    public function read($encrypted_id)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         if ($decrypted_id) {
-            $data['lamaran'] = $this->riwayat->detailPelamar($decrypted_id);
+            $data['riwayat'] = $this->riwayat->detailPelamar($decrypted_id);
             $data['title'] = "Detail Job";
-            $this->load->view('pelamar/profil/v_status', $data);
+            $this->load->view('pelamar/profil/v_status_riwayat', $data);
         } else {
             redirect('error_page');
         }

@@ -14,10 +14,10 @@ class Beranda extends CI_Controller
 	}
 	public function index()
 	{
-
 		$data = array(
 			'record' => $this->Loker_model->read('loker'),
-			'title' => 'CariKerja'
+			'title' => 'CariKerja',
+			'logout_message' => $this->session->userdata('logout_message'),
 		);
 		$this->load->view('beranda_view', $data);
 	}
@@ -66,10 +66,8 @@ class Beranda extends CI_Controller
 	}
 	public function get_data()
 	{
-		// Ambil nilai pencarian dari parameter POST
 		$search = $this->input->post('search');
 		$data['items'] = $this->Beranda_model->get_items($search);
-		// echo($data);
 		header('Content-Type: application/json');
 		echo json_encode($data);
 	}

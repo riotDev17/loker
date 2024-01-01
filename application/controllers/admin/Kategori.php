@@ -24,12 +24,13 @@ class Kategori extends CI_Controller
     public function index()
     {
         $data['kategori'] = $this->Kategori_model->read('kategori');
-        $data['title'] = 'Mak e';
+        $data['title'] = 'Kategori';
         $this->load->view('admin/loker/kategori/index', $data);
     }
     public function tambah()
     {
-        $this->load->view('admin/loker/kategori/tambah_kategori',);
+        $data['title'] = 'Tambah Kategori';
+        $this->load->view('admin/loker/kategori/tambah_kategori',$data);
     }
     public function insert()
     {
@@ -57,10 +58,10 @@ class Kategori extends CI_Controller
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         if ($decrypted_id) {
-            $data['title'] = "Sistem Informasi Loker | Tambah Loker";
+            $data['title'] = "Tambah Loker";
             if ($this->form_validation->run() == false) {
                 $data = array(
-                    'title' => 'Sistem Informasi Loker | Edit Kategori',
+                    'title' => 'Edit Kategori',
                     'record' => $this->Kategori_model->edit($decrypted_id, 'kategori'),
                 );
                 $this->load->view('admin/loker/kategori/edit_kategori', $data);

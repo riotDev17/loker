@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/logo.svg') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -55,8 +55,12 @@
             <!-- end header section -->
 
             <div class="animate__animated p-6 container" :class="[$store.app.animation]">
+
                 <!-- start main content section -->
                 <div>
+                    <div>
+
+                    </div>
                     <div class="pt-5">
                         <!-- <div>
                             <a href="javascript:void(0);" onclick="window.history.go(-1);" class="flex items-center justify-start mb-10 gap-5">
@@ -67,14 +71,20 @@
                                 <h1 class="text-base">Kembali</h1>
                             </a>
                         </div> -->
+
                         <div class="mb-5 flex items-center justify-between">
+
                             <h5 class="text-lg font-semibold dark:text-white-light">Settings</h5>
+                            <ol class="flex text-gray-500 font-semibold dark:text-white-dark">
+                                <li class="before:bg-primary before:inline-block before:relative before:-top-0.5 before:mx-4"><a href="<?= base_url('profil') ?>" class="text-primary">Profil</a></li>
+                                <li class="before:w-1 before:h-1 before:rounded-full before:bg-primary before:inline-block before:relative before:-top-0.5 before:mx-4"><a href="<?= base_url('gantipassword') ?>" class="hover:text-gray-500/70 dark:hover:text-white-dark/70">Ganti Password</a></li>
+                            </ol>
                         </div>
                         <div>
                             <div>
                                 <?= form_open_multipart(); ?>
 
-                                <h6 class="mb-5 text-lg font-bold">General Information</h6>
+                                <h6 class="mb-5 text-lg font-bold">Informasi Pribadi</h6>
                                 <div class="flex flex-col sm:flex-row">
                                     <div class="mb-5 w-full sm:w-2/12 ltr:sm:mr-4 rtl:sm:ml-4">
                                         <img src="<?= base_url('assets/img/pelamar/' . $users->photo) ?>" alt="image" class="mx-auto h-20 w-20 rounded-full object-cover md:h-32 md:w-32" />
@@ -180,6 +190,7 @@
             });
         </script>
     <?php endif; ?>
+    <!-- Validasi Inputan -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const inputNama = document.getElementById('nama');

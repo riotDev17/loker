@@ -30,7 +30,7 @@ class Loker extends CI_Controller
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         if ($decrypted_id) {
             $data['record'] = $this->Loker_model->baca_detail($decrypted_id);
-            $data['title'] = "Detail Job";
+            $data['title'] = "Detail Job | $nama_pekerjaan";
             $this->load->view('pelamar/detailJob/v_single', $data);
         } else {
             redirect('error_page');

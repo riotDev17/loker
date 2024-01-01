@@ -24,6 +24,7 @@ class Lamaran extends CI_Controller
     }
     public function index()
     {
+        $data['title'] = 'CariKerja | Lamaran';
         $data['lamaran'] = $this->lamaran->detailPelamarStatus($this->session->userdata('id_pelamar'));
         $data['riwayat'] = $this->riwayat->detailPelamarStatus($this->session->userdata('id_pelamar'));
         $this->load->view('pelamar/profil/status_lamaran', $data);
@@ -35,7 +36,7 @@ class Lamaran extends CI_Controller
         if ($decrypted_id) {
             $data['riwayat'] = $this->riwayat->detailPelamar($decrypted_id);
             $data['lamaran'] = $this->lamaran->detailPelamar($decrypted_id);
-            $data['title'] = "Detail Job";
+            $data['title'] = "Detail Job | $nama_pekerjaan";
             $this->load->view('pelamar/profil/v_status', $data);
         } else {
             redirect('error_page');
@@ -44,11 +45,12 @@ class Lamaran extends CI_Controller
     public function apply($encrypted_id)
     {
         $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
+
         if ($decrypted_id) {
             $user_id = $this->session->userdata('id_pelamar');
-            if ($this->lamaran->SudahApply($user_id, $decrypted_id)) {
-                $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Anda sudah mengajukan lamaran untuk lowongan pekerjaan ini sebelumnya.</div>');
-                redirect('status');
+            if ($this->riwayat->isPelamarDiterima($user_id, $decrypted_id)) {
+                $this->session->set_flashdata('error', '<div class="alert alert-danger alert-pesan">Anda sudah diterima pada lowongan pekerjaan ini dan tidak dapat mengajukan lamaran lagi.</div>');
+                redirect('riwayat');
             }
             $jumlah_lamaran = $this->riwayat->getJumlahLamaranByPelamar($user_id);
             if ($jumlah_lamaran < 3) {
@@ -81,6 +83,7 @@ class Lamaran extends CI_Controller
         }
     }
 
+
     private function isDataPelamarComplete($data_pelamar)
     {
         return
@@ -107,5 +110,18 @@ class Lamaran extends CI_Controller
         }
 
         return $new_kd;
+    }
+
+    public function batal_lamar($encrypted_id)
+    {
+        $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
+        if ($decrypted_id) {
+            $this->db->where('id_lamaran', $decrypted_id);
+            $this->db->delete('lamaran');
+            $this->session->set_flashdata('success', '<div class="alert alert-success alert-pesan">Data Lamaran berhasil dihapus.</div>');
+            redirect('status');
+        } else {
+            redirect('error_page');
+        }
     }
 }

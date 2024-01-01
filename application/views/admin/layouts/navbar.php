@@ -76,7 +76,7 @@
                                     <span>
                                         <?php $getData = $this->Admin_model->getData('admin', ['id' => $this->session->userdata('id')]);
                                         $d = $getData->row(); ?>
-                                        <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="assets/images/user-profile.jpeg" alt="image" />
+                                        <img class="h-9 w-9 rounded-full object-cover saturate-50 group-hover:saturate-100" src="<?= base_url('assets/images/' . $d->photo) ?>" alt="image" />
                                     </span>
                                 </a>
                                 <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="top-11 w-[230px] !py-0 font-semibold text-dark ltr:right-0 rtl:left-0 dark:text-white-dark dark:text-white-light/90">
@@ -84,7 +84,7 @@
 
                                         <div class="flex items-center px-4 py-4">
                                             <div class="flex-none">
-                                                <img class="h-10 w-10 rounded-md object-cover" src="assets/images/user-profile.jpeg" alt="image" />
+                                                <img class="h-10 w-10 rounded-md object-cover" src="<?= base_url('assets/images/' . $d->photo) ?>" alt="image" />
                                             </div>
                                             <div class="truncate ltr:pl-4 rtl:pr-4">
                                                 <h4 class="text-base">

@@ -56,6 +56,9 @@
                         <div class="flex flex-wrap items-center justify-between gap-4">
                             <h2 class="text-xl">Status Job</h2>
                         </div>
+                        <?php if (empty($lamaran)) : ?>
+                            <?php redirect('riwayat'); ?>
+                        <?php endif ?>
                         <div class="panel mt-5 overflow-hidden border-0 p-0">
                             <div>
                                 <div class="table-responsive">

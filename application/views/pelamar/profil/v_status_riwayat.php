@@ -33,7 +33,7 @@
                             <iconify-icon icon="material-symbols:work" class="text-white" width="25"></iconify-icon>
                         </div>
                         <!-- Main Frame-->
-                        <?php foreach ($lamaran as $r) : ?>
+                        <?php foreach ($riwayat as $r) : ?>
                             <!-- Header -->
                             <div class="w-full">
                                 <div class="flex items-center justify-between">

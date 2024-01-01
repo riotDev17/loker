@@ -58,7 +58,7 @@ class Riwayat_model extends CI_Model
         $this->db->join('data_pelamar', 'riwayat_lamaran.id_pelamar = data_pelamar.id_pelamar');
         $this->db->join('pelamar', 'pelamar.id_pelamar = data_pelamar.id_pelamar');
         $this->db->join('loker', 'riwayat_lamaran.id_loker = loker.id_loker');
-        $this->db->where('riwayat_lamaran.id_lamaran', $id);
+        $this->db->where('id', $id);
         return $query = $this->db->get()->result_array();
     }
     public function detailPelamarStatus($id)
@@ -146,5 +146,31 @@ class Riwayat_model extends CI_Model
     {
         $this->db->where('id_lamaran', $id);
         $this->db->update('lamaran', $data);
+    }
+    public function isPelamarDiterima($id_pelamar, $id_loker)
+    {
+        $this->db->select('status');
+        $this->db->where('id_pelamar', $id_pelamar);
+        $this->db->where('id_loker', $id_loker);
+        $result = $this->db->get('riwayat_lamaran')->row();
+
+        return $result && $result->status == 1;
+    }
+
+    public function isExistingStatus2Entry($id_pelamar, $id_loker)
+    {
+        $this->db->where('id_pelamar', $id_pelamar);
+        $this->db->where('id_loker', $id_loker);
+        $this->db->where('status', 2);
+        $result = $this->db->get('riwayat_lamaran')->row();
+        return ($result) ? true : false;
+    }
+
+    public function updateStatusLamaran($id_pelamar, $id_loker)
+    {
+        $this->db->where('id_pelamar', $id_pelamar);
+        $this->db->where('id_loker', $id_loker);
+        $this->db->where('status', 2);
+        $this->db->update('riwayat_lamaran', ['status' => 1]);
     }
 }

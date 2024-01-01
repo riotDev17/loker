@@ -82,7 +82,7 @@ class Profil extends CI_Controller
                         }
                     }
                 }
-
+                // CV
                 $cvFileName = '';
                 if (!empty($_FILES['cvuser']['name'])) {
                     $cvConfig['upload_path']      = './assets/cv/';
@@ -193,5 +193,92 @@ class Profil extends CI_Controller
             $new_kd = 'CV001';
         }
         return $new_kd;
+    }
+    public function ganti_password()
+    {
+        //ketika user mengklik tombol ubah password
+        if ($this->security->xss_clean($this->input->post('submit', TRUE)) == 'submit') {
+            //lakukan validasi
+
+            // $this->form_validation->set_rules(
+            //     'pwLama',
+            //     'Password Lama',
+            //     "required|min_length[3]",
+            //     array(
+            //         'required' => '{field} wajib diisi',
+            //         'min_length' => '{field} minimal 3 karakter'
+            //     )
+            // );
+            // $this->form_validation->set_rules(
+            //     'pwBaru',
+            //     'Password Baru',
+            //     "required|min_length[3]",
+            //     array(
+            //         'required' => '{field} wajib diisi',
+            //         'min_length' => '{field} minimal 3 karakter'
+            //     )
+            // );
+            // $this->form_validation->set_rules(
+            //     'pwBaru2',
+            //     'Ulang Password Baru',
+            //     "required|min_length[3]|matches[pwBaru]",
+            //     array(
+            //         'required' => '{field} wajib diisi',
+            //         'min_length' => '{field} minimal 3 karakter'
+
+            //     )
+            // );
+            $rules = [
+                [
+                    'field' => 'pwLama',
+                    'label' => 'Password Lama',
+                    'rules' => 'trim|required|min_length[5]',
+
+                ],
+                [
+                    'field' => 'pwBaru',
+                    'label' => 'Password Baru',
+                    'rules' => 'trim|required|min_length[4]|matches[pwBaru2]'
+                ],
+                [
+                    'field' => 'pwBaru2',
+                    'label' => 'Repeat Password',
+                    'rules' => 'trim|required|matches[pwBaru]'
+                ]
+            ];
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == TRUE) {
+
+                $getData = $this->Pelamar_model->getData('pelamar', ['id_pelamar' => $this->session->userdata('id_pelamar')]);
+                $f = $getData->row();
+                $pwBaru = $this->security->xss_clean($this->input->post('pwBaru', TRUE));
+                $pwLama = $this->security->xss_clean($this->input->post('pwLama', TRUE));
+                if (!password_verify($pwLama, $f->password)) {
+                    $this->session->set_flashdata('error', 'Password Lama yang anda masukkan salah..');
+                    redirect('gantipassword');
+                }
+                if ($pwBaru == $pwLama) {
+                    $this->session->set_flashdata('error', 'Password Baru dan Password Lama sama, Data tidak diubah...');
+                    redirect('gantipassword');
+                }
+                //encrypt & update password
+                $hash_password = password_hash($pwBaru, PASSWORD_DEFAULT);
+
+                $update = $this->Pelamar_model->update('pelamar', ['password' => $hash_password], ['id_pelamar' => $f->id_pelamar]);
+
+                if ($update) {
+                    $this->session->set_flashdata('success', 'Password berhasil diubah..');
+                    redirect('logout');
+                } else {
+                    $this->session->set_flashdata('error', 'Password gagal diubah..');
+                }
+            }
+        }
+        $getData = $this->Pelamar_model->getData('data_pelamar', ['id_pelamar' => $this->session->userdata('id_pelamar')]);
+        $data = [
+            'title' => 'Profil',
+            'users' => $getData->row()
+        ];
+        $this->load->view('pelamar/profil/ganti_password', $data);
     }
 }

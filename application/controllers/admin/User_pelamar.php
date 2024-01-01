@@ -78,6 +78,7 @@ class User extends CI_Controller
         }
         // $decrypted_id = $this->encryption->decrypt(base64_decode(urldecode($encrypted_id)));
         // if ($decrypted_id) {
+        $data['title'] = 'Pelamar User';
         $data['pelamar'] = $this->Pelamar_model->baca_detail($id);
         $this->load->view('admin/pelamar/edit_pelamar', $data);
         // } else {

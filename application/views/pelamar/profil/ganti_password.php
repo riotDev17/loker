@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title><?= $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/images/logo.svg') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -17,8 +17,10 @@
     <script defer src="<?= base_url() ?>assets/js/popper.min.js"></script>
     <script defer src="<?= base_url() ?>assets/js/tippy-bundle.umd.min.js"></script>
     <script defer src="<?= base_url() ?>assets/js/sweetalert.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/nice-select2.css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/quill.snow.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body x-data="main" class="relative overflow-x-hidden font-nunito text-sm font-normal antialiased" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.theme === 'dark' || $store.app.isDarkMode ?  'dark' : '', $store.app.menu, $store.app.layout,$store.app.rtlClass]">
@@ -33,10 +35,6 @@
             </path>
         </svg>
     </div>
-    <!-- sidebar menu overlay -->
-    <div x-cloak class="fixed inset-0 z-50 bg-[black]/60 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
-
-
     <!-- scroll to top button -->
     <div class="fixed bottom-6 z-50 ltr:right-6 rtl:left-6" x-data="scrollToTop">
         <template x-if="showTopButton">
@@ -50,97 +48,161 @@
     </div>
 
     <div class="main-container min-h-screen text-black dark:text-white-dark" :class="[$store.app.navbar]">
-        <!-- start sidebar section -->
-        <?php $this->load->view("/admin/layouts/sidebar.php") ?>
-
-        <!-- end sidebar section -->
-
-        <div class="main-content flex min-h-screen flex-col">
+        <div class="flex flex-col min-h-screen">
             <!-- start header section -->
-            <?php $this->load->view("admin/layouts/navbar.php") ?>
+            <?php $this->load->view("layouts/navbar.php") ?>
 
             <!-- end header section -->
 
+            <div class="animate__animated p-6 container" :class="[$store.app.animation]">
 
-            <!-- start main content section -->
-            <div class="animate__animated p-6" :class="[$store.app.animation]">
+                <!-- start main content section -->
                 <div>
-                    <ul class="flex space-x-2 rtl:space-x-reverse">
-                        <li>
-                            <a href="javascript:;" class="text-primary hover:underline">Detail</a>
-                        </li>
-                    </ul>
+                    <div>
 
-                    <!-- MAIN -->
-                    <?php foreach ($pelamar as $p) : ?>
-                        <div class="flex flex-wrap items-center justify-between gap-4">
-                            <h2 class="text-xl mt-5">Detail <?= $p['nama'] ?></h2>
-                        </div>
-                        <?php echo form_open('', 'class="mt-10"') ?>
-                        <!-- Nama Lengkap -->
-                        <div class="mb-5">
-                            <label for="inputLarge">Nama Lengkap</label>
-                            <input id="inputLarge" name="nama" type="text" value="<?= $p['nama'] ?>" class="form-input " />
-                        </div>
+                    </div>
+                    <div class="pt-5">
+                        <!-- <div>
+                            <a href="javascript:void(0);" onclick="window.history.go(-1);" class="flex items-center justify-start mb-10 gap-5">
 
-                        <!-- Alamat -->
-                        <div class="mb-5">
-                            <label for="inputLarge">Alamat</label>
-                            <input id="inputLarge" name="alamat" type="text" value="<?= $p['alamat'] ?>" class="form-input " />
-                        </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
+                                    <path fill="currentColor" d="M228 128a12 12 0 0 1-12 12H69l51.52 51.51a12 12 0 0 1-17 17l-72-72a12 12 0 0 1 0-17l72-72a12 12 0 0 1 17 17L69 116h147a12 12 0 0 1 12 12" />
+                                </svg>
+                                <h1 class="text-base">Kembali</h1>
+                            </a>
+                        </div> -->
 
-                        <!-- Jenis Kelamin -->
-                        <div class="mb-5">
-                            <label for="inputLarge">Jenis Kelamin</label>
-                            <input id="inputLarge" name="jenis_kelamin" type="text" value="<?= $p['jenis_kelamin'] ?>" class="form-input " />
-                        </div>
+                        <div class="mb-5 flex items-center justify-between">
 
-                        <!-- Email -->
-                        <div class="mb-5">
-                            <label for="inputLarge">Email</label>
-                            <input id="inputLarge" name="email" type="text" value="<?= $p['email'] ?>" class="form-input " disabled />
+                            <h5 class="text-lg font-semibold dark:text-white-light">Settings</h5>
+                            <ol class="flex text-gray-500 font-semibold dark:text-white-dark">
+                                <li class="before:bg-primary before:inline-block before:relative before:-top-0.5 before:mx-4"><a href="<?= base_url('profil') ?>" class="hover:text-gray-500/70 dark:hover:text-white-dark/70">Profil</a></li>
+                                <li class="before:w-1 before:h-1 before:rounded-full before:bg-primary before:inline-block before:relative before:-top-0.5 before:mx-4"><a href="<?= base_url('gantipassword') ?>" class="text-primary">Ganti Password</a></li>
+                            </ol>
                         </div>
+                        <div>
+                            <div>
+                                <?= form_open_multipart(); ?>
 
-                        <!-- No Telp -->
-                        <div class="mb-5">
-                            <label for="inputLarge">No Telepon</label>
-                            <input id="inputLarge" name="no_telp" type="text" value="<?= $p['no_telp'] ?>" class="form-input " />
-                        </div>
+                                <h6 class="mb-5 text-lg font-bold">Ganti Password</h6>
+                                <div class="flex flex-col sm:flex-row">
 
-                        <!-- Resume -->
-                        <?php
-                        $cv = $this->lamaran->datacv($p['id_cv']);
-                        $file_cv = isset($cv['file_cv']) ? $cv['file_cv'] : '';
-                        $file_cv_safe = htmlentities($file_cv, ENT_QUOTES, 'UTF-8');
-                        $cv_path = base_url('assets/cv/' . $file_cv_safe);
-                        ?>
-                        <div x-data="dropdown" class="mb-5 dropdown">
-                            <label id="dropdownLeft">Resume</label>
-                            <div class="flex">
-                                <div class="bg-primary text-white flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-[#e0e6ed] dark:border-[#17263c] cursor-pointer" @click="toggle" @click.outside="open = false">Resume</div>
-                                <input id="dropdownLeft" type="text" value="<?= $file_cv_safe ?>" class="form-input disabled:pointer-events-none disabled:bg-[#eee] dark:disabled:bg-[#1b2e4b] cursor-not-allowed" disabled />
+                                    <div class="grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2">
+                                        <div>
+                                            <div>
+                                                <input id="PwLama" name="pwLama" type="password" placeholder="Masukan Password Saat ini..." class="form-input py-3" />
+                                                <?= form_error('pwLama', '<p class="text-danger mt-1">', '</p>'); ?>
+                                            </div>
+                                            <div class="mt-3">
+                                                <input id="PwBaru" type="password" name="pwBaru" placeholder="Masukan Password Baru..." class="form-input py-3" />
+                                                <?= form_error('pwBaru', '<p class="text-danger mt-1">', '</p>'); ?>
+                                            </div>
+                                            <div class="mt-3">
+                                                <input id="PwBaru2" type="password" name="pwBaru2" placeholder="Tulis Ulang Password Baru..." class="form-input py-3" />
+                                                <?= form_error('pwBaru2', '<p class="text-danger mt-1">', '</p>'); ?>
+                                            </div>
+                                        </div>
+                                        <div class="sm:col-span-2">
+                                            <button type="submit" name="submit" value="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </form> -->
+                                <?= form_close(); ?>
+
                             </div>
-                            <ul x-cloak x-show="open" x-transition x-transition.duration.300ms class="ltr:left-0 rtl:right-0">
-                                <li><a href="<?= $cv_path ?>" download="<?= $file_cv_safe ?>" @click="toggle">Download</a></li>
-                                <li><a href="<?= $cv_path ?>" target="_blank">Lihat</a></li>
-                            </ul>
                         </div>
-                        <div class="flex items-center gap-3 justify-end mt-5">
-                            <button type="submit" value="submit" name="submit" class="btn btn-success">Ubah</button>
-                            <a href="javascript:void(0);" onclick="window.history.go(-1);" class="btn btn-secondary">Batal</a>
-                        </div>
-                    <?php endforeach ?>
-                    <?php echo form_close() ?>
+                    </div>
                 </div>
+                <!-- end main content section -->
+
             </div>
-            <!-- end main content section -->
 
             <!-- start footer section -->
-            <?php $this->load->view("admin/layouts/footer.php") ?>
-
+            <?php $this->load->view("layouts/footer.php") ?>
             <!-- end footer section -->
         </div>
     </div>
+    <?php if ($this->session->flashdata('error')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'error',
+                    title: '<?= $this->session->flashdata('error') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('success')) : ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+
+                toast.fire({
+                    icon: 'success',
+                    title: '<?= $this->session->flashdata('success') ?>',
+                    padding: '2em',
+                });
+            });
+        </script>
+    <?php endif; ?>
+    <!-- Validasi Inputan -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputPwBaru = document.getElementById('pwBaru');
+            const inputPwLama = document.getElementById('pwLama');
+            const inputpwBaru2 = document.getElementById('pwBaru2');
+
+
+            const initialValuePwBaru = inputPwBaru.value;
+            const initialValuePwLama = inputPwLama.value;
+            const initialValuepwBaru2 = inputpwBaru2.value;
+
+
+            function checkPwBaruChange() {
+                const trimmedValue = inputpwBaru.value.trim();
+
+                saveButton.disabled = trimmedValue === initialValuepwBaru || trimmedValue === '';
+            }
+
+            function checkPwLamaChange() {
+                const trimmedValue = inputPwLama.value.trim();
+
+                saveButton.disabled = trimmedValue === initialValuePwLama || trimmedValue === '';
+            }
+
+            function checkpwBaru2Change() {
+                saveButton.disabled = false;
+
+            }
+
+
+
+            inputPwBaru.addEventListener('change', checkPwBaruChange);
+            inputPwLama.addEventListener('change', checkPwLamaChange);
+            inputpwBaru2.addEventListener('change', checkpwBaru2Change);
+
+            checkPwBaruChange();
+            checkPwLamaChange();
+            checkpwBaru2Change();
+
+        });
+    </script> -->
 
     <script src="<?= base_url() ?>assets/js/alpine-collaspe.min.js"></script>
     <script src="<?= base_url() ?>assets/js/alpine-persist.min.js"></script>
@@ -152,9 +214,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/highlight.min.css" />
     <script src="<?= base_url() ?>assets/js/highlight.min.js"></script>
     <!-- end hightlight js -->
-    <script src="<?= base_url() ?>assets/js/nice-select2.js"></script>
 
-    <script src="<?= base_url() ?>assets/js/quill.js"></script>
 
     <script>
         document.addEventListener('alpine:init', () => {
@@ -206,30 +266,7 @@
                 },
             }));
         });
-
-        document.addEventListener("DOMContentLoaded", function(e) {
-            // default
-            var els = document.querySelectorAll(".selectize");
-            els.forEach(function(select) {
-                NiceSelect.bind(select);
-            });
-        });
-
-        new Quill('#editor', {
-            theme: 'snow'
-        });
-        var toolbar = quill.container.previousSibling;
-        toolbar.querySelector('.ql-picker').setAttribute('title', 'Font Size');
-        toolbar.querySelector('button.ql-bold').setAttribute('title', 'Bold');
-        toolbar.querySelector('button.ql-italic').setAttribute('title', 'Italic');
-        toolbar.querySelector('button.ql-link').setAttribute('title', 'Link');
-        toolbar.querySelector('button.ql-underline').setAttribute('title', 'Underline');
-        toolbar.querySelector('button.ql-clean').setAttribute('title', 'Clear Formatting');
-        toolbar.querySelector('[value=ordered]').setAttribute('title', 'Ordered List');
-        toolbar.querySelector('[value=bullet]').setAttribute('title', 'Bullet List');
     </script>
-
-
 </body>
 
 </html>

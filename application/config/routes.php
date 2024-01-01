@@ -53,6 +53,7 @@ $route['default_controller'] = 'beranda';
 // $route['auth'] = 'error_page';
 $route['admin'] = 'admin/beranda';
 $route['profil'] = 'profil/ubah';
+$route['gantipassword'] = 'profil/ganti_password';
 $route['login'] = 'auth';
 $route['registrasi'] = 'auth/registrasi';
 $route['logout'] = 'auth/logout';
@@ -60,7 +61,7 @@ $route['status'] = 'lamaran';
 $route['riwayat'] = 'riwayat';
 $route['search'] = 'beranda/search';
 $route['status/detail/(:any)/(:any)'] = 'lamaran/read/$1/$2';
-$route['riwayat/detail/(:any)/(:any)'] = 'riwayat/read/$1/$2';
+$route['riwayat/detail/(:any)'] = 'riwayat/read/$1';
 $route['detail/(:any)/(:any)'] = 'loker/read/$1/$2';
 $route['applyloker/(:any)'] = 'lamaran/apply/$1';
 // admin
