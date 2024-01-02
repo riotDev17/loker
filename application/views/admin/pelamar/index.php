@@ -125,9 +125,7 @@
                                                                     <a href="<?= base_url('admin/pelamar/ubah/') . $encrypted_id  ?>" class="btn btn-sm btn-outline-primary">
                                                                         Edit
                                                                     </a>
-                                                                    <a href="<?= base_url('admin/loker/delete/') . $encrypted_id ?>" class="btn btn-sm btn-outline-danger" onclick="showAlert(event)">
-                                                                        Hapus
-                                                                    </a>
+
                                                                 </div>
                                                             </td>
                                                         </tr>

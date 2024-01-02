@@ -82,6 +82,11 @@
 									<iconify-icon icon="mingcute:time-fill" width="22"></iconify-icon>
 									<p class="text-base"><?= $r['hari_kerja'] ?> / <?= $r['jam_kerja'] ?></p>
 								</div>
+								<div class="flex items-center font-semibold gap-3 mt-2">
+								<iconify-icon icon="mdi:calendar" width="22"></iconify-icon>
+								<p class="text-base mt-1"><?= $r['tgl_akhir_loker'] ?>
+							   </p>
+								</div>
 								<?php if ($this->session->userdata('username')) : ?>
 									<?php
 									$encrypted_id = urlencode(base64_encode($this->encryption->encrypt($r['id_loker']))); ?>
